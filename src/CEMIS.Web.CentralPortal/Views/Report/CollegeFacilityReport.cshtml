@@ -1,0 +1,157 @@
+﻿
+@model IEnumerable<CollegeFacilityVM>
+@{
+    ViewBag.Title = "College Facility Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section customstyles
+    {
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.datatables.net/buttons/1.5.4/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
+
+}
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h4 class="panel-title">Central Facility Report</h4>
+        @if (Model.Count() > 0)
+        {
+            <button onclick="goBack()">Go Back</button>
+        }
+    </div>
+    <div class="panel-body">
+
+        @if (Model.Count() == 0)
+        {
+            <section style="margin:5px">
+
+                @using (Html.BeginForm("CollegeFacilityReport", "Report", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="row form-group">
+                        <div class="col-md-12">
+
+                            <label class="col-md-1">Facility Name</label>
+                            <div class="col-md-2">
+                                <input type="text" name="facility" id="facility" class="form-control" />
+                            </div>
+                            <label class="col-md-1">College</label>
+                            <div class="col-md-3">
+                                @Html.DropDownList("collegeId", (IEnumerable<SelectListItem>)(ViewBag.College), "Select college....", new { @class = "custom-select" })
+                            </div>
+
+                            <label class="col-md-1">Seat Availability</label>
+                            <div class="col-md-1">
+                                <select class="custom-select" name="seating" id="seating" asp-items="Html.GetEnumSelectList(typeof(SeatAvailability))"></select>
+                            </div>
+
+                            <label class="col-md-1"> Condition</label>
+                            <div class="col-md-2">
+                                <select class="custom-select" name="condition" id="condition" asp-items="Html.GetEnumSelectList(typeof(ClassRoomCondition))"></select>
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-12">
+                      
+                        </div>
+
+                    </div>
+
+                    <input type="submit" class="btn btn-success btn-sm" style="margin-bottom:15px; margin-right:10px" value="Generate Report" />
+                }
+            </section>
+        }
+
+        <div class="table-responsive">
+            <table id="datatable" class="display table" style="width: 100%; cellspacing: 0;">
+                <thead>
+
+                    <tr>
+                        <th>S/N</th>
+                        <th>Facility</th>
+                        <th>College</th>
+                        <th>Facility Type</th>
+                        <th>Year Of Construction</th>
+                        <th>Present Condition</th>
+                        <th>Length(meters)</th>
+                        <th>Width(meters)</th>
+                        <th>Seatings</th>
+                        <th>Roof Material</th>
+                        <th>Floor Material</th>
+                        <th>Disability Access</th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @{int rowNo = 0;}
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>@(rowNo += 1)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                        <td>@Html.DisplayFor(modelItem => item.College)</td>
+                        <td>@Html.DisplayFor(modelItem => item.FacilityType)</td>
+                        <td>@Html.DisplayFor(modelItem => item.YearOfConstruction)</td>
+                        <td>@Html.DisplayFor(modelItem => item.PresentCondition)</td>
+                        <td>@Html.DisplayFor(modelItem => item.LengthInMeters)</td>
+                        <td>@Html.DisplayFor(modelItem => item.WidthInMeters)</td>
+                        <td>@Html.DisplayFor(modelItem => item.Seatings)</td>
+                        <td>@Html.DisplayFor(modelItem => item.RoofMaterial)</td>
+                        <td>@Html.DisplayFor(modelItem => item.FloorMaterial)</td>
+                        <td>@Html.DisplayFor(modelItem => item.DisabilityAccess)</td>
+
+
+
+
+
+
+                    </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+@section scripts {
+    @*<script src="https://code.jquery.com/jquery-3.3.1.js"></script>*@
+
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.4/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.4/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.4/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.4/js/buttons.print.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            optionText = 'select.....';
+            optionValue = '0'; 
+            $('#seating').prepend(`<option value="${optionValue}" selected='selected'> 
+                                       ${optionText} 
+                                  </option>`); 
+            $('#condition').prepend(`<option value="${optionValue}" selected='selected'> 
+                                       ${optionText} 
+                                  </option>`); 
+            $('#datatable').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            });
+        });
+
+        function goBack() {
+            window.history.back();
+        }
+
+    </script>
+
+}

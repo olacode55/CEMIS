@@ -1,0 +1,213 @@
+﻿
+@model IEnumerable<StudentViewModel>
+@{
+    ViewBag.Title = "Student Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section customstyles
+    {
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.datatables.net/buttons/1.5.4/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
+
+}
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h4 class="panel-title">Central College Student Infromation Report</h4>
+    </div>
+    <div class="panel-body">
+        @if (Model.Count() == 0)
+        {
+            <section style="margin:5px">
+
+                @using (Html.BeginForm("StudentReport", "Report", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="row form-group">
+                        <div class="col-md-12">
+
+                            <label class="col-md-1">Student Name</label>
+                            <div class="col-md-2">
+                                <input type="text" name="studentName" id="studentName" class="form-control" />
+                            </div>
+                            <label class="col-md-1">Student ID</label>
+                            <div class="col-md-2">
+                                <input type="text" name="studentRef" id="studentRef" class="form-control" />
+                            </div>
+                            <label class="col-md-1">Gender</label>
+                            <div class="col-md-1">
+
+                                <select class="custom-select" name ="Gender" id="Gender" asp-items="Html.GetEnumSelectList(typeof(Gender))"></select>
+                            </div>
+                            <label class="col-md-1">College</label>
+                            <div class="col-md-2">
+                                @Html.DropDownList("collegeId", (IEnumerable<SelectListItem>)(ViewBag.College), "Select college....", new { @class = "custom-select" })
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <input type="submit" class="btn btn-success btn-sm" style="margin-bottom:15px; margin-right:10px" value="Generate Report" />
+                }
+            </section>
+        }
+
+        <div class="table-responsive">
+            <table id="datatable" class="display table" style="width: 100%; cellspacing: 0;">
+                <thead>
+                    <tr>
+                        <th>
+                            Name
+                        </th>
+                        <th>
+                            Gender
+                        </th>
+                        <th>
+                            College
+                        </th>
+                        <th>
+                            Student ID
+                        </th>
+                        <th>
+                            DOB
+                        </th>
+                        <th>
+                            Phone
+                        </th>
+                        <th>
+                            Marital Status
+                        </th>
+                        <th>
+                            Religion
+                        </th>
+                        <th>
+                            Home Town
+                        </th>
+                        <th>
+                            Region
+                        </th>
+                        <th>
+                            District
+                        </th>
+                        <th>
+                            Language
+                        </th>
+                        <th>
+                            Address
+                        </th>
+                        <th>
+                            Disability
+                        </th>
+                        <th>
+                            First Choice Program
+                        </th>
+                        <th>
+                            Second Choice Program
+                        </th>
+                        <th>
+                            Third Choice Program
+                        </th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OtherNames)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Gender)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.College)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.StudentId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DOB)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.TelephoneNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MaritalStatus)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Region)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.HomeTown)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Region)
+                        </td>
+
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.District)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LanguagesSpoken)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ContactAddress)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Disability)
+                        </td>
+
+                        <td>
+                            @Html.DisplayFor(modelItem => item.FirstChoiceProgram)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SecondChoiceProgram)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ThirdChoiceCollege)
+                        </td>
+                    </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+
+
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.4/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.4/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.4/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.4/js/buttons.print.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+
+            optionText = 'select.....';
+            optionValue = '0';
+            $('#Gender').prepend(`<option value="${optionValue}" selected='selected'> 
+                                       ${optionText} 
+                                  </option>`); 
+            //$("#theSelectId").prepend("<option value='' selected='selected'></option>");
+        $('#datatable').DataTable({
+            dom: 'Bfrtip',
+            buttons: [
+                'copy', 'csv', 'excel', 'pdf', 'print'
+            ]
+        });
+    });
+
+     
+
+
+    </script>
+
+}

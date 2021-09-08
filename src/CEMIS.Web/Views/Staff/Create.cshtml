@@ -1,0 +1,1144 @@
+﻿
+@model TeachingStaffViewModel
+
+@{
+    ViewBag.Title = "Teaching Staff";
+    //var i = 1;
+    var uploads = ViewBag.Uploads;
+
+}
+
+
+@section Styles{
+    <link href="~/css/space.min.css" rel="stylesheet">
+    <link href="~/css/custom.css" rel="stylesheet">
+    <link href="~/Assets/select2/select2.css" rel="stylesheet" />
+
+}
+
+<div class="page-inner">
+    <div class="page-title">
+        <h3 class="breadcrumb-header">Staff</h3>
+    </div>
+    <div id="main-wrapper">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-white">
+                    <div class="panel-body">
+                        <div id="rootwizard">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active"><a href="#tab1" data-toggle="tab"><i class="fa fa-user m-r-xs"></i>Personal Info</a></li>
+                                <li role="presentation"><a href="#tab2" data-toggle="tab"><i class="fa fa-user m-r-xs"></i>Personal Info 1 </a></li>
+                                <li role="presentation"><a href="#tab3" data-toggle="tab"><i class="fa fa-file-archive-o m-r-xs"></i>Certificate Upload</a></li>
+                                <li role="presentation"><a href="#tab4" data-toggle="tab"><i class="fa fa-file-archive-o m-r-xs"></i>Allowance</a></li>
+                                <li role="presentation"><a href="#tab5" data-toggle="tab"><i class="fa fa-file-archive-o m-r-xs"></i>Due For Promotion</a></li>
+                                <li role="presentation"><a href="#tab6" data-toggle="tab"><i class="fa fa-check m-r-xs"></i>Finish</a></li>
+                            </ul>
+                            <div class="progress progress-sm m-t-sm">
+                                <div class="progress-bar progress-bar-info progress-bar-striped active" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 0%">
+                                </div>
+                            </div>
+                            <form id="wizardForm" action="@Url.Action("Create", "staff")" method="post" enctype="multipart/form-data">
+                                @Html.AntiForgeryToken()
+                                @Html.HiddenFor(x => x.Id)
+                                <div class="tab-content">
+                                    <div class="tab-pane active fade in" id="tab1">
+                                        <div class="row m-b-lg">
+                                            <div class="col-md-12">
+                                                <div class="row">
+                                                    <div class="form-group col-md-4">
+                                                        <label>First Name<b style="color:red">*</b></label>
+                                                        @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control", placeholder = "First Name" })
+                                                        @Html.ValidationMessageFor(x => @x.FirstName, null, new { @style = "color:red" })
+                                                    </div>
+                                                    <div class="form-group  col-md-4">
+                                                        <label>Middle Name<b style="color:red">*</b></label>
+                                                        @Html.TextBoxFor(x => x.MiddleName, new { @class = "form-control", placeholder = "Middle Name" })
+                                                        @Html.ValidationMessageFor(x => @x.MiddleName, null, new { @style = "color:red" })
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label>Last Name<b style="color:red">*</b></label>
+                                                        @Html.TextBoxFor(x => x.Lastname, new { @class = "form-control", placeholder = "Last Name" })
+                                                        @Html.ValidationMessageFor(x => @x.Lastname, null, new { @style = "color:red" })
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label>Date Of Birth<b style="color:red">*</b></label>
+                                                        @Html.TextBoxFor(x => x.DateOfBirth, "{0:MM/dd/yyyy}", new { @class = "form-control date-picker", @Value = @DateTime.Now.ToString("yyyy-MM-dd"), @datatoggle = "datepicker", max = DateTime.Today.ToString("yyyy-MM-dd"), onkeydown = "return false" })
+                                                        @Html.ValidationMessageFor(x => @x.DateOfBirth, null, new { @style = "color:red" })
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label>Gender<b style="color:red">*</b></label>
+                                                        @*@Html.TextBoxFor(x => x.Gender, new { @class = "form-control",  })*@
+                                                        <select class="custom-select" asp-for="gender" asp-items="Html.GetEnumSelectList(typeof(Gender))"></select>
+                                                        @Html.ValidationMessageFor(x => @x.gender, null, new { @style = "color:red" })
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label>Staff File No<b style="color:red">*</b></label>
+                                                        @Html.TextBoxFor(x => x.StaffFileNo, new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(x => @x.StaffFileNo, null, new { @style = "color:red" })
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label>Year Of First Appointment<b style="color:red">*</b></label>
+                                                        @Html.TextBoxFor(x => x.YearOfFirstAppointment, new { @class = "form-control", @type = "number" })
+                                                        @Html.ValidationMessageFor(x => @x.YearOfFirstAppointment, null, new { @style = "color:red" })
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label>Year Of Posting To College<b style="color:red">*</b></label>
+                                                        @Html.TextBoxFor(x => x.YearOfPostingToCollege, new { @class = "form-control", @type = "number" })
+                                                        @Html.ValidationMessageFor(x => @x.YearOfPostingToCollege, null, new { @style = "color:red" })
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label>Area Of Specialization<b style="color:red">*</b></label>
+                                                        @Html.TextBoxFor(x => x.AreaOfSpecialization, new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(x => @x.AreaOfSpecialization, null, new { @style = "color:red" })
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label>Main Subject Taught<b style="color:red">*</b></label>
+                                                        @Html.TextBoxFor(x => x.MainSubjectTaught, new { @class = "form-control", })
+                                                        @Html.ValidationMessageFor(x => @x.MainSubjectTaught, null, new { @style = "color:red" })
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label>Subject Of Qualification<b style="color:red">*</b></label>
+                                                        @Html.TextBoxFor(x => x.SubjectOfQualification, new { @class = "form-control", })
+                                                        @Html.ValidationMessageFor(x => @x.MainSubjectTaught, null, new { @style = "color:red" })
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label>Teaching Type<b style="color:red">*</b></label>
+                                                        <select class="custom-select" asp-for="TeachingType" asp-items="Html.GetEnumSelectList(typeof(TeachingType))"></select>
+                                                        @Html.ValidationMessageFor(x => @x.TeachingType, null, new { @style = "color:red" })
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label>Date Of CurrentAppointment<b style="color:red">*</b></label>
+                                                        @Html.TextBoxFor(x => x.DateOfCurrentAppointment, "{0:MM/dd/yyyy}", new { @class = "form-control date-picker", data_toggle = "datepicker", max = DateTime.Today.ToString("yyyy-MM-dd"), onkeydown = "return false" })
+                                                        @Html.ValidationMessageFor(x => @x.DateOfCurrentAppointment, null, new { @style = "color:red" })
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label>Date Of FirstAppointment<b style="color:red">*</b></label>
+                                                        @Html.TextBoxFor(x => x.DateOfFirstAppointment, "{0:MM/dd/yyyy}", new { @class = "form-control date-picker", data_toggle = "datepicker" })
+                                                        @Html.ValidationMessageFor(x => @x.DateOfFirstAppointment, null, new { @style = "color:red" })
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label>Academic Qualification(Highest Only)<b style="color:red">*</b></label>
+                                                        @Html.TextBoxFor(x => x.AcademicQualification, new { @class = "form-control" })
+                                                        @Html.ValidationMessageFor(x => @x.AcademicQualification, null, new { @style = "color:red" })
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="tab2">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group col-md-4">
+                                                    <label>Certificate Number Of Highest Academic Qualification<b style="color:red">*</b></label>
+                                                    @Html.TextBoxFor(x => x.AcademicQualificationCertNo, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(x => @x.AcademicQualificationCertNo, null, new { @style = "color:red" })
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label>Year Of Present Appointment<b style="color:red">*</b></label>
+                                                    @Html.TextBoxFor(x => x.YearOfPresentAppointment, new { @class = "form-control", @type = "number" })
+                                                    @Html.ValidationMessageFor(x => @x.YearOfPresentAppointment, null, new { @style = "color:red" })
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label>Teaching Qualification(Highest Only)<b style="color:red">*</b></label>
+                                                    @Html.TextBoxFor(x => x.TeachingQualification, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(x => @x.TeachingQualification, null, new { @style = "color:red" })
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label>Source Of Salary<b style="color:red">*</b></label>
+                                                    <select class="custom-select" asp-for="SourceOfSalary" asp-items="Html.GetEnumSelectList(typeof(SourceOfIncome))"></select>
+                                                    @Html.ValidationMessageFor(x => @x.SourceOfSalary, null, new { @style = "color:red" })
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label>Awarding Institution for HighestQualification<b style="color:red">*</b></label>
+                                                    @Html.TextBoxFor(x => x.awardingInstitutionforHighestQualification, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(x => @x.awardingInstitutionforHighestQualification, null, new { @style = "color:red" })
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label>Awarding Institution for HighestTeaching Qualification<b style="color:red">*</b></label>
+                                                    @Html.TextBoxFor(x => x.awardingInstitutionforHighestTeachingQualification, new { @class = "form-control" })
+                                                    @Html.ValidationMessageFor(x => @x.awardingInstitutionforHighestTeachingQualification, null, new { @style = "color:red" })
+                                                </div>
+
+                                                <div class="form-group col-md-6">
+                                                    <label>Main Admin Role <b style="color:red">*</b></label>
+                                                    <select id="AdminRoleId" name="AdminRoleId" asp-for="MainAdminRole" multiple="multiple" class="custom-select form-control-sm  Adminrole-dropdown">
+                                                        @foreach (var item in ViewBag.AdminRoles)
+                                                                {
+                                                                    if (item.Selected)
+                                                                    {
+                                                                    <option value="@item.Value" selected>@item.Text</option>
+                                                            }
+                                                        else
+                                                          {
+                                                             <option value="@item.Value">@item.Text</option>
+                                                      }
+                                                       }
+                                                    </select>
+                                                    @Html.ValidationMessageFor(x => @x.MainAdminRole, null, new { @style = "color:red" })
+                                                </div>
+                                                <div class=" form-group col-md-6">
+                                                    <label>Lecturer Grade<b style="color:red">*</b></label>
+                                                    @Html.DropDownList("LecturerGrade", new SelectList(ViewBag.Staffgradelevel, "Id", "Name"), "Select Grade", new { @class = "custom-select form-control-sm" })
+                                                    @Html.ValidationMessageFor(x => @x.LecturerGrade, null, new { @style = "color:red" })
+                                                </div>
+                                                <div class=" form-group col-md-6">
+                                                    <label>Department<b style="color:red">*</b></label>
+                                                    @Html.DropDownList("departments", new SelectList(ViewBag.Department, "Id", "Name"), "Select Department", new { @class = "custom-select form-control-sm" })
+                                                    @Html.ValidationMessageFor(x => @x.department, null, new { @style = "color:red" })
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label>Retired Date<b style="color:red">*</b></label>
+                                                    @Html.TextBoxFor(x => x.retiredDate, "{0:MM/dd/yyyy}", new { @class = "form-control date-picker", @datatoggle = "datepicker", max = DateTime.Today.ToString("yyyy-MM-dd"), onkeydown = "return false" })
+                                                    @Html.ValidationMessageFor(x => @x.retiredDate, null, new { @style = "color:red" })
+                                                </div>
+
+                                                <div class="form-group col-md-4">
+                                                    <label>Staff Type<b style="color:red">*</b></label>
+                                                    <select id="stafftype" class="custom-select custom-select-sm" asp-for="staffType">
+                                                        <option value="1"> Select a Staff Type</option>
+                                                        @foreach (var staff in ViewBag.StaffType)
+            {
+                                            <option value="@staff.Id">@staff.Name</option>
+
+}
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label>Staff Category<b style="color:red">*</b></label>
+                                                    @*@Html.DropDownList("StaffCategors", null, "-- Select --", htmlAttributes: new { @class = "custom-select form-control-sm " })*@
+                                                    <select id="staffCategory" class="custom-select custom-select-sm" asp-for="staffCategory">
+                                                        <option value="1"> Select a staff Category</option>
+                                                        @foreach (var staff in ViewBag.staffCategory)
+            {
+                                            <option value="@staff.Id">@staff.Name</option>
+
+}
+                                                    </select>
+                                                </div>
+                                                <div class=" form-group col-md-4">
+                                                    <label>Staff Rank<b style="color:red">*</b></label>
+                                                    <select id="staffRank" class="custom-select custom-select-sm" asp-for="staffRank">
+                                                        <option value="-1"> Select a staff Rank</option>
+                                                        @foreach (var staff in ViewBag.staffRank)
+            {
+                                            <option value="@staff.Id">@staff.Name</option>
+}
+                                                    </select>
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label>Staff Grade Level<b style="color:red">*</b></label>
+                                                    <select id="staffGradeLevel" class="custom-select custom-select-sm" asp-for="GradeLevel">
+                                                        <option value="-1"> Select a Grade Level</option>
+                                                        @foreach (var grade in ViewBag.GradeLevel)
+            {
+                                            <option value="@grade.Id">@grade.Name</option>
+
+}
+                                                    </select>
+                                                </div>
+                                                <div class=" form-group col-md-4">
+                                                    <label>Staff Step<b style="color:red">*</b></label>
+                                                    @if (ViewBag.Step != null)
+        {
+                                            @Html.DropDownList("Step", ViewBag.Step, "Select Step", new { @class = "custom-select form-control-sm", @id = "staffStep" })
+}
+else
+{
+                                            <select id="staffStep" class="custom-select custom-select-sm" asp-for="step"></select>
+}
+                                                </div>
+                                                <div class="form-group col-md-4">
+                                                    <label>Basic Salary<b style="color:red">*</b></label>
+                                                    @Html.TextBoxFor(x => x.basicSalary, new { @class = "form-control", @type = "number", @readonly = "readonly" })
+                                                    @Html.ValidationMessageFor(x => @x.basicSalary, null, new { @style = "color:red" })
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="tab3">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="panel panel-white">
+                                                    <div class="panel-heading clearfix">
+                                                        <h4 class="panel-title">Certificate Upload</h4>
+                                                    </div>
+                                                    <div class="panel-body">
+
+                                                        <table id="Product_Item_Table" class="vatebra-datagridview table table-striped">
+                                                            <thead class="thead-colored">
+                                                                <tr>
+                                                                    <th class="width-60px text-center">
+                                                                        -#-
+                                                                    </th>
+                                                                    <th>
+                                                                        Name
+                                                                    </th>
+
+                                                                    <th>
+                                                                        File
+                                                                    </th>
+                                                                    <th></th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td></td>
+                                                                    <td><input type="text" placeholder="Certificater Name" id="certificate-name" name="certificate-name" /></td>
+                                                                    <td><input type="file" id="certificateFileUpload" name="certificateFileUpload" /></td>
+                                                                    <td><button type="button" class="btn btn-primary btn-sm text-right" id="add-certificate">+</button></td>
+                                                                </tr>
+
+                                                            </thead>
+
+                                                            <tbody id="certificate-upload">
+
+                                                                <tr id='certificate-upload-row0'></tr>
+
+                                                            </tbody>
+
+                                                        </table>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="tab4">
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="panel panel-white">
+                                                    <div class="panel-heading clearfix">
+                                                        <h4 class="panel-title">Allowance </h4>
+                                                    </div>
+                                                    <div class="panel-body">
+                                                        <table id="Product1_Item_Table" class="vatebra-datagridview table table-striped">
+                                                            <thead class="thead-colored">
+                                                                <tr>
+                                                                    <th class="width-60px text-center">
+                                                                        -#-
+                                                                    </th>
+                                                                    <th>
+                                                                        Allowance
+                                                                    </th>
+                                                                    <th>
+                                                                        Amount
+                                                                    </th>
+                                                                    <th></th>
+                                                                </tr>
+                                                                <tr>
+                                                                    <td></td>
+                                                                    <td><select id="allowance-name" name="allowance-name" class="custom-select custom-select-sm" /></td>
+                                                                    <td><input type="number" id="amount" name="amount" class="form-control" /></td>
+                                                                    <td><button type="button" class="btn btn-primary btn-sm text-right" id="add-allowance">+</button></td>
+                                                                </tr>
+                                                            </thead>
+                                                            <tbody id="staff-allowance">
+                                                                <tr id='staff-allowance-row0'></tr>
+                                                            </tbody>
+                                                        </table>
+                                                        <div class="form-group col-md-12">
+                                                            @*@Html.LabelFor(model => model.DueForPromotion, htmlAttributes:  new{@style="margin-top:5px;"}, new { @class = "control-label" })*@
+                                                            <label>Due For Promotion<b style="color:red">*</b></label>
+                                                            @Html.DropDownList("DueForPromotion", null, "-- Select --", htmlAttributes: new { @class = "custom-select form-control-sm " })
+                                                            @Html.ValidationMessageFor(x => @x.DueForPromotion, null, new { @style = "color:red" })
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="tab5">
+                                        <div id="PromotionSection" class="">
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group col-md-4">
+                                                        <label>Staff GradeLevel<b style="color:red">*</b></label>
+                                                        <select id="staffGradeLevel1" class="custom-select custom-select-sm" asp-for="gradeLevelPromotion">
+                                                            <option value="1"> Select a GradeLevel</option>
+                                                            @foreach (var grade in ViewBag.GradeLevel)
+                                                            {
+                                                                <option value="@grade.Id">@grade.Name</option>
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                    <div class=" form-group col-md-4">
+                                                        <label>Staff Step<b style="color:red">*</b></label>
+                                                        <select id="staffStep1" class="custom-select custom-select-sm" asp-for="stepPromotion"></select>
+                                                    </div>
+                                                    <div class="form-group col-md-4">
+                                                        <label>Basic Salary<b style="color:red">*</b></label>
+                                                        @Html.TextBoxFor(x => x.basicsalaryPromotion, new { @class = "form-control", @type = "number", @readonly = "readonly" })
+                                                        @Html.ValidationMessageFor(x => @x.basicSalary, null, new { @style = "color:red" })
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <table id="Product1_Item_Table" class="vatebra-datagridview table table-striped">
+                                                        <thead class="thead-colored">
+                                                            <tr>
+                                                                <th class="width-60px text-center">
+                                                                    -#-
+                                                                </th>
+                                                                <th>
+                                                                    Allowance
+                                                                </th>
+                                                                <th>
+                                                                    Amount
+                                                                </th>
+                                                                <th></th>
+                                                            </tr>
+                                                            <tr>
+                                                                <td></td>
+                                                                <td><select id="pallowance-name" name="pallowance-name" class="custom-select custom-select-sm" /></td>
+                                                                <td><input type="number" id="pamount" name="pamount" class="form-control" /></td>
+                                                                <td><button type="button" class="btn btn-primary btn-sm text-right" id="padd-allowance">+</button></td>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody id="pstaff-allowance">
+                                                            <tr id='pstaff-allowance-row0'></tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="tab6">
+                                        <h3 style="margin-top:25px;">Thank You!</h3>
+                                        Please Ensure you have Accurate Data Before Submiting.
+                                        <div>
+                                            <button id="btnSaveApply" type="submit" class="btn btn-outline-light">Submit</button>
+                                        </div>
+
+                                    </div>
+
+                                    @*<button id="btnSaveApply" class="btn btn-outline-light">Submit</button>*@
+
+
+                                    <ul class="pager wizard">
+                                        <li class="previous"><a href="#" class="btn btn-default">Previous</a></li>
+                                        <li class="next"><a href="#" class="btn btn-default">Next</a></li>
+                                    </ul>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+
+
+    <script type="text/javascript">
+        $("document").ready(function (e) {
+
+            var certificateUploadItems = [];
+            var AllowanceItems = [];
+            var P_AllowanceItems = [];
+            $(".Adminrole-dropdown").select2({
+                placeholder: "Select a Adminroles value",
+                allowClear: true
+            });
+
+
+            function loadDocument() {
+                var selected = $('#DueForPromotion').val();
+                if (selected == "true") {
+                    $('#PromotionSection').show();
+                }
+                else {
+
+                     $('#PromotionSection').hide();
+                };
+                var items = "";
+                debugger;
+                $.getJSON("@Url.Action("GetAllowance", "staff")", function (data) {
+                    debugger;
+               $.each(data,function(index,item){
+                   items += "<option value='" + item.Id + "'>" + item.name+"</option>";
+                 });
+                    $("#allowance-name").html(items);
+                    $("#pallowance-name").html(items);
+             });
+
+
+
+                var Id = $('#Id').val();
+                $.ajax({
+                    type: "GET",
+                    url: '@Url.Action("GetUploads", "Staff")/?StaffId=' + Id,
+                      //dataType: "Json",
+
+                      cache: false,
+                      contentType: false,
+                      processData: false,
+
+                    success: function (resp) {
+
+                        if (resp.success) {
+                            $.each(resp.data, function (index, item) {
+
+                                certificateUploadItems.push({
+                                    CertificateName: item.name,
+                                    CertificateFile: item.filePath
+                                });
+                            });
+
+                            addRow();
+                            $("#certificate-name").val("");
+                            $("#certificateFileUpload").val("");
+                        } else {
+                            toastr.error(data.error);
+                        }
+                    },
+                    error: function (request, status, error) {
+                        toastr.error(error);
+
+                        $("#btnSaveApply").attr("disabled", false);
+                    }
+                });
+
+
+                var Id = $('#Id').val();
+                debugger;
+              $.ajax({
+                    type: "GET",
+                  url: '@Url.Action("GetAllowances", "Staff")/?StaffId=' + Id,
+                      //dataType: "Json",
+
+                      cache: false,
+                      contentType: false,
+                      processData: false,
+                  success: function (resp) {
+
+                      if (resp.success) {
+                          $.each(resp.data, function (index, item) {
+
+                              AllowanceItems.push({
+                                  AllowanceName: item.name,
+                                  AllowanceAmount: item.amount
+                              });
+                          });
+                            addAllowance();
+                            $("#allowance-name").val("");
+                            $("#amount").val("");
+                        } else {
+                            toastr.error(data.error);
+                        }
+                    },
+                    error: function (request, status, error) {
+                        toastr.error(error);
+
+                        $("#btnSaveApply").attr("disabled", false);
+                    }
+                });
+                var Id = $('#Id').val();
+                debugger;
+              $.ajax({
+                    type: "GET",
+                  url: '@Url.Action("P_GetAllowances", "Staff")/?StaffId=' + Id,
+                      //dataType: "Json",
+
+                      cache: false,
+                      contentType: false,
+                      processData: false,
+                  success: function (resp) {
+
+                      if (resp.success) {
+                          $.each(resp.data, function (index, item) {
+
+                              P_AllowanceItems.push({
+                                  P_AllowanceName: item.name,
+                                  P_AllowanceAmount: item.amount
+                              });
+                          });
+                          P_addAllowance();
+                            $("#pallowance-name").val("");
+                            $("#pamount").val("");
+                        } else {
+                            toastr.error(data.error);
+                        }
+                    },
+                    error: function (request, status, error) {
+                        toastr.error(error);
+
+                        $("#btnSaveApply").attr("disabled", false);
+                    }
+                });
+            }
+
+
+
+
+            loadDocument();
+            function addRow() {
+                $.each(certificateUploadItems, function (index, value) {
+
+                    var filePath = value.CertificateFile;
+                    var fileName = '';
+                    if (filePath.name !== undefined) {
+                        fileName = filePath.name;
+                    }
+                    else {
+                        fileName = filePath;
+                    }
+                    $('#certificate-upload-row' + index).html("<td valign='middle' class='text-center'>" + (index + 1) + "</td><td>" + value.CertificateName + "</td><td>" + fileName + "</td><td class='text-right'><button  type='button' class='btn btn-primary btn-sm' id='delete_row'>-</button></td>");
+                    $('#certificate-upload').append('<tr id="certificate-upload-row' + (index + 1) + '"></tr>');
+                });
+            };
+
+            function addAllowance() {
+                $.each(AllowanceItems, function (index, value) {
+                    debugger;
+
+                    $('#staff-allowance-row' + index).html("<td valign='middle' class='text-center'>" + (index + 1) + "</td><td>" + value.AllowanceName + "</td><td>" + value.AllowanceAmount + "</td><td class='text-right'><button  type='button' class='btn btn-primary btn-sm' id='delete1_row'>-</button></td>");
+                    $('#staff-allowance').append('<tr id="staff-allowance-row' + (index + 1) + '"></tr>');
+                });
+            };
+            function P_addAllowance() {
+                $.each(P_AllowanceItems, function (index, value) {
+                    debugger;
+
+                    $('#pstaff-allowance-row' + index).html("<td valign='middle' class='text-center'>" + (index + 1) + "</td><td>" + value.P_AllowanceName + "</td><td>" + value.P_AllowanceAmount + "</td><td class='text-right'><button  type='button' class='btn btn-primary btn-sm' id='delete2_row'>-</button></td>");
+                    $('#pstaff-allowance').append('<tr id="pstaff-allowance-row' + (index + 1) + '"></tr>');
+                });
+            };
+
+            //$("#certificateFileUpload").change(function () {
+            //    var file = $("#certificateFileUpload").get(0).files[0];
+            //    var fileName = file.name;
+            //    alert(fileName);
+            //});
+
+
+
+            $("#add-certificate").click(function () {
+
+                var certificateName = $("#certificate-name").val();
+                var certificateUpload = $("#certificateFileUpload").get(0).files[0];
+
+                //var certificateUpload = $('#certificateFileUpload')[0];
+                //var file = certificateUpload.files[0];
+
+                if (certificateName == null || certificateName == '' || certificateName == undefined) {
+                    return false;
+                }
+                if (certificateUpload == null || certificateUpload == '' || certificateUpload == undefined) {
+                    return false;
+                }
+
+                var data = new FormData();
+                data.append("Name", certificateName);
+                data.append("FileUpload", certificateUpload);
+
+
+              $.ajax({
+                    type: "POST",
+                  url: "@Url.Action("OnPostUpload", "Staff")",
+                      //dataType: "Json",
+                  data: data,
+                      cache: false,
+                      contentType: false,
+                      processData: false,
+
+                    success: function (data) {
+
+                        if (data == "Success") {
+                            certificateUploadItems.push({
+                                CertificateName: certificateName,
+                                CertificateFile: certificateUpload
+                            });
+                            addRow();
+                            $("#certificate-name").val("");
+                            $("#certificateFileUpload").val("");
+                        } else {
+                            toastr.error(data.error);
+                        }
+                    },
+                    error: function (request, status, error) {
+                        toastr.error(error);
+
+                        $("#btnSaveApply").attr("disabled", false);
+                    }
+                });
+
+
+
+
+            });
+
+            $("#add-allowance").click(function () {
+                debugger;
+                var allowanceName = $("#allowance-name option:selected").text();
+                var allowanceAmount = $("#amount").val();
+
+                //var certificateUpload = $('#certificateFileUpload')[0];
+                //var file = certificateUpload.files[0];
+                debugger;
+                if (allowanceName == null || allowanceName == '' || allowanceName == undefined) {
+                    return false;
+                }
+                if (allowanceAmount <= 0 || allowanceAmount == '' || allowanceAmount == undefined) {
+                    return false;
+                }
+                debugger;
+                var data = new FormData();
+                data.append("name", allowanceName);
+                data.append("amount", allowanceAmount);
+
+
+              $.ajax({
+                    type: "POST",
+                  url: "@Url.Action("OnPostStaffAlowance", "Staff")",
+                      //dataType: "Json",
+                  data: data,
+                      cache: false,
+                      contentType: false,
+                      processData: false,
+
+                    success: function (data) {
+                        debugger;
+                        if (data == "Success") {
+                            AllowanceItems.push({
+                                AllowanceName: allowanceName,
+                                AllowanceAmount: allowanceAmount
+                            });
+                            addAllowance();
+                            $("#allowance-name").val("");
+                            $("#amount").val("");
+                        } else {
+                            toastr.error(data.error);
+                        }
+                    },
+                    error: function (request, status, error) {
+                        toastr.error(error);
+
+                        $("#btnSaveApply").attr("disabled", false);
+                    }
+                });
+
+
+
+
+            });
+
+             $("#padd-allowance").click(function () {
+                debugger;
+                var pallowanceName = $("#pallowance-name option:selected").text();
+                var pallowanceAmount = $("#pamount").val();
+
+                //var certificateUpload = $('#certificateFileUpload')[0];
+                //var file = certificateUpload.files[0];
+                debugger;
+                 if (pallowanceName == null || pallowanceName == '' || pallowanceName == undefined) {
+                    return false;
+                }
+                 if (pallowanceAmount <= 0 || pallowanceAmount == '' || pallowanceAmount == undefined) {
+                    return false;
+                }
+                debugger;
+                var data = new FormData();
+                 data.append("name", pallowanceName);
+                 data.append("amount", pallowanceAmount);
+
+
+              $.ajax({
+                    type: "POST",
+                  url: "@Url.Action("PromotionStaffAlowance", "Staff")",
+                      //dataType: "Json",
+                  data: data,
+                      cache: false,
+                      contentType: false,
+                      processData: false,
+
+                    success: function (data) {
+                        debugger;
+                        if (data == "Success") {
+                            P_AllowanceItems.push({
+                                P_AllowanceName: pallowanceName,
+                                P_AllowanceAmount: pallowanceAmount
+                            });
+                            P_addAllowance();
+                            $("#pallowance-name").val("");
+                            $("#pamount").val("");
+                        } else {
+                            toastr.error(data.error);
+                        }
+                    },
+                    error: function (request, status, error) {
+                        toastr.error(error);
+
+                        $("#btnSaveApply").attr("disabled", false);
+                    }
+                });
+
+
+
+
+            });
+
+
+
+            $(document).on('click', '#delete_row', function () {
+
+                var index = $(this).closest('td').parent()[0].sectionRowIndex;
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("RemoveUpload", "Staff")/?index=' + index,
+                      //dataType: "Json",
+                      data: index,
+                    cache: false,
+                      contentType: false,
+                    processData: false,
+                       success: function (data) {
+
+                           if (data =="Success") {
+                               certificateUploadItems.splice(index, 1);
+                               $(this).parents('tr').remove();
+                               $('#certificate-upload').html("<tr id='certificate-upload-row0'></tr>");
+                               addRow();
+                        }
+                        else {
+                            toastr.error(data.error);
+                        }
+                    },
+                    error: function (request, status, error) {
+                        toastr.error(error);
+
+                        $("#btnSaveApply").attr("disabled", false);
+
+                    }
+                });
+
+
+            });
+
+            $(document).on('click', '#delete1_row', function () {
+
+                var index = $(this).closest('td').parent()[0].sectionRowIndex;
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("RemoveAllowances", "Staff")/?index=' + index,
+                      //dataType: "Json",
+                      data: index,
+                    cache: false,
+                      contentType: false,
+                    processData: false,
+                       success: function (data) {
+
+                           if (data =="Success") {
+                               AllowanceItems.splice(index, 1);
+                               $(this).parents('tr').remove();
+                               $('#staff-allowance').html("<tr id='staff-allowance-row0'></tr>");
+                               addAllowance();
+                        }
+                        else {
+                            toastr.error(data.error);
+                        }
+                    },
+                    error: function (request, status, error) {
+                        toastr.error(error);
+
+                        $("#btnSaveApply").attr("disabled", false);
+
+                    }
+                });
+
+
+            });
+
+
+            $(document).on('click', '#delete2_row', function () {
+                debugger;
+                var index = $(this).closest('td').parent()[0].sectionRowIndex;
+                $.ajax({
+                    type: "POST",
+                    url: '@Url.Action("RemoveP_Allowances", "Staff")/?index=' + index,
+                      //dataType: "Json",
+                      data: index,
+                    cache: false,
+                      contentType: false,
+                    processData: false,
+                       success: function (data) {
+
+                           if (data =="Success") {
+                               P_AllowanceItems.splice(index, 1);
+                               $(this).parents('tr').remove();
+                               $('#pstaff-allowance').html("<tr id='pstaff-allowance-row0'></tr>");
+                               P_addAllowance();
+                        }
+                        else {
+                            toastr.error(data.error);
+                        }
+                    },
+                    error: function (request, status, error) {
+                        toastr.error(error);
+
+                        $("#btnSaveApply").attr("disabled", false);
+
+                    }
+                });
+
+
+            });
+
+            $('#staffGradeLevel').on('change', function () {
+
+                $('#staffStep option').remove();
+                var staffgradeLevel = $('#staffGradeLevel option:selected').val();
+
+                 $.ajax({
+                        type: 'GET',
+
+                     url: '@Url.Action("FindStaffStep", "Staff")/?Level=' + staffgradeLevel,
+                        success: function (result) {
+                            var sc = '<option value="-1">Select Staff Step</option>';
+                            for (var i = 0; i < result.length; i++) {
+                                sc += '<option Value="' + result[i] + '">' + result[i] + '</option>';
+                            }
+                            $('#staffStep').html(sc);
+                     }
+                         });
+
+
+            });
+
+
+            $('#staffStep').on('change', function () {
+
+                debugger;
+                var staffgradeLevel = $('#staffGradeLevel option:selected').val();
+                var staffstep = $('#staffStep option:selected').val();
+
+                 $.ajax({
+                        type: 'GET',
+
+                     url: '@Url.Action("GetBasicSalary", "Staff")/?gradelevel=' + staffgradeLevel + "&step=" + staffstep,
+
+                     success: function (result) {
+                         console.log(result);
+                         var sc = result;
+
+
+                            $('#basicSalary').val(sc);
+                     }
+                         });
+
+
+            });
+
+
+
+            $('#staffStep1').on('change', function () {
+
+
+                var staffgradeLevel = $('#staffGradeLevel1 option:selected').val();
+                var staffstep = $('#staffStep1 option:selected').val();
+
+                 $.ajax({
+                        type: 'GET',
+
+                     url: '@Url.Action("GetBasicSalary", "Staff")/?gradelevel=' + staffgradeLevel + "&step=" + staffstep,
+                     success: function (result) {
+
+                            var sc = result ;
+
+
+                         $('#basicsalaryPromotion').val(sc);
+                     }
+                         });
+
+
+            });
+
+            $('#staffGradeLevel1').on('change', function () {
+
+                $('#staffStep1 option').remove();
+                var staffgradeLevel = $('#staffGradeLevel1 option:selected').val();
+
+                 $.ajax({
+                        type: 'GET',
+
+                     url: '@Url.Action("FindStaffStep", "Staff")/?Level=' + staffgradeLevel,
+                        success: function (result) {
+                            var sc = '<option value="-1">Select Staff Step</option>';
+                            for (var i = 0; i < result.length; i++) {
+                                sc += '<option Value="' + result[i] + '">' + result[i] + '</option>';
+                            }
+                            $('#staffStep1').html(sc);
+                     }
+                         });
+
+
+            });
+
+
+
+            $('#stafftype').on('change', function () {
+                $('#staffCategory option').remove();
+
+                var stafftypeid = $('#stafftype option:selected').val();
+                if (stafftypeid != -1) {
+
+                    $.ajax({
+                        type: 'GET',
+
+                        url: '@Url.Action("FindStaffCategory", "Staff")/?stafftypeid=' + stafftypeid,
+                        success: function (result) {
+                            var sc = '<option value="-1">Select Staff Category</option>';
+                            for (var i = 0; i < result.length; i++) {
+                                sc += '<option Value="' + result[i].id + '">' + result[i].name + '</option>';
+                            }
+                            $('#staffCategory').html(sc);
+                        }
+
+                    });
+                }
+            });
+
+
+            $('#DueForPromotion').change(function () {
+
+                var selected = $(this).val();
+                //console.log(selected);
+                if (selected === 'true') {
+                    $('#PromotionSection').show();
+
+                } else {
+                    $('#PromotionSection').hide();
+
+                }
+            });
+
+            $('#staffCategory').on('change', function () {
+                $('#staffRank option').remove();
+
+                var staffcategoryid = $('#staffCategory option:selected').val();
+                if (staffcategoryid != -1) {
+
+                    $.ajax({
+                        type: 'GET',
+
+                        url: '@Url.Action("FindStaffRank", "Staff")/?staffcategoryid=' + staffcategoryid,
+                        success: function (result) {
+                            var sc = '<option value="-1">Select Staff Rank</option>';
+                            for (var i = 0; i < result.length; i++) {
+                                sc += '<option Value="' + result[i].id + '">' + result[i].name + '</option>';
+                            }
+                            $('#staffRank').html(sc);
+                        }
+
+                    });
+                }
+            });
+
+  //$("#btnSaveApply").click(function () {
+  //              debugger;
+
+  //              var firstName = $("#FirstName").val();
+  //              var lastName = $("#Lastname").val();
+  //              var middleName = $("#MiddleName").val();
+  //              var dateOfBirth = $("#DateOfBirth").val();
+  //              var gender = $("#Gender").val();
+  //              var staffFileNo = $("#StaffFileNo").val();
+  //              var yearOfFirstAppointment = $("#YearOfFirstAppointment").val();
+  //              var yearOfPostingToCollege = $("#YearOfPostingToCollege").val();
+  //              var areaOfSpecialization = $("#AreaOfSpecialization").val();
+  //              var lecturerGrade = $("#GradeLevel").val();
+  //              var mainAdminRole = $("#MainAdminRole").val();
+  //              var dateOfFirstAppointment = $("#DateOfFirstAppointment").val();
+  //              var dateOfCurrentAppointment = $("#DateOfCurrentAppointment").val();
+  //              var academicQualification = $("#AcademicQualification").val();
+  //              var academicQualificationCertNo = $("#AcademicQualificationCertNo").val();
+  //              var teachingQualification = $("#TeachingQualification").val();
+  //              var teachingQualificationCertNo = $("#TeachingQualificationCertNo").val();
+
+  //              var sourceOfSalary = $("#SourceOfSalary").val();
+
+
+  //              var yearOfPresentAppointment = $("#YearOfPresentAppointment").val();
+
+  //              var gradeLevel = $("#GradeLevel").val();
+  //              var subjectOfQualification = $("#SubjectOfQualification").val();
+
+  //              var mainSubjectTaught = $("#MainSubjectTaught").val();
+  //              var teachingType = $("#TeachingType").val();
+  //             var inServiceTraining = $("#InServiceTraining").val();
+
+  //
+
+
+      //$.each(certificateUploadItems, function (index, item) {
+      //    debugger;
+      //    var f = item.CertificateFile;
+      //    data.append("Certificates[" + index + "].Name", item.CertificateName);
+      //    data.append("Certificates[" + index + "].FileUpload", item.CertificateFile);
+
+
+      //          });
+
+
+       @*data.append("FirstName", firstName);
+      data.append("Lastname", lastName);
+      data.append("MiddleName", middleName);
+      data.append("DateOfBirth", dateOfBirth);
+      data.append("Gender", gender);
+      data.append("StaffFileNo", staffFileNo);
+      data.append("YearOfFirstAppointment", yearOfFirstAppointment);
+      data.append("YearOfPostingToCollege", yearOfPostingToCollege);
+      data.append("AreaOfSpecialization", areaOfSpecialization);
+      data.append("GradeLevel", lecturerGrade);
+      data.append("MainAdminRole", mainAdminRole);
+      data.append("DateOfFirstAppointment", dateOfFirstAppointment);
+      data.append("DateOfCurrentAppointment", dateOfCurrentAppointment);
+      data.append("AcademicQualification", academicQualification);
+      data.append("AcademicQualificationCertNo", academicQualificationCertNo);
+      data.append("TeachingQualification", teachingQualification);
+      data.append("TeachingQualificationCertNo", teachingQualificationCertNo);
+
+      data.append("SourceOfSalary", sourceOfSalary);
+
+
+      data.append("YearOfPresentAppointment", yearOfPresentAppointment);
+
+      data.append("GradeLevel", gradeLevel);
+      data.append("SubjectOfQualification", subjectOfQualification);
+
+      data.append("MainSubjectTaught", mainSubjectTaught);
+      data.append("TeachingType", teachingType);
+      data.append("InServiceTraining", inServiceTraining);
+      debugger;
+
+
+                *@
+
+
+
+
+
+            });
+
+
+
+
+
+    </script>
+
+
+
+
+
+    <script src="~/lib/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+    <script src="~/lib/switchery/switchery.min.js"></script>
+    <script src="~/lib/jquery-validation/jquery.validate.min.js"></script>
+    <script src="~/lib/bootstrap-wizard/jquery.bootstrap.wizard.min.js"></script>
+    <script src="~/js/space.min.js"></script>
+    <script src="~/js/pages/form-wizard.js"></script>
+    <script src="~/Assets/select2/select2.js"></script>
+
+
+}
+
+

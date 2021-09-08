@@ -1,0 +1,124 @@
+﻿@using CEMIS.Utility.ViewModel
+@model PartnerSchoolCPDAssesmentViewModel
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <form method="post" enctype="multipart/form-data" asp-action="Create">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title" style="text-align:center">Add New CPD Assesment</h4>
+                </div>
+
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <div class="modal-body">
+
+
+                    <div class="row">
+
+                        <div class="form-group col-md-12">
+                            <div class="col-md-4"><label>Partner School: </label></div>
+                            <div class="col-md-8">
+                                <select asp-for="PartnerSchoolId" asp-items="ViewBag.ParternSchools" class="custom-select form-control-sm">
+                                    <option value="0" selected>--- Select Partner School ---</option>
+                                </select>
+                                <span asp-validation-for="PartnerSchoolId" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="form-group col-md-12">
+                            <div class="col-md-4"><label>Academic Year: </label></div>
+                            <div class="col-md-8">
+                                <select asp-for="AcademicYearId" asp-items="ViewBag.AcademicSession" class="custom-select form-control-sm">
+                                    <option value="0" selected>--- Select Academic Year ---</option>
+                                </select>
+                                <span asp-validation-for="AcademicYearId" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="form-group col-md-12">
+                            <div class="col-md-4"><label>Semester: </label></div>
+                            <div class="col-md-8">
+                                <select asp-for="Semester" asp-items="Html.GetEnumSelectList(typeof(Semester))" class="custom-select form-control-sm">
+                                    @*<option value="0" selected>--- Select Semester ---</option>*@
+                                </select>
+                                <span asp-validation-for="Semester" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="form-group col-md-12">
+                            <div class="col-md-4"><label>Form Type: </label></div>
+                            <div class="col-md-8">
+                                <select asp-for="FormType" asp-items="Html.GetEnumSelectList(typeof(CPDFORMTYPE))" class="custom-select form-control-sm">
+                                    @*<option value="0" selected>--- Select Form Type ---</option>*@
+                                </select>
+                                <span asp-validation-for="FormType" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="form-group col-md-12">
+                            <div class="col-md-4"><label>Date: </label></div>
+                            <div class="col-md-8">
+                                <div class="input-group date" data-provide="datepicker">
+                                    <input type="text" class="form-control" asp-for="Date" />
+                                    <div class="input-group-addon">
+                                        <span class="glyphicon glyphicon-th"></span>
+                                    </div>
+                                </div>
+                                <span asp-validation-for="Date" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="form-group col-md-12">
+                            <div class="col-md-4"><label>File (Maximum 5mb): </label></div>
+                            <div class="col-md-8">
+                                <input asp-for="File" type="file" value="Upload" class="form-control" />
+                                <span asp-validation-for="File" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="modal-footer">
+                    <div class="row">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <a class="btn btn-danger" asp-action="Index">Close</a>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </form>
+
+    </div>
+</div>

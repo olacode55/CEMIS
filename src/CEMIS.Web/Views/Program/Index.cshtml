@@ -1,0 +1,106 @@
+﻿
+@using CEMIS.Utility.ViewModel
+
+@model IEnumerable<ProgramViewModel>
+
+
+@{
+    ViewBag.Title = "Program Management";
+    var i = 1;
+}
+
+<div class="page-title">
+    <h3 class="breadcrumb-header">@ViewBag.Title</h3>
+</div>
+
+<div class="clearfix" style="text-align:right; padding: 20px">
+
+    <button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#myModal">Add Program</button>
+</div>
+
+<div id="main-wrapper">
+
+    @*<div class="col-md-24">*@
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Program Information</h3>
+        </div>
+
+        <div class="panel-body table-responsive">
+            <div class="table-responsive" style="width:100%; column-width:auto;">
+                <table id="example" class="display table table-active" style="width:100%; column-width:auto;">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Status</th>
+                            <th>Action(s)</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr class="odd gradeX">
+                                <td>@i</td>
+                                <td>@item.Name</td>
+                                <td>
+                                    @if (item.IsActive == true)
+                                    {
+                                        <a class="btn btn-success btn-sm" style="width:130px" href="@Url.Action("Toggle","Program", new { Id = item.Id})">Active</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn btn-danger btn-sm" style="width:130px" href="@Url.Action("Toggle","Program", new { Id = item.Id})">In-Active</a>
+                                    }
+                                </td>
+
+                                <td>
+                                    <button class="btn btn-default btn-sm" onclick="manage(@item.Id )">Edit</button>
+
+                                </td>
+
+                            </tr>
+                            i = i + 1;
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@Html.Partial("Create", new ProgramViewModel())
+@Html.Partial("_Edit", new ProgramViewModel())
+
+@section JavaScript
+    {
+
+
+}
+
+<script>
+    function manage(id) {
+
+    $.ajax({
+    url: '@Url.Action("manage", "Program")',
+    data: { Id: id },
+    type: 'GET',
+        success: function (response) {
+            console.log(response);
+            $("#eID").val(response.id);
+            $("#eName").val(response.name);
+            $("#eNumber").val(response.number);
+
+            $("#editModal").modal("show");
+            jQuery('#editModal').addClass('show')
+            //$("editModal").attr("show");
+    },
+    error: function (xhr, status, error) {
+    console.log("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText)
+    }
+    });
+    }
+</script>

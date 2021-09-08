@@ -1,0 +1,98 @@
+﻿@using CEMIS.Utility.ViewModel
+@model ExistingStudentFileUpload
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        @using (Html.BeginForm("ExistingStudentUpload", "Student", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" style="text-align:center">Existing Student Upload List</h4>
+                </div>
+
+                <div class="modal-body">
+
+                    @Html.AntiForgeryToken()
+
+                    <div class="row">
+
+                        <div class="form-group col-md-12">
+                            <div class="col-md-4"><label>Academic Session: </label></div>
+                            <div class="col-md-8">
+                                @Html.DropDownListFor(x => @x.AcademicSessionId, new SelectList(ViewBag.AcademicSession, "Value", "Text"), "Select Academic Session", new { @class = "custom-select form-control-sm" })
+                                @Html.ValidationMessageFor(x => @x.AcademicSessionId, null, new { @style = "color:red" })
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="form-group col-md-12">
+                            <div class="col-md-4"><label>Program: </label></div>
+                            <div class="col-md-8">
+                                @Html.DropDownListFor(x => @x.ProgramId, new SelectList(ViewBag.Program, "Value", "Text"), "Select Program", new { @class = "custom-select form-control-sm" })
+                                @Html.ValidationMessageFor(x => @x.ProgramId, null, new { @style = "color:red" })
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="form-group col-md-12">
+                            <div class="col-md-4"><label>Level: </label></div>
+                            <div class="col-md-8">
+                                @Html.DropDownListFor(x => @x.LevelId, new SelectList(ViewBag.Level, "Value", "Text"), "Select Level", new { @class = "custom-select form-control-sm" })
+                                @Html.ValidationMessageFor(x => @x.LevelId, null, new { @style = "color:red" })
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="form-group col-md-12">
+                            <div class="col-md-4"><label>Students Record File(.xlsx File): </label></div>
+                            <div class="col-md-8"><input class="col-md-8 form-control" type="file" id="StudentRecords" name="StudentRecords" placeholder=".Xlsx" /></div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-8"> <a class="text-info" href="~/Templates/ExistingStudentUploadTemplate.xlsx">Download Template</a></div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-8"><p class="text-danger"><b>NB: AppRefNumber is only required when uploading student to 100 Level</b></p></div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="modal-footer">
+                    <div class="row">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+
+        }
+
+    </div>
+</div>

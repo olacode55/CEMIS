@@ -1,0 +1,170 @@
+﻿
+
+@model StaffCPDAssesmentViewModel
+
+@{
+    ViewBag.Title = "Staff CPD Assesement";
+    var i = 1;
+}
+
+<div class="modal-dialog">
+
+    <!-- Modal content-->
+    @using (Html.BeginForm("Create", "StaffCPD", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+    {
+
+        <div class="modal-content">
+            <div class="modal-header">
+                @*<button type="button" class="close" data-dismiss="modal">&times;</button>*@
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" style="text-align:center">Add Staff CPD</h4>
+            </div>
+            <div class="modal-body">
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(Model => Model.Id)
+
+                @*<div class="row">
+                        <div class="col-md-12">
+                            <label>Staff Name<b style="color:red">*</b></label>
+                            @Html.DropDownListFor(x => @x.StaffId, new SelectList(ViewBag.Staff, "Value", "Text"), "Select Staff Name", new { @class = "custom-select form-control-sm" })
+                            @Html.ValidationMessageFor(x => @x.StaffId, null, new { @style = "color:red" })
+                        </div>
+                        <br />
+                        <div class="col-md-12">
+                            <label>Academic Session<b style="color:red">*</b></label>
+                            @Html.DropDownListFor(x => @x.SessionId, new SelectList(ViewBag.Session, "Value", "Text"), "Select Sesssion", new { @class = "custom-select form-control-sm" })
+                            @Html.ValidationMessageFor(x => @x.SessionId, null, new { @style = "color:red" })
+                        </div>
+                        <br />
+                        <div class="form-group col-md-12">
+                            <label>Semester<b style="color:red">*</b></label>
+                            <select class="custom-select" asp-for="Semester" asp-items="Html.GetEnumSelectList(typeof(Semester))"></select>
+                            @Html.ValidationMessageFor(x => @x.Semester, null, new { @style = "color:red" })
+                        </div>
+                        <br />
+                        <div class="form-group col-md-12">
+                            <label>Form Type<b style="color:red">*</b></label>
+                            <select class="custom-select" asp-for="FormType" asp-items="Html.GetEnumSelectList(typeof(CPDFORMTYPE))"></select>
+                            @Html.ValidationMessageFor(x => @x.FormType, null, new { @style = "color:red" })
+                        </div>
+                        <div class="col-md-12">
+                            <label>File (Maximum 5mb)<b style="color:red"></b></label>
+                            <input asp-for="File" type="file" value="Upload" />
+                        </div>
+                    </div>*@
+
+
+                <div class="row">
+
+                    <div class="form-group col-md-12">
+                        <div class="col-md-4"><label>Staff Name: </label></div>
+                        <div class="col-md-8">
+                            <select asp-for="StaffId" asp-items="ViewBag.Staff" class="custom-select form-control-sm">
+                                <option value="0" selected>--- Select Staff ---</option>
+                            </select>
+                            <span asp-validation-for="StaffId" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="form-group col-md-12">
+                        <div class="col-md-4"><label>Academic Year: </label></div>
+                        <div class="col-md-8">
+                            <select asp-for="SessionId" asp-items="ViewBag.Session" class="custom-select form-control-sm">
+                                <option value="0" selected>--- Select Academic Year ---</option>
+                            </select>
+                            <span asp-validation-for="SessionId" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="form-group col-md-12">
+                        <div class="col-md-4"><label>Semester: </label></div>
+                        <div class="col-md-8">
+                            <select asp-for="Semester" asp-items="Html.GetEnumSelectList(typeof(Semester))" class="custom-select form-control-sm">
+                                @*<option value="0" selected>--- Select Semester ---</option>*@
+                            </select>
+                            <span asp-validation-for="Semester" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="form-group col-md-12">
+                        <div class="col-md-4"><label>Form Type: </label></div>
+                        <div class="col-md-8">
+                            <select asp-for="FormType" asp-items="Html.GetEnumSelectList(typeof(CPDFORMTYPE))" class="custom-select form-control-sm">
+                                @*<option value="0" selected>--- Select Form Type ---</option>*@
+                            </select>
+                            <span asp-validation-for="FormType" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="form-group col-md-12">
+                        <div class="col-md-4"><label>Date: </label></div>
+                        <div class="col-md-8">
+                            <div class="input-group date" data-provide="datepicker">
+                                <input type="text" class="form-control" asp-for="Date" />
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-th"></span>
+                                </div>
+                            </div>
+                            <span asp-validation-for="Date" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="form-group col-md-12">
+                        <div class="col-md-4"><label>File (Maximum 5mb): </label></div>
+                        <div class="col-md-8">
+                            <input asp-for="File" type="file" value="Upload" class="form-control" />
+                            <span asp-validation-for="File" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="modal-footer">
+                    <div class="row">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        @*<button type="button" class="btn btn-danger" data-dismiss="modal" @Url.Action("Index", "AcademicSession")>Close</button>*@
+
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    }
+</div>
+
+
+
+
+
+
+
+
+
+
+
+

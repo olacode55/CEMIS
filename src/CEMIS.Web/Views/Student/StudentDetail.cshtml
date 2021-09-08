@@ -1,0 +1,87 @@
+﻿@model CEMIS.Utility.ViewModel.StudentViewModel
+
+@{
+    ViewData["Title"] = "StudentDetail";
+}
+
+
+
+<div class="row-md-12 grid-margin grid-margin-md-0">
+    <div class="card">
+        <div class="card-header"><h2 class="font-weight-bold" style="text-align:center">STUDENT DETAILS</h2></div><br /><br />
+        <div class="card-body">
+            <div class="wrap d-flex justify-content-start justify-content-sm-center flex-wrap">
+                <div class="col-md-4">
+                    <img class="rounded-circle shadow-lg" style="width:300px; height:350px; " alt="image" src="@Url.Content(Model.Passport)" />
+                    <div class="row"></div>
+                </div>
+                <div class="col-md-8">
+                    <div class="wrap align-items-center ml-5">
+                        <p class="font-weight-bold text-success" style="font-size:20px">@Model.Surname @Model.OtherNames</p>
+                        <p class="font-weight-normal"> Registration Pin: @Model.RegistrationPin</p>
+                        <p class="font-weight-normal"> Applicant Ref. NO: @Model.AppRefNumber</p>
+                        <p class="font-weight-normal"> Gender: @Model.Gender</p>
+                        <p class="font-weight-normal">Date Of Birth: @Model.DOB.ToString("dd-MMM-yyyy")</p>
+                        <p class="font-weight-normal">Marital status: @Model.MaritalStatus</p>
+                        <p class="font-weight-normal">Place Of Birth: @Model.POB</p>
+                        <p class="font-weight-normal">Home Town: @Model.HomeTown</p>
+                        <p class="font-weight-normal">District: @Model.District</p>
+                        <p class="font-weight-normal">Region: @Model.Region</p>
+                        <p class="font-weight-normal">Religion: @Model.Religion</p>
+                        <p class="font-weight-normal">Address: @Model.ContactAddress</p>
+                        <p class="font-weight-normal">Languages Spoken: @Model.LanguagesSpoken</p>
+                        <p class="font-weight-normal">Disability: @Model.Disability</p>
+                        <p class="font-weight-normal">Parent Particulars: @Model.ParentParticulars</p>
+                        <p class="font-weight-normal">Phone: <a href="tel:@Model.TelephoneNumber">@Model.TelephoneNumber</a></p>
+
+                        <br />
+
+                        <h3 class="font-weight-bold"> Result</h3>
+                        <hr />
+                        <p class="font-weight-normal"> Result : @Model.Result</p>
+
+                        <br />
+                        <h3 class="font-weight-bold"> Program Information</h3>
+                        <hr />
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th></th>
+                                    <th> College</th>
+                                    <th>Program</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>First Choice: </td>
+                                    <td>@Model.FirstChoiceCollege</td>
+                                    <td>@Model.FirstChoiceProgram</td>
+                                </tr>
+                                <tr>
+                                    <td>Second Choice: </td>
+                                    <td> @Model.SecondChoiceCollege</td>
+                                    <td>@Model.SecondChoiceProgram</td>
+                                </tr>
+                                <tr>
+                                    <td>Third Choice: </td>
+                                    <td> @Model.ThirdChoiceCollege</td>
+                                    <td>@Model.ThreeChoiceProgram</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <br />
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <div class="card-footer">
+            <a class="btn btn-default" style="float:left" asp-action="Index">Back to List</a>
+            @*<a class="btn btn-default" style="float:left" asp-action="RouteToIndex" asp-route-Id="@Model.Id">Back to List</a>*@
+            <a class="btn btn-primary" style="float:right" asp-action="EditStudent" asp-route-Id="@Model.Id">Edit</a>
+        </div>
+    </div>
+
+</div>
+

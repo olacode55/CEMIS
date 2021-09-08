@@ -1,0 +1,85 @@
+﻿@using CEMIS.Utility.ViewModel
+@model StudentDropOutViewModel
+
+@{
+    ViewBag.Title = "Student Drop Out";
+
+}
+
+
+<div class="col-md-12">
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <h3 class="vatebra-pagetitle text-uppercase">Student Drop Out</h3>
+        </div>
+
+        <div class="card-body">
+
+            <form method="post" enctype="multipart/form-data" asp-action="StudentDropout">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+
+
+                <div class="form-row ">
+
+                    <div class="col-md-12">
+                        <label>Applicant Ref. Number</label>
+                        <input asp-for="AppRefNumber" class="form-control" readonly />
+                        <span asp-validation-for="AppRefNumber" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-row">
+
+                    <div class="col-md-6">
+                        <label>Surename</label>
+                        <input asp-for="Surname" class="form-control" readonly />
+                        <span asp-validation-for="Surname" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>Other Names</label>
+                        <input asp-for="OtherNames" class="form-control" readonly />
+                        <span asp-validation-for="OtherNames" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-row ">
+
+                    <div class="col-md-12">
+                        <label>Reason for droping out</label>
+                        <input asp-for="DropOutComment" class="form-control" />
+                        <span asp-validation-for="DropOutComment" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+
+
+                <div class="form-row">
+                    <a class="btn btn-default" style="margin-top:50px; float:left" asp-action="Index">Back</a>
+                    <button type="submit" class="btn btn-primary" style="margin-top:50px; float:right">Update</button>
+                </div>
+
+
+
+            </form>
+
+        </div>
+    </div>
+
+    <div class="card-footer" style="margin-top:50px">
+
+        @*<a class="btn btn-default" style="float:left" asp-action="StudentDetail" asp-route-AppRefNumber="@Model.AppRefNumber">Back</a>*@
+
+    </div>
+</div>
+
+
+
+

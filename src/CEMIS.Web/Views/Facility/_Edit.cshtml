@@ -1,0 +1,121 @@
+﻿
+@model CollegeFacilityViewModel
+<!-- Modal -->
+<div id="editModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        @using (Html.BeginForm("Create", "facility", FormMethod.Post))
+        {
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Edit Facility</h4>
+                </div>
+                <div class="modal-body">
+
+                    @Html.AntiForgeryToken()
+
+                    @Html.HiddenFor(Model => Model.Id, new { id = "eID" })
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Name</label>
+                            @Html.TextBoxFor(x => x.Name, new { @class = "form-control", id = "eName" })
+                            @Html.ValidationMessageFor(x => @x.Name, null, new { @style = "color:red" })
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>Description</label>
+                            @Html.TextBoxFor(x => x.Description, new { @class = "form-control", id = "eDescription" })
+                            @Html.ValidationMessageFor(x => @x.Description, null, new { @style = "color:red" })
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Facility Type<b style="color:red">*</b></label>
+
+                            @Html.DropDownListFor(x => @x.FacilityType, new SelectList(ViewBag.FacilityType, "Value", "Text"), "Select Facility Type", new { @class = "custom-select form-control-sm", id = "eFacilityType" })
+                            @Html.ValidationMessageFor(x => @x.FacilityType, null, new { @style = "color:red" })
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>Has Disability Access<b style="color:red">*</b></label>
+                            <select class="custom-select" asp-for="DisabilityAccess" asp-items="Html.GetEnumSelectList(typeof(DisabilityAccessAvailability))" id="eDisabilityAccess"></select>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Year Of Construction<b style="color:red">*</b></label>
+                            @Html.TextBoxFor(x => x.YearOfConstruction, new { @class = "form-control", required = "true", id = "eYearOfConstruction" })
+                            @Html.ValidationMessageFor(x => @x.YearOfConstruction, null, new { @style = "color:red" })
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>Present Condition<b style="color:red">*</b></label>
+                            <select class="custom-select" asp-for="PresentCondition" asp-items="Html.GetEnumSelectList(typeof(ClassRoomCondition))" id="ePresentCondition"></select>
+                            @Html.ValidationMessageFor(x => @x.PresentCondition, null, new { @style = "color:red" })
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Length (m)<b style="color:red">*</b></label>
+                            @Html.TextBoxFor(x => x.LengthInMeters, new { @class = "form-control", required = "true", id = "eLengthInMeters" })
+                            @Html.ValidationMessageFor(x => @x.LengthInMeters, null, new { @style = "color:red" })
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>Width (m)<b style="color:red">*</b></label>
+                            @Html.TextBoxFor(x => x.WidthInMeters, new { @class = "form-control", required = "true", id = "eWidthInMeters" })
+                            @Html.ValidationMessageFor(x => @x.WidthInMeters, null, new { @style = "color:red" })
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Floor Material<b style="color:red">*</b></label>
+                            <select class="custom-select" asp-for="FloorMaterial" asp-items="Html.GetEnumSelectList(typeof(FloorMaterial))" id="eFloorMaterial"></select>
+                            @Html.ValidationMessageFor(x => @x.FloorMaterial, null, new { @style = "color:red" })
+                        </div>
+
+
+                        <div class="col-md-6">
+                            <label>Roof Material<b style="color:red">*</b></label>
+                            <select class="custom-select" asp-for="RoofMaterial" asp-items="Html.GetEnumSelectList(typeof(RoofMaterial))" id="eRoofMaterial"></select>
+                            @Html.ValidationMessageFor(x => @x.RoofMaterial, null, new { @style = "color:red" })
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-md-6">
+                            <label>Seatings<b style="color:red">*</b></label>
+                            <select class="custom-select" asp-for="Seatings" asp-items="Html.GetEnumSelectList(typeof(SeatAvailability))" id="eSeatings"></select>
+                            @Html.ValidationMessageFor(x => @x.Seatings, null, new { @style = "color:red" })
+                        </div>
+
+
+
+                    </div>
+
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,107 @@
+﻿
+@model IEnumerable<CouncilSessionViewModel>
+
+
+@{
+    ViewBag.Title = "Council Session Management";
+    var i = 1;
+}
+
+<div class="page-title">
+    <h3 class="breadcrumb-header">@ViewBag.Title</h3>
+</div>
+
+<div class="clearfix" style="text-align:right; padding: 20px">
+
+    <button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#myModal">Add Session</button>
+</div>
+
+<div id="main-wrapper">
+
+    @*<div class="col-md-24">*@
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Council Session Information</h3>
+        </div>
+
+        <div class="panel-body table-responsive">
+            <div class="table-responsive" style="width:100%; column-width:auto;">
+                <table id="example" class="display table table-active" style="width:100%; column-width:auto;">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Start Date </th>
+                            <th>End Date </th>
+                            <th>Status</th>
+                            <th>Action</th>
+                            @*<th>Add Council Members</th>*@
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr class="odd gradeX">
+                                <td>@i</td>
+                                <td>@item.name</td>
+                                <td>@item.startDate.ToString("dddd, dd MMMM yyyy")</td>
+                                 <td>@item.endDate.ToString("dddd, dd MMMM yyyy")</td>
+                                <td>
+                                    @if (item.IsActive == "1")
+                                    {
+                                        <a class="btn btn-success btn-sm" style="width:120px" href="@Url.Action("Toggle","CouncilSession", new { Id = item.Id})">Active</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn btn-danger btn-sm" style="width:120px" href="@Url.Action("Toggle","CouncilSession", new { Id = item.Id})">Closed</a>
+                                    }
+                                </td>
+
+                                <td>
+                                    <button class="btn btn-default btn-sm" onclick="Edit(@item.Id)">Edit</button>
+
+                                </td>
+                                @*<td>
+
+                                        <button class="btn btn-default btn-sm" onclick="location.href='@Url.Action("Index", "CouncilMember")'">Add Council Members</button>
+                                    </td>*@
+
+                            </tr>
+                            i = i + 1;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("_create", new CouncilSessionViewModel())
+@Html.Partial("_edit", new CouncilSessionViewModel())
+
+
+
+<script>
+    function Edit(id) {
+
+    $.ajax({
+    url: '@Url.Action("Edit", "CouncilSession")',
+    data: { Id: id },
+    type: 'GET',
+        success: function (response) {
+            console.log(response);
+            $("#eId").val(response.id);
+            $("#ename").val(response.name);
+            $("#eIsActive").val(response.isActive);
+            $("#eStartDate").val(response.startDate);
+            $("#editModal").modal("show");
+            jQuery('#editModal').addClass('show')
+            //$("editModal").attr("show");
+    },
+    error: function (xhr, status, error) {
+    console.log("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText)
+    }
+    });
+    }
+</script>

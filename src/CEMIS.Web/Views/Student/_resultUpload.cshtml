@@ -1,0 +1,122 @@
+﻿@using CEMIS.Utility.ViewModel
+@model ResultFileUploadViewModel
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        @using (Html.BeginForm("ResultUpload", "Student", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" style="text-align:center">Student Result Upload</h4>
+                </div>
+
+                <div class="modal-body">
+
+                    @Html.AntiForgeryToken()
+
+                    <div class="row">
+
+                        <div class="form-group col-md-12">
+                            <div class="col-md-4"><label>Academic Session: </label></div>
+                            <div class="col-md-8">
+                                @Html.DropDownListFor(x => @x.AcademicSessionId, new SelectList(ViewBag.AcademicSession, "Value", "Text"), "Select Academic Session", new { @class = "custom-select form-control-sm" })
+                                @Html.ValidationMessageFor(x => @x.AcademicSessionId, null, new { @style = "color:red" })
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="form-group col-md-12">
+                            <div class="col-md-4"><label>Level: </label></div>
+                            <div class="col-md-8">
+                                @Html.DropDownListFor(x => @x.LevelId, new SelectList(ViewBag.Level, "Value", "Text"), "Select Level", new { @class = "custom-select form-control-sm" })
+                                @Html.ValidationMessageFor(x => @x.LevelId, null, new { @style = "color:red" })
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="form-group col-md-12">
+                            <div class="col-md-4"><label>Program: </label></div>
+                            <div class="col-md-8">
+                                <select asp-for="ProgramId" class="custom-select form-control-sm" asp-items="ViewBag.Program">
+                                    <option value="" selected>--- Select program ---</option>
+                                </select>
+                                @Html.ValidationMessageFor(x => @x.ProgramId, null, new { @style = "color:red" })
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="form-group col-md-12">
+                            <div class="col-md-4"><label>Semester: </label></div>
+                            <div class="col-md-8">
+                                <select class="custom-select" asp-for="Semester" asp-items="Html.GetEnumSelectList(typeof(Semester))">
+                                    <option value="0" selected> Select Semester </option>
+                                </select>
+                                @Html.ValidationMessageFor(x => @x.Semester, null, new { @style = "color:red" })
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+
+                        <div class="form-group col-md-12">
+                            <div class="col-md-4"><label>Course: </label></div>
+                            <div class="col-md-8">
+                                @Html.DropDownListFor(x => @x.CourseId, new SelectList(ViewBag.Course, "Value", "Text"), "Select Level", new { @class = "custom-select form-control-sm" })
+                                @Html.ValidationMessageFor(x => @x.CourseId, null, new { @style = "color:red" })
+                            </div>
+                        </div>
+
+                    </div>
+
+
+                    <div class="row">
+
+                        <div class="form-group col-md-12">
+                            <div class="col-md-4"><label>Students Record File(.xlsx File): </label></div>
+                            <div class="col-md-8"><input class="col-md-8 form-control" type="file" id="StudentResultFile" name="StudentResultFile" placeholder=".Xlsx" /></div>
+                           
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-12">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-8"><a class="text-info" href="/Templates/StudentResultUploadTemplate.xlsx">Download Template</a></div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+
+                <div class="modal-footer">
+                    <div class="row">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+
+        }
+
+    </div>
+</div>

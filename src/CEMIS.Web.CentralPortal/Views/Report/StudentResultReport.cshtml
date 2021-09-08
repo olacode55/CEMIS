@@ -1,0 +1,264 @@
+﻿
+@model IEnumerable<ResultViewModel>
+@{
+    ViewBag.Title = "College Result Report";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@section customstyles
+    {
+    <link href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.datatables.net/buttons/1.5.4/css/buttons.dataTables.min.css" rel="stylesheet" type="text/css" />
+
+}
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h4 class="panel-title">Central Student Result Report</h4>
+        @if (Model.Count() > 0)
+        {
+            <button onclick="goBack()">Go Back</button>
+        }
+    </div>
+    <div class="panel-body">
+
+        @if (Model.Count() == 0)
+        {
+            <section style="margin:5px">
+
+                @using (Html.BeginForm("StudentResultReport", "Report", FormMethod.Post))
+                {
+                    @Html.AntiForgeryToken()
+                    <div class="row form-group">
+                        <div class="col-md-12">
+
+                            <label class="col-md-1">Student ID</label>
+                            <div class="col-md-3">
+                                <input type="text" name="studentId" id="studentId" class="form-control" />
+                            </div>
+
+                            <label class="col-md-1">College</label>
+                            <div class="col-md-3">
+                                @Html.DropDownList("collegeId", (IEnumerable<SelectListItem>)(ViewBag.College), "Select college....", new { @class = "custom-select" })
+                            </div>
+                            <label class="col-md-1">Program</label>
+                            <div class="col-md-2">
+                                <select id="program" class="custom-select custom-select-sm" name="programId">
+                                    <option value="0"> select.......</option>
+                                </select>
+                            </div>
+
+
+                            
+
+
+
+
+                        </div>
+                    </div>
+
+                    <div class="row form-group">
+                        <div class="col-md-12">
+
+                            <label class="col-md-1">Course</label>
+                            <div class="col-md-2">
+                                <select id="course" class="custom-select custom-select-sm" name="courseId">
+                                    <option value="0"> select.......</option>
+                                </select>
+                            </div>
+
+                            <label class="col-md-1">Session</label>
+                            <div class="col-md-2">
+                                <select id="session" class="custom-select custom-select-sm" name="session">
+                                    <option value="0"> select.......</option>
+                                </select>
+                            </div>
+
+                            <label class="col-md-1">Semester</label>
+                            <div class="col-md-2">
+                                <select class="custom-select" name="semesterId" id="semesterId" asp-items="Html.GetEnumSelectList(typeof(Semester))"></select>
+                            </div>
+
+                            <label class="col-md-1">Level</label>
+                            <div class="col-md-2">
+                                <select class="custom-select" name="Level" id="Level" asp-items="Html.GetEnumSelectList(typeof(Level))"></select>
+                            </div>
+
+                        </div>
+
+                        </div>
+
+                    <input type="submit" class="btn btn-success btn-sm" style="margin-bottom:15px; margin-right:10px" value="Generate Report" />
+                }
+            </section>
+        }
+
+        <div class="table-responsive">
+            <table id="datatable" class="display table" style="width: 100%; cellspacing: 0;">
+                <thead>
+
+                    <tr>
+                        <th>S/N</th>
+                        <th>Student Name</th>
+                        <th>Program</th>
+                        <th>Course</th>
+                        <th>Score</th>
+                        <th>Grade</th>
+                        <th>Level</th>
+                        <th>Session</th>
+
+
+                    </tr>
+                </thead>
+                <tbody>
+                    @{int rowNo = 0;}
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@(rowNo += 1)</td>
+                            <td>@Html.DisplayFor(modelItem => item.StudentName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Program)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Course)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Score)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Grade)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Level)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Session)</td>
+
+
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+</div>
+@section scripts {
+    @*<script src="https://code.jquery.com/jquery-3.3.1.js"></script>*@
+
+    <script src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.4/js/dataTables.buttons.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.4/js/buttons.flash.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.36/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.4/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/1.5.4/js/buttons.print.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            optionText = 'select.....';
+            optionValue = '0';
+            $('#Level').prepend(`<option value="${optionValue}" selected='selected'>
+                                       ${optionText}
+                                  </option>`);
+
+           
+            $('#semesterId').prepend(`<option value="${optionValue}" selected='selected'>
+                                       ${optionText}
+                                  </option>`);
+
+
+            $('#datatable').DataTable({
+                dom: 'Bfrtip',
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            });
+
+
+    });
+
+     $('#collegeId').on('change', function () {
+
+         $('#program option').remove();
+                let collegeId = $('#collegeId option:selected').val();
+                let url = '@Url.Action("GetProgrambyCollegeId", "Program")'
+         $.ajax({
+             type: "GET",
+             url: url,
+             data: { collegeId: collegeId}, // serializes the form's elements.
+             success: function (data) {
+                 let html = '<option value="0">select........</option>';
+                 console.log(data);
+                 for (let i = 0; i < data.length; i++) {
+
+                     html += '<option Value="' + data[i].key + '">' + data[i].value + '</option>';
+                 }
+                 $('#program').html(html);
+
+                 getSession(collegeId)
+            },
+            error: function (resp) {
+                console.log(resp);
+
+            }
+        });
+
+
+        });
+
+
+
+        $('#program').on('change', function () {
+
+            $('#course option').remove();
+            let programId = $('#program option:selected').val();
+            let collegeId = $('#collegeId option:selected').val();
+                let url = '@Url.Action("GetCoursesByProgramId", "Course")'
+         $.ajax({
+             type: "GET",
+             url: url,
+             data: { collegeId: collegeId, programId: programId}, // serializes the form's elements.
+             success: function (data) {
+                 let html = '<option value="0">select........</option>';
+                 console.log(data);
+                 for (let i = 0; i < data.length; i++) {
+
+                     html += '<option Value="' + data[i].key + '">' + data[i].value + '</option>';
+                 }
+                 $('#course').html(html);
+            },
+             error: function (resp) {
+                 alert('failed');
+                console.log(resp);
+
+            }
+        });
+
+
+       });
+
+        
+        function getSession(collegeId) {
+            $('#session option').remove();
+                let url = '@Url.Action("GetSessionbyCollegeId", "report")'
+         $.ajax({
+             type: "GET",
+             url: url,
+             data: { collegeId: collegeId}, // serializes the form's elements.
+             success: function (data) {
+                 let html = '<option value="0">select........</option>';
+                 console.log(data);
+                 for (let i = 0; i < data.length; i++) {
+
+                     html += '<option Value="' + data[i].key + '">' + data[i].value + '</option>';
+                 }
+                 $('#session').html(html);
+            },
+            error: function (resp) {
+                console.log(resp);
+
+            }
+        });
+        }
+        function goBack() {
+            window.history.back();
+        }
+
+    </script>
+
+}
+

@@ -1,0 +1,127 @@
+﻿
+@model CollegeClassRoomInfoViewModel
+<!-- Modal -->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        @using (Html.BeginForm("ClassRoomInfo", "College", FormMethod.Post))
+        {
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4>College Class Room Info </h4>
+                </div>
+                <div class="modal-body">
+
+                    @Html.AntiForgeryToken()
+
+                    @Html.HiddenFor(Model => Model.Id)
+                    @Html.HiddenFor(Model => Model.CollegeId)
+
+
+                    <div class="col-md-12">
+
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Year Of Construction<b style="color:red">*</b></label>
+                                @*<input id="YearOfConstruction" name="YearOfConstruction" type="number" class="form-control" />*@
+                                @Html.TextBoxFor(x => x.YearOfConstruction, new { @class = "form-control", required = "true" })
+                                @Html.ValidationMessageFor(x => @x.YearOfConstruction, null, new { @style = "color:red" })
+                            </div>
+
+                            <div class="col-md-6">
+                                <label>Present Condition<b style="color:red">*</b></label>
+                                <select class="custom-select" asp-for="PresentCondition" asp-items="Html.GetEnumSelectList(typeof(ClassRoomCondition))"></select>
+                                @Html.ValidationMessageFor(x => @x.PresentCondition, null, new { @style = "color:red" })
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Length (m)<b style="color:red">*</b></label>
+                                @Html.TextBoxFor(x => x.LengthInMeters, new { @class = "form-control", required = "true" })
+                                @Html.ValidationMessageFor(x => @x.LengthInMeters, null, new { @style = "color:red" })
+                            </div>
+
+                            <div class="col-md-6">
+                                <label>Width (m)<b style="color:red">*</b></label>
+                                @Html.TextBoxFor(x => x.WidthInMeters, new { @class = "form-control", required = "true", })
+                                @Html.ValidationMessageFor(x => @x.WidthInMeters, null, new { @style = "color:red" })
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Floor Material<b style="color:red">*</b></label>
+                                <select class="custom-select" asp-for="FloorMaterial" asp-items="Html.GetEnumSelectList(typeof(FloorMaterial))"></select>
+                                @Html.ValidationMessageFor(x => @x.FloorMaterial, null, new { @style = "color:red" })
+                            </div>
+
+                            <div class="col-md-6">
+                                <label>Wall Material<b style="color:red">*</b></label>
+                                <select class="custom-select" asp-for="WallMaterial" asp-items="Html.GetEnumSelectList(typeof(WallMaterial))"></select>
+                                @Html.ValidationMessageFor(x => @x.WallMaterial, null, new { @style = "color:red" })
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Roof Material<b style="color:red">*</b></label>
+                                <select class="custom-select" asp-for="RoofMaterial" asp-items="Html.GetEnumSelectList(typeof(RoofMaterial))"></select>
+                                @Html.ValidationMessageFor(x => @x.RoofMaterial, null, new { @style = "color:red" })
+                            </div>
+
+                            <div class="col-md-6">
+                                <label>Seatings<b style="color:red">*</b></label>
+                                <select class="custom-select" asp-for="Seatings" asp-items="Html.GetEnumSelectList(typeof(SeatAvailability))"></select>
+                                @Html.ValidationMessageFor(x => @x.Seatings, null, new { @style = "color:red" })
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <label>Has Disability Access<b style="color:red">*</b></label>
+                                <select class="custom-select" asp-for="DisabilityAccess" asp-items="Html.GetEnumSelectList(typeof(DisabilityAccessAvailability))"></select>
+
+                            </div>
+
+                            <div class="col-md-6">
+
+                            </div>
+
+                        </div>
+
+
+                        @*<div class="row" style="margin-top:20px">
+
+
+                                <a class="btn btn-default" style="float:left" href="@Url.Action("Index","College", new { Id = Model.CollegeId})"> Back To Preview </a>
+
+                                <button type="submit" style="float:right" class="btn btn-primary">Submit</button>
+
+
+
+
+                            </div>*@
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Create</button>
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        }
+    </div>
+</div>

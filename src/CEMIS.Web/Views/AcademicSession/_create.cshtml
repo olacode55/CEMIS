@@ -1,0 +1,108 @@
+﻿@using CEMIS.Utility.ViewModel
+@model AcademicSessionViewModel
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        @using (Html.BeginForm("Create", "AcademicSession", FormMethod.Post))
+        {
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    @*<button type="button" class="close" data-dismiss="modal">&times;</button>*@
+                    <h4 class="modal-title" style="text-align:center">Add Academic Session</h4>
+                </div>
+
+                <div class="modal-body">
+
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(Model => Model.Id)
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Academic Period<b style="color:red">*</b></label>
+                            @Html.TextBoxFor(x => x.AcademicPeriod, new { @class = "form-control", required = "true", Placeholder = "2019/2020" })
+                            @Html.ValidationMessageFor(x => @x.AcademicPeriod, null, new { @style = "color:red" })
+                        </div>
+
+                        <div class="col-md-6">
+                            @*<label>Status<b style="color:red">*</b></label>
+                                <select class="custom-select" asp-for="IsActive">
+                                    <option value="1">Active</option>
+                                    <option value="0">Inactive</option>
+                                </select>
+                                @Html.ValidationMessageFor(x => @x.IsActive, null, new { @style = "color:red" })*@
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>First Semester Start Date</label>
+                            <div class="input-group date" data-provide="datepicker">
+                                <input type="text" class="form-control" asp-for="FirstSemesterStartDate" />
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-th"></span>
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(x => @x.FirstSemesterStartDate, null, new { @style = "color:red" })
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>First Semester EndDate</label>
+                            <div class="input-group date" data-provide="datepicker">
+                                <input type="text" class="form-control" asp-for="FirstSemesterEndDate" />
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-th"></span>
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(x => @x.FirstSemesterEndDate, null, new { @style = "color:red" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Second Semester Start Date</label>
+                            <div class="input-group date" data-provide="datepicker">
+                                <input type="text" class="form-control" asp-for="SecondSemesterStartDate" />
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-th"></span>
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(x => @x.SecondSemesterStartDate, null, new { @style = "color:red" })
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>Second Semester End Date</label>
+                            <div class="input-group date" data-provide="datepicker">
+                                <input type="text" class="form-control" asp-for="SecondSemesterEndDate" />
+                                <div class="input-group-addon">
+                                    <span class="glyphicon glyphicon-th"></span>
+                                </div>
+                            </div>
+                            @Html.ValidationMessageFor(x => @x.SecondSemesterEndDate, null, new { @style = "color:red" })
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+
+                <div class="modal-footer">
+                    <div class="row">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        @*<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>*@
+                        @*<button type="button" class="btn btn-danger" data-dismiss="modal" @Url.Action("Index", "AcademicSession")>Close</button>*@
+                        <a class="btn btn-danger" href=" @Url.Action("Index", "AcademicSession")">Close</a>
+                    </div>
+
+                </div>
+            </div>
+
+        }
+
+    </div>
+</div>

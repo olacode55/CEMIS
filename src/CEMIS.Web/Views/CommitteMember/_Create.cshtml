@@ -1,0 +1,69 @@
+﻿
+@model CommitteMemberViewModel
+
+
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        @using (Html.BeginForm("Create", "CommitteMember", FormMethod.Post, new { enctype = "multipart/form-data" }))
+
+            {
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                @*<button type="button" class="close" data-dismiss="modal">&times;</button>*@
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" style="text-align:center">Add Committe Member</h4>
+            </div>
+            <div class="modal-body">
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(Model => Model.Id)
+                <div class="row">
+                    <div class="col-md-12">
+                        <labe> Name <b style="color:red">*</b></labe>
+                        @Html.TextBoxFor(x => x.committeMemberName, new { @class = "form-control", required = "true", Placeholder = "Committe Member Name" })
+                        @Html.ValidationMessageFor(x => @x.committeMemberName, null, new { @style = "color:red" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <labe> Commitee Name <b style="color:red">*</b></labe>
+                        @Html.DropDownListFor(u => u.committeId, Model.CommitteNames, "-- Select Committe Name --", new { @class = "custom-select" })
+                        @Html.ValidationMessageFor(u => u.committeId, "", new { @style = "color:red" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Session<b style="color:red">*</b></label>
+                        <div class="">
+                            @Html.DropDownListFor(u => u.sessionId, Model.sessionNames, "-- Select Council Session --", new { @class = "custom-select" })
+                            @Html.ValidationMessageFor(u => u.sessionId, "", new { @style = "color:red" })
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Postion <b style="color:red">*</b></label>
+                        <div class="">
+                            <select class="custom-select" asp-for="committeMemberPosition" asp-items="Html.GetEnumSelectList(typeof(Postion))"></select>
+                        </div>
+                        @Html.ValidationMessageFor(x => @x.committeMemberPosition, null, new { @style = "color:red" })
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <div class="row">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        @*<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>*@
+                        @*<button type="button" class="btn btn-danger" data-dismiss="modal" @Url.Action("Index", "AcademicSession")>Close</button>*@
+
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+}
+    </div>

@@ -1,0 +1,114 @@
+﻿
+@using CEMIS.Utility.ViewModel
+
+@model IEnumerable<PartnerSchoolViewModel>
+
+
+@{
+    ViewBag.Title = "Partner School Management";
+    var i = 1;
+}
+
+<div class="page-title">
+    <h3 class="breadcrumb-header">@ViewBag.Title</h3>
+</div>
+
+<div class="clearfix" style="text-align:right; padding: 20px">
+
+    <button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#myModal">Add Partner School</button>
+</div>
+
+<div id="main-wrapper">
+
+    @*<div class="col-md-24">*@
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Partner School Information</h3>
+        </div>
+
+        <div class="panel-body table-responsive">
+            <div class="table-responsive" style="width:100%; column-width:auto;">
+                <table id="example" class="display table table-active" style="width:100%; column-width:auto;">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Head Teacher </th>
+                            <th>Phone </th>
+                            <th>Address </th>
+                            <th>No Of Mantees </th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr class="odd gradeX">
+                                <td>@i</td>
+                                <td>@item.Name</td>
+                                <td>@item.HeadTeacher</td>
+                                <td>@item.Phone</td>
+                                <td>@item.Address</td>
+                                <td>@item.NoOfMantees</td>
+
+                                <td>
+                                    @if (item.IsActive)
+                                    {
+                                        <a class="btn btn-success btn-sm" style="width:120px" href="@Url.Action("Toggle","PartnerSchool", new { Id = item.Id})">Active</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn btn-danger btn-sm" style="width:120px" href="@Url.Action("Toggle","PartnerSchool", new { Id = item.Id})">Inactive</a>
+                                    }
+                                </td>
+
+                                <td>
+                                    <button class="btn btn-default btn-sm" onclick="Edit(@item.Id)">Edit</button>
+
+                                </td>
+
+
+                            </tr>
+                            i = i + 1;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("_create", new PartnerSchoolViewModel())
+@Html.Partial("_edit", new PartnerSchoolViewModel())
+
+
+
+<script>
+    function Edit(id) {
+
+    $.ajax({
+    url: '@Url.Action("Edit", "PartnerSchool")',
+    data: { Id: id },
+    type: 'GET',
+        success: function (response) {
+            console.log(response);
+            $("#eId").val(response.id);
+            $("#eName").val(response.name);
+            $("#eHeadTeacher").val(response.headTeacher);
+            $("#ePhone").val(response.phone);
+            $("#eAddress").val(response.address);
+            $("#eNoOfMantees").val(response.noOfMantees);
+
+
+            $("#editModal").modal("show");
+            jQuery('#editModal').addClass('show')
+            //$("editModal").attr("show");
+    },
+    error: function (xhr, status, error) {
+    console.log("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText)
+    }
+    });
+    }
+</script>

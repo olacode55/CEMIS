@@ -1,0 +1,124 @@
+﻿@model IEnumerable<CEMIS.Utility.ViewModel.UnitViewModel>
+@{
+    ViewBag.Title = "Unit";
+    var i = 1;
+}
+
+
+<div class="page-title">
+    <h3 class="breadcrumb-header">@ViewBag.Title</h3>
+</div>
+<div class="clearfix" style="text-align:right; padding: 20px">
+    <button type="button" class="btn btn-success btn-md" id="btnCreate" data-toggle="modal" data-target="#myModal">Create</button>
+</div>
+<div id="main-wrapper">
+
+    <div class="row">
+        <div class="col-24">
+            <div id="divModal">
+            </div>
+            <div class="row">
+                <div class="col-md-24">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            &nbsp;
+                        </div>
+                        <div class="panel-body">
+                            <div class="dataTable_wrapper">
+                                <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Unit</th>
+                                            <th>Department</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr class="odd gradeX">
+                                                <td>@i</td>
+                                                <td>@item.Name</td>
+                                                <td>@item.Department</td>
+
+                                                <td>
+                                                    <button class="btn btn-default btn-sm btnManager" data-toggle="modal" data-target="#myModal" data-val="@item.Id">Manage</button>
+                                                    @*<button class="btn btn-danger btn-sm" href="@Url.Action("Delete","Unit", new { Id = item.Id})">Delete</button>*@
+                                                    <a class="btn btn-danger btn-sm" href="@Url.Action("Delete","Unit", new { Id = item.Id})">Delete</a>
+                                                  
+                                                </td>
+                                            </tr>
+                                            i = i + 1;
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div id="myModal" class="modal fade" role="dialog">
+
+</div>
+
+@*@Html.Partial("Create", new UnitViewModel())*@
+@*@Html.Partial("_Edit", new UnitViewModel())*@
+
+@section JavaScript
+{
+<script type="application/javascript">
+    $("document").ready(function () {
+        $("#btnCreate").click(function (e) {
+
+            e.preventDefault();
+            $("#myModal").load("@Url.Action("Create","Unit")");
+        });
+
+        $(".btnManager").click(function(e){
+
+            e.preventDefault();
+            var unitId = $(this).data("val");
+            $("#myModal").load("@Url.Action("Edit","Unit")?id="+unitId);
+        });
+    });
+</script>    
+
+}
+
+<script>
+
+    
+
+    function manage(id) {
+
+    $.ajax({
+    url: '@Url.Action("manage", "Unit")',
+    data: { Id: id },
+    type: 'GET',
+        success: function (response) {
+            console.log(response);
+            $("#eID").val(response.id);
+            $("#eName").val(response.name);
+            $("#eDepartment").val(response.department);
+            //$("#eNumber").val(response.number);
+            debugger;
+            $("#editModal").modal("show");
+            jQuery('#editModal').addClass('show')
+            //$("editModal").attr("show");
+    },
+    error: function (xhr, status, error) {
+    console.log("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText)
+    }
+    });
+    }
+</script>
+

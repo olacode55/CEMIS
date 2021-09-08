@@ -1,0 +1,115 @@
+﻿@using CEMIS.Data.Central
+
+@model IEnumerable<College>
+@{
+    ViewBag.Title = "College Setup";
+    var i = 1;
+}
+
+
+<div class="page-title">
+    <h3 class="breadcrumb-header">@ViewBag.Title</h3>
+</div>
+<div style="float:right">
+    <button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#myModal">Create</button>
+</div><br />
+<div id="main-wrapper">
+
+    <div class="row">
+        <div class="col-24">
+
+
+            <div id="divModal">
+            </div>
+            <div class="row">
+                <div class="col-md-24">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            &nbsp;
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="dataTable_wrapper">
+                                <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Name</th>
+                                            <th>API Key</th>
+
+
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Name</th>
+                                            <th>API Key</th>
+
+
+                                            <th></th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr class="odd gradeX">
+                                                <td>@i</td>
+                                                <td>@item.Name</td>
+                                                <td>@item.APIKey</td>
+
+                                                <td>
+
+                                                    <button class="btn btn-default btn-sm" onclick="manage(@item.Id )">Manage</button>
+                                                </td>
+                                            </tr>
+                                            i = i + 1;
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+@Html.Partial("Create", new College())
+@*@Html.Partial("_Edit", new College())*@
+
+@section JavaScript
+    {
+
+
+}
+
+<script>
+    function manage(id) {
+
+    $.ajax({
+    url: '@Url.Action("manage", "Facility")',
+    data: { Id: id },
+    type: 'GET',
+        success: function (response) {
+            console.log(response);
+            $("#eID").val(response.id);
+            $("#eName").val(response.name);
+            $("#eNumber").val(response.number);
+
+            $("#editModal").modal("show");
+            jQuery('#editModal').addClass('show')
+            //$("editModal").attr("show");
+    },
+    error: function (xhr, status, error) {
+    console.log("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText)
+    }
+    });
+    }
+</script>

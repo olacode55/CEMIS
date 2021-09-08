@@ -1,0 +1,66 @@
+﻿
+@model CouncilSessionViewModel
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        @using (Html.BeginForm("Create", "CouncilSession", FormMethod.Post))
+        {
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                @*<button type="button" class="close" data-dismiss="modal">&times;</button>*@
+                <h4 class="modal-title" style="text-align:center">Add Council Session</h4>
+            </div>S
+            <div class="modal-body">
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(Model => Model.Id)
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>NAME<b style="color:red">*</b></label>
+                        @Html.TextBoxFor(x => x.name, new { @class = "form-control", required = "true", Placeholder = "2019/2020" })
+                        @Html.ValidationMessageFor(x => @x.name, null, new { @style = "color:red" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label> Start Date</label>
+                        <div class="input-group date" data-provide="datepicker">
+                            <input type="text" class="form-control" asp-for="startDate" />
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-th"></span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(x => @x.startDate, null, new { @style = "color:red" })
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label> End Date</label>
+                        <div class="input-group date" data-provide="datepicker">
+                            <input type="text" class="form-control" asp-for="endDate" />
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-th"></span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(x => @x.endDate, null, new { @style = "color:red" })
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <div class="row">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    @*<button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>*@
+                    @*<button type="button" class="btn btn-danger" data-dismiss="modal" @Url.Action("Index", "AcademicSession")>Close</button>*@
+                    <a class="btn btn-danger" href=" @Url.Action("Index", "CouncilSession")">Close</a>
+                </div>
+
+            </div>
+        </div>
+
+        }
+
+    </div>
+</div>

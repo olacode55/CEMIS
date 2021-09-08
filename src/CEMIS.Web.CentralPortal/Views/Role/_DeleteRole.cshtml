@@ -1,0 +1,68 @@
+﻿@model RoleViewModel
+<!-- Modal -->
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Delete Role</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @using (Html.BeginForm("RemoveRole", "Role", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="modal-body">
+                @Html.HiddenFor(m => m.roleid)
+                @*@Html.HiddenFor(m => m.Roles, new { id = "hdnRoles"})*@
+                <div class="form-group">
+                    Are You Sure You Want To Delete This User?
+                    <strong> @Html.DisplayFor(m => m.rolename, new { @class = "form-control" })</strong>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-shadow" data-dismiss="modal" id="dismiss">Close</button>
+                <button type="submit" class="btn btn-primary">Delete</button>
+            </div>
+        }
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('document').ready(function () {
+        $("form").submit(function (e) {
+
+            e.preventDefault();
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: $(this).serialize(),
+                success: function (result) {
+                    if (result.success) {
+                        $('#addRoleModal').modal("hide");
+                        location.href = "@Url.Action("Index","Role")";
+                    }
+                    else {
+                        $('#addRoleModal').html(result);
+                    }
+                }, error: function (request, status, error) {
+                    alert(JSON.stringify(error));
+                }
+            });
+            return false;
+        })
+
+        //$('#rolesLstBx').change(function () {
+        //    document.getElementById("hdnRoles").value = document.getElementById("rolesLstBx").value;
+        //})
+    })
+
+	$('#dismiss').click(function () {
+            $('#addRoleModal').modal("hide");
+            location.href = "@Url.Action("Index","Role")";
+        });
+
+        $('#close').click(function () {
+            $('#addRoleModal').modal("hide");
+            location.href = "@Url.Action("Index","Role")";
+        });
+</script>

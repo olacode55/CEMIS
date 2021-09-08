@@ -1,0 +1,87 @@
+﻿
+@using CEMIS.Data.Entities
+
+@model IEnumerable<TeachingStaff>
+@{
+    ViewBag.Title = "Teaching Staff";
+    var i = 1;
+}
+
+<div class="page-title">
+    <h3 class="breadcrumb-header">@ViewBag.Title</h3>
+</div>
+<div class="clearfix" style="text-align:right; padding: 20px">
+    <a class="btn btn-default btn-md" href="@Url.Action("create", "staff")"> New Staff </a>
+</div>
+<div id="main-wrapper">
+    <div class="row">
+        <div class="col-24">
+            <div id="divModal">
+                @*@Html.Partial("_AddStructure", new Department())*@
+            </div>
+            <div class="row">
+                <div class="col-md-24">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            &nbsp;
+                        </div>
+
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Staff Name</th>
+                                            <th>Gender</th>
+                                            <th>DOB</th>
+                                            <th>Retired Date</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                        <tr class="odd gradeX">
+                                            <td>@i</td>
+                                            @{string parameterValue = item.FirstName + " " + item.MiddleName + " " + item.LastName;
+                                            }
+                                            <td>@Html.DisplayFor(modelItem => parameterValue)</td>
+                                            <td>@item.Gender</td>
+                                            <td>@item.DateOfBirth.ToString("dddd, dd MMMM yyyy")</td>
+                                            <td>@item.RetiredDate.ToString("dddd, dd MMMM yyyy")</td>
+                                            <td>
+                                                @Html.ActionLink("Retire Staff", "RetireStaff", "Staff", new { Id = item.Id }, new { @class = "btn btn-danger btn-sm" })
+                                            </td>
+                                            <td>
+                                                @Html.ActionLink("Manage", "manage", "Staff", new { Id = item.Id }, new { @class = "btn btn-primary btn-sm" })
+                                            </td>
+                                            @*<td>
+            @Html.ActionLink("Delete", "Delete", "Staff", new { Id = item.Id }, new { @class = "btn btn-danger btn-sm" })
+        </td>*@
+                                        </tr>
+                                            i = i + 1;
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+@section JavaScript
+    {
+}

@@ -1,0 +1,180 @@
+﻿@using CEMIS.Utility.ViewModel
+
+
+
+@model ResultFormViewModel
+
+
+@{
+    ViewBag.Title = "Students Result Information";
+    var i = 1;
+}
+
+<div class="page-title">
+    <h3 class="breadcrumb-header">@ViewBag.Title</h3>
+</div>
+
+<div class="clearfix" style="text-align:right; padding: 20px">
+
+    <button type="button" class="btn btn-default btn-md" data-toggle="modal" data-target="#myModal">Upload Students Result</button>
+</div>
+
+<div id="main-wrapper">
+
+    @*<div class="col-md-24">*@
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Student Result Information</h3>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="row" style="margin-top:50px; margin-bottom:50px">
+
+                    @using (Html.BeginForm("Result", "Student", FormMethod.Post))
+                    {
+                        <div class="form-group">
+                            <div class="row col-md-12">
+                                <div class="col-md-4">
+                                    <label>Academic Session:</label>
+                                    <select asp-for="AcademicSessionId" class="custom-select form-control-sm" asp-items="ViewBag.AcademicSession" id="AcademicSessionId">
+                                        <option value="0" selected>--- Select Academic Year ---</option>
+                                    </select>
+                                    @Html.ValidationMessageFor(x => @x.AcademicSessionId, null, new { @style = "color:red" })
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Level:</label>
+                                    <select asp-for="LevelId" class="custom-select form-control-sm" asp-items="ViewBag.Level" id="LevelId">
+                                        <option value="0" selected>--- Select Level ---</option>
+                                    </select>
+
+                                    @Html.ValidationMessageFor(x => @x.LevelId, null, new { @style = "color:red" })
+                                </div>
+
+
+                                <div class="col-md-4">
+                                    <label>Program:</label>
+                                    <select asp-for="ProgramId" class="custom-select form-control-sm" asp-items="ViewBag.Program" id="ProgramId">
+                                        <option value="0" selected>--- Select program ---</option>
+                                    </select>
+                                    @Html.ValidationMessageFor(x => @x.ProgramId, null, new { @style = "color:red" })
+                                </div>
+
+                            </div>
+
+                            <div class="row col-md-12" style="margin-top:20px">
+
+                                <div class="col-md-4">
+                                    <label>Semester:</label>
+                                    <select class="custom-select" asp-for="Semester" asp-items="Html.GetEnumSelectList(typeof(Semester))" id="Semester">
+                                        <option value="0" selected>--- Select Semester ---</option>
+                                    </select>
+                                    @Html.ValidationMessageFor(x => @x.Semester, null, new { @style = "color:red" })
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label>Course:</label>
+                                    <select class="custom-select form-control-sm" asp-for="CourseId" asp-items="ViewBag.Course" id="CourseId">
+                                        <option value="0" selected>--- Select Course ---</option>
+                                    </select>
+                                    @Html.ValidationMessageFor(x => @x.CourseId, null, new { @style = "color:red" })
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="submit" class="btn btn-primary" style="float:right; margin-top:24px">View</button>
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    }
+
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-body table-responsive">
+            <div class="table-responsive" style="width:100%; column-width:auto;">
+                <table id="example" class="display table table-active" style="width:100%; column-width:auto;">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Student Id</th>
+                            <th>Name</th>
+                            <th>Program</th>
+                            @*<th>Level</th>*@
+                            <th>Course</th>
+                            <th>Score</th>
+                            <th>Grade</th>
+
+                            @*<th></th>*@
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model.Result)
+                        {
+                            <tr class="odd gradeX">
+                                <td>@i</td>
+                                <td>@item.StudentId</td>
+                                <td>@item.StudentName</td>
+                                <td>@item.Program</td>
+                                @*<td>@item.Level</td>*@
+                                <td>@item.Course</td>
+                                <td>@item.Score</td>
+                                <td>@item.Grade</td>
+
+                                @*<td>
+                                        <a class="text-primary" href="@Url.Action("","", new { item.StudentId})">View Result</a>
+                                    </td>*@
+
+                            </tr>
+                            i = i + 1;
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@Html.Partial("_resultUpload", new ResultFileUploadViewModel())
+
+@*@section scripts
+        {
+
+        <script>
+        $(document).ready(function() {
+           $('#Semester').on('change', function(){
+
+              $('CourseId option').remove();
+              var program = $('#ProgramId option:selected').val();
+              var level = $('#LevelId option:selected').val();
+              var semester = $('#Semester option:selected').val();
+
+              $.ajax({
+                    type:'GET',
+                    url: '@Url.Action("GetCourseByProgram", "Student")',
+                    data: 'LevelId='+level +'&ProgramId='+program +'&Semester='+semester,
+                    success: function(result){
+                        var courseList = '<option value="0" selected>--- Select Course ---</option>';
+                        for (var i = 0; i < result.lenght; i++ ) {
+
+                        courseList = '<option value=" ' + result[i].Value + ' ">' + result[i].Text + '</option>';
+                         }
+
+                        $('CourseId').html(courseList);
+
+                    }
+              });
+
+           });
+
+       });
+
+        </script>
+
+    }*@
+

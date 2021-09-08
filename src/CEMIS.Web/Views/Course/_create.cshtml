@@ -1,0 +1,101 @@
+﻿@using CEMIS.Utility.ViewModel
+@model CourseViewModel
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        @using (Html.BeginForm("Create", "Course", FormMethod.Post))
+        {
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    @*<button type="button" class="close" data-dismiss="modal">&times;</button>*@
+                    <h4 class="modal-title" style="text-align:center">Add a course</h4>
+                </div>
+
+                <div class="modal-body">
+
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(Model => Model.Id)
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Course Code</label>
+                            @Html.TextBoxFor(x => x.CourseCode, new { @class = "form-control", required = "true", Placeholder = "ENG101" })
+                            @Html.ValidationMessageFor(x => @x.CourseCode, null, new { @style = "color:red" })
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>Course Title</label>
+                            @Html.TextBoxFor(x => x.CourseTitle, new { @class = "form-control", required = "true", Placeholder = "The Use of english" })
+                            @Html.ValidationMessageFor(x => @x.CourseTitle, null, new { @style = "color:red" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Credit</label>
+                            @Html.TextBoxFor(x => x.Credit, new { @class = "form-control", required = "true", Placeholder = "2" })
+                            @Html.ValidationMessageFor(x => @x.Credit, null, new { @style = "color:red" })
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>Option</label>
+                            <select class="custom-select" asp-for="Option" asp-items="Html.GetEnumSelectList(typeof(CourseOption))"></select>
+                            @Html.ValidationMessageFor(x => @x.Option, null, new { @style = "color:red" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Program:</label>
+                            @*@Html.DropDownListFor(x => @x.ProgramId, new SelectList(ViewBag.Program, "Value", "Text"), "Select Program", new { @class = "custom-select form-control-sm" })*@
+                            <select asp-for="ProgramId" class="custom-select form-control-sm" asp-items="ViewBag.Program">
+                                <option value="0" selected>--- Select program ---</option>
+                            </select>
+                            @Html.ValidationMessageFor(x => @x.ProgramId, null, new { @style = "color:red" })
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>Level:</label>
+                            @*@Html.DropDownListFor(x => @x.LevelId, new SelectList(ViewBag.Level, "Value", "Text"), "Select Level", new { @class = "custom-select form-control-sm" })*@
+                            <select asp-for="LevelId" class="custom-select form-control-sm" asp-items="ViewBag.Level">
+                                <option value="" selected>--- Select Level ---</option>
+                            </select>
+                            @Html.ValidationMessageFor(x => @x.LevelId, null, new { @style = "color:red" })
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <label>Semester</label>
+                            <select class="custom-select" asp-for="Semester" asp-items="Html.GetEnumSelectList(typeof(Semester))"></select>
+                            @Html.ValidationMessageFor(x => @x.Semester, null, new { @style = "color:red" })
+                        </div>
+
+                        <div class="col-md-6">
+
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+
+
+                <div class="modal-footer">
+                    <div class="row">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <a class="btn btn-danger" href=" @Url.Action("Index", "Course")">Close</a>
+                    </div>
+
+                </div>
+            </div>
+
+        }
+
+    </div>
+</div>

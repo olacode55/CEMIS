@@ -1,0 +1,50 @@
+﻿@using CEMIS.Utility.ViewModel
+@model ProgramViewModel
+
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        @using (Html.BeginForm("Create", "Program", FormMethod.Post))
+        {
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title" style="text-align:center">Add Program</h4>
+                </div>
+
+                <div class="modal-body">
+
+                    @Html.AntiForgeryToken()
+                    @Html.HiddenFor(Model => Model.Id)
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label>Name<b style="color:red">*</b></label>
+                            @Html.TextBoxFor(x => x.Name, new { @class = "form-control", required = "true" })
+                            @Html.ValidationMessageFor(x => @x.Name, null, new { @style = "color:red" })
+                        </div>
+
+                    </div>
+
+                   
+
+
+                </div>
+
+
+                <div class="modal-footer">
+                    <div class="row">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                    </div>
+
+                </div>
+            </div>
+
+        }
+
+    </div>
+</div>

@@ -1,0 +1,118 @@
+﻿@using CEMIS.Utility.ViewModel
+
+
+@model GraduatingStudentFormViewModel
+
+
+@{
+    ViewBag.Title = "Graduating Student(s) List";
+    var i = 1;
+}
+
+<div class="page-title">
+    <h3 class="breadcrumb-header">@ViewBag.Title</h3>
+</div>
+
+<div class="clearfix" style="text-align:right; padding: 20px">
+
+    @*<button type="button" class="btn btn-default btn-md" data-toggle="modal" data-target="#myModal">Upload Admited Students</button>*@
+</div>
+
+<div id="main-wrapper">
+
+    @*<div class="col-md-24">*@
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Graduating Student(s) Information</h3>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="row" style="margin-top:50px; margin-bottom:50px">
+
+                    @using (Html.BeginForm("GraduatingStudent", "Student", FormMethod.Post))
+                    {
+                        <div class="form-group">
+                            <div class="row col-md-12">
+
+                                <div class="col-md-4">
+                                    <label>Program:</label>
+                                    @Html.DropDownListFor(x => @x.ProgramId, new SelectList(ViewBag.Program, "Value", "Text"), "Select Program", new { @class = "custom-select form-control-sm" })
+                                    @Html.ValidationMessageFor(x => @x.ProgramId, null, new { @style = "color:red" })
+                                </div>
+
+                                <div class="col-md-4">
+
+                                </div>
+
+                                <div class="col-md-4">
+
+                                    <button type="submit" class="btn btn-primary" style="float:right; margin-top:24px">View</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-body table-responsive">
+            <div class="table-responsive" style="width:100%; column-width:auto;">
+                @using (Html.BeginForm("Graduate", "Student", FormMethod.Post))
+                {
+
+                    <table id="example" class="display table table-active" style="width:100%; column-width:auto;">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Student Id</th>
+                                <th>Surname</th>
+                                <th>Other Names</th>
+                                <th>Session Admited</th>
+                                <th>Level</th>
+                                <th>Graduate</th>
+                                @*<th>Action(s)</th>*@
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            @foreach (var item in Model.GradautionList)
+                            {
+                                <tr class="odd gradeX">
+                                    <td>@i</td>
+                                    <td>@item.StudentId</td>
+                                    <td>@item.Surname</td>
+                                    <td>@item.OtherName</td>
+                                    <td>@item.SessionAdmited</td>
+                                    <td>400 Level</td>
+                                    <td><input class="checkbox" asp-for="@item.IsGraduated" /></td>
+
+                                    @*<td>
+                                            <a class="text-primary" href="@Url.Action("StudentDetail","Student", new {appRefNumber = item.AppRefNumber })">Bio-Data</a> |
+
+                                            |<a class="text-primary" href="@Url.Action("StudentDropout","Student", new {appRefNumber = item.AppRefNumber })"> Dropout</a>
+
+                                        </td>*@
+
+                                </tr>
+                                i = i + 1;
+                            }
+                        </tbody>
+                    </table>
+
+                    <div>
+
+                        <button type="submit" class="btn btn-primary" style="float:right; margin-top:24px">Graduate</button>
+                    </div>
+
+                }
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+
+

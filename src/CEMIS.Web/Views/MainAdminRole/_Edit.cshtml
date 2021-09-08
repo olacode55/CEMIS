@@ -1,0 +1,41 @@
+﻿
+@using CEMIS.Data.Entities
+
+@model TeachingStaffAdminRole
+
+<!-- Modal -->
+<div id="editModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        @using (Html.BeginForm("Create", "MainAdminRole", FormMethod.Post))
+        {
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Edit Facility</h4>
+            </div>
+            <div class="modal-body">
+
+                @Html.AntiForgeryToken()
+
+                @Html.HiddenFor(Model => Model.Id, new { id = "eID" })
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Facility<b style="color:red">*</b></label>
+                        @Html.TextBoxFor(x => x.Name, new { @class = "form-control", required = "true", id = "eName" })
+                        @Html.ValidationMessageFor(x => @x.Name, null, new { @style = "color:red" })
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Update</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+        }
+    </div>
+</div>

@@ -1,0 +1,91 @@
+﻿
+@model IEnumerable<CommitteViewModel>
+
+
+@{
+    ViewBag.Title = "Committe Management";
+    var i = 1;
+}
+
+<div class="page-title">
+    <h3 class="breadcrumb-header">@ViewBag.Title</h3>
+</div>
+
+<div class="clearfix" style="text-align:right; padding: 20px">
+
+    <button type="button" class="btn btn-success btn-md" id="btnCreate" data-toggle="modal" data-target="#myModal">Create</button>
+</div>
+
+<div id="main-wrapper">
+
+    @*<div class="col-md-24">*@
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Committe Information</h3>
+        </div>
+
+        <div class="panel-body table-responsive">
+            <div class="table-responsive" style="width:100%; column-width:auto;">
+                <table id="example" class="display table table-active" style="width:100%; column-width:auto;">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr class="odd gradeX">
+                                <td>@i</td>
+                                <td>@item.name</td>
+                              
+
+
+                                <td>
+                                    <button class="btn btn-default btn-sm btnManager" data-toggle="modal" data-target="#myModal" data-val="@item.Id">Manage</button>
+
+                                </td>
+
+                            </tr>
+                            i = i + 1;
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+    <div id="myModal" class="modal fade" role="dialog">
+    </div>
+
+    @*@Html.Partial("_Create", new CouncilMemberViewModel())
+        @Html.Partial("_Edit", new CouncilMemberViewModel())*@
+    @section JavaScript
+        {
+        <script type="application/javascript">
+    $("document").ready(function () {
+
+        $("#btnCreate").click(function (e) {
+
+            e.preventDefault();
+            $("#myModal").load("@Url.Action("Create", "Committe")");
+        });
+
+        $(".btnManager").click(function(e){
+
+            e.preventDefault();
+            var unitId = $(this).data("val");
+            $("#myModal").load("@Url.Action("Edit", "Committe")?Id="+unitId);
+        });
+
+    });
+        </script>
+
+    }
+
+
+

@@ -1,0 +1,136 @@
+﻿
+@model IEnumerable<CollegeFacilityViewModel>
+@{
+    ViewBag.Title = "Facility";
+    var i = 1;
+}
+
+
+<div class="page-title">
+    <h3 class="breadcrumb-header">@ViewBag.Title</h3>
+</div>
+<div class="clearfix" style="text-align:right; padding: 20px">
+    <button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#myModal">Create</button>
+</div>
+<div id="main-wrapper">
+
+    <div class="row">
+        <div class="col-24">
+            <div id="divModal">
+            </div>
+            <div class="row">
+                <div class="col-md-24">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            &nbsp;
+                        </div>
+                        <div class="panel-body table-responsive">
+                            <div class="table-responsive" style="width:140%; ">
+                                <table id="example" class="display table table-active" style="width:100%;">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Type</th>
+                                            <th>Name</th>
+                                            <th>Description</th>
+                                            <th>Year Constructed</th>
+                                            <th>Present Condition</th>
+                                            <th>Length(M)</th>
+                                            <th>Width(M)</th>
+                                            <th>Floor Material</th>
+                                            <th>Roof Material</th>
+                                            <th>Seatings</th>
+                                            <th>Disability Access</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr class="odd gradeX">
+                                                <td>@i</td>
+                                                <td>@item.FacilityTypeName</td>
+                                                <td>@item.Name</td>
+                                                <td>@item.Description</td>
+                                                <td>@item.YearOfConstruction</td>
+                                                <td>@item.PresentCondition</td>
+                                                <td>@item.LengthInMeters</td>
+                                                <td>@item.WidthInMeters</td>
+                                                <td>@item.FloorMaterial</td>
+                                                <td>@item.RoofMaterial</td>
+                                                <td>@item.Seatings</td>
+                                                <td>@item.DisabilityAccess</td>
+                                                <td>
+                                                    <button class="btn btn-default btn-sm" onclick="manage(@item.Id )">Manage</button>
+                                                    <a class="btn btn-danger" href="@Url.Action("Delete","Facility", new { Id = item.Id})">Delete</a>
+                                                    @*<button class="btn btn-danger btn-sm" href="@Url.Action("Delete","Facility", new { Id = item.Id})">Delete</button>*@
+
+                                                </td>
+                                            </tr>
+                                            i = i + 1;
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12">
+        <a class="btn btn-default" style="float:left" href="@Url.Action("Index","College", new { Id = 1})"> Back To Preview </a>
+    </div>
+</div>
+
+
+@Html.Partial("Create", new CollegeFacilityViewModel())
+@Html.Partial("_Edit", new CollegeFacilityViewModel())
+
+@section JavaScript
+    {
+
+
+}
+
+<script>
+    function manage(id) {
+
+    $.ajax({
+    url: '@Url.Action("manage", "Facility")',
+    data: { Id: id },
+    type: 'GET',
+        success: function (response) {
+            console.log(response);
+            $("#eID").val(response.id);
+            $("#eName").val(response.name);
+            $("#eDescription").val(response.description);
+            $("#eFacilityType").val(response.facilityType);
+            $("#eYearOfConstruction").val(response.yearOfConstruction);
+            $("#ePresentCondition").val(response.presentCondition);
+            $("#eLengthInMeters").val(response.lengthInMeters);
+            $("#eWidthInMeters").val(response.widthInMeters);
+            $("#eFloorMaterial").val(response.floorMaterial);
+            $("#eRoofMaterial").val(response.roofMaterial);
+            $("#eSeatings").val(response.seatings);
+            $("#eDisabilityAccess").val(response.disabilityAccess);
+            $("#eCollegeId").val(response.collegeId);
+
+            $("#editModal").modal("show");
+            jQuery('#editModal').addClass('show')
+            //$("editModal").attr("show");
+    },
+    error: function (xhr, status, error) {
+    console.log("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText)
+    }
+    });
+    }
+</script>
+

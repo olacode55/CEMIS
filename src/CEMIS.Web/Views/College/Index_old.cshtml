@@ -1,0 +1,125 @@
+﻿@using CEMIS.Data.ViewModel
+@using CEMIS.Data.Entities
+@model IEnumerable<College>
+
+@{
+    ViewBag.Title = "MANAGE COLLEGE";
+    var i = 1;
+}
+
+
+<div class="panel panel-white">
+    <div class="panel-title ">
+        @ViewBag.Title
+    </div>
+
+    <div class="row">
+        <a class="btn btn-default btn-sm" style="margin-bottom:20px" href="@Url.Action("Create", "College")">Add College </a>
+
+        <span class="label label-default pull-right">
+            @{
+                if (Model.Any())
+                {
+                    @Model.Count()
+                }
+            } &nbsp; College(s)
+        </span>
+    </div>
+
+
+    <div class="panel-body">
+        <div id="divModal">
+
+            @*@Html.Partial("Create", new CollegeViewModel())*@
+            @*@Html.Partial("_Edit", new Facility())*@
+
+        </div>
+
+        <div class="table-responsive">
+
+            <table id="example3" class="display table" style="width:auto; cellspacing: 0;">
+                <thead>
+
+                    <tr>
+                        @*<th>S/N</th>*@
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>GIS</th>
+                        <th>Address</th>
+                        <th>Email</th>
+                        <th>Phone</th>
+                        <th>Principal Name</th>
+                        <th>Principal Email</th>
+                        <th>Principal Phone</th>
+                        <th>Vice Principal Name</th>
+                        <th>Vice Principal Email</th>
+                        <th>Vice Principal Phone</th>
+                        <th>ICTSystem Name</th>
+                        <th>ICTSystem Email</th>
+                        <th>ICTSystem Phone</th>
+                        <th>Admin Officer Name</th>
+                        <th>Admin Officer Email</th>
+                        <th>Admin Officer Phone</th>
+                        <th>Secretary Count</th>
+                        <th>Drivers Count</th>
+                        <th>Handymen Count</th>
+                        <th>SecurityGuard Count</th>
+                        <th>Cleaner Count</th>
+                        <th>Date Created</th>
+                        <th>Date Updated</th>
+
+                        <th @*width="5%" *@></th>
+                        <th @*width="5%" *@></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @*@{int rowNo = 0;}*@
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            @*<td>@(rowNo += 1)</td>*@
+                            <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Address)</td>
+                            <td>@Html.DisplayFor(modelItem => item.GIS)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Phone)</td>
+                            <td>@Html.DisplayFor(modelItem => item.PrincipalName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.PrincipalEmail)</td>
+                            <td>@Html.DisplayFor(modelItem => item.PrincipalPhone)</td>
+                            <td>@Html.DisplayFor(modelItem => item.VicePrincipalName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.VicePrincipalEmail)</td>
+                            <td>@Html.DisplayFor(modelItem => item.VicePrincipalPhone)</td>
+                            <td>@Html.DisplayFor(modelItem => item.ICTSystemName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.ICTSystemEmail)</td>
+                            <td>@Html.DisplayFor(modelItem => item.ICTSystemPhone)</td>
+                            <td>@Html.DisplayFor(modelItem => item.AdminOfficerName)</td>
+                            <td>@Html.DisplayFor(modelItem => item.AdminOfficerEmail)</td>
+                            <td>@Html.DisplayFor(modelItem => item.AdminOfficerPhone)</td>
+                            <td>@Html.DisplayFor(modelItem => item.SecretaryCount)</td>
+                            <td>@Html.DisplayFor(modelItem => item.DriversCount)</td>
+                            <td>@Html.DisplayFor(modelItem => item.HandymenCount)</td>
+                            <td>@Html.DisplayFor(modelItem => item.SecurityGuardCount)</td>
+                            <td>@Html.DisplayFor(modelItem => item.CleanerCount)</td>
+                            <td>@Html.DisplayFor(modelItem => item.DateCreated)</td>
+                            <td>@Html.DisplayFor(modelItem => item.DateUpdated)</td>
+
+
+                            <td><a data-target='#addRoleModal' role="button" data-edit-id='@Html.DisplayFor(modelItem => item.Id)' class="btn btn-default editBtn" data-toggle="modal"><i class='fa fa-edit'></i>Edit</a></td>
+                            <td><a data-target='#addRoleModal' role="button" data-delete-id='@Html.DisplayFor(modelItem => item.Id)' class='btn btn-default deleteBtn' data-toggle='modal'><i class='fa fa-trash'></i>Delete</a></td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+    <div class="modal fade" id="addCollegeModal" role="dialog" aria-hidden="true"></div>
+
+</div>
+
+
+
+

@@ -1,0 +1,101 @@
+﻿
+@model BasicSalaryViewModel
+
+
+<div class="modal-dialog">
+
+    <!-- Modal content-->
+    @using (Html.BeginForm("Create", "BasicSalary", FormMethod.Post))
+    {
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                @*<button type="button" class="close" data-dismiss="modal">&times;</button>*@
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" style="text-align:center">Add Staff Salary</h4>
+            </div>
+            <div class="modal-body">
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(Model => Model.Id)
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Staff Grade Level<b style="color:red">*</b></label>
+                        @Html.TextBoxFor(x => x.gradeLevel, new { @class = "form-control", @type = "number" })
+                        @*<input type="number" name="gradeLevel" required />*@
+                        @*<select id="staffGradeLevel" class="custom-select custom-select-sm" asp-for="gradeLevel">
+            <option value="-1"> Select a Grade Level</option>
+            @foreach (var grade in ViewBag.GradeLevel)
+            {
+                <option value="@grade.Id">@grade.Name</option>
+
+            }
+        </select>*@
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Staff Step<b style="color:red">*</b></label>
+                        @Html.TextBoxFor(x => x.step, new { @class = "form-control", @type = "number" })
+                        @*<input type="number" name="step" required />*@
+                        @*<select id="staffStep" class="custom-select custom-select-sm" asp-for="step"></select>*@
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <label>Amount<b style="color:red">*</b></label>
+                        <div class="">
+                            @Html.TextBoxFor(x => x.amount, new { @class = "form-control", @type = "number" })
+                            @Html.ValidationMessageFor(x => @x.amount, null, new { @style = "color:red" })
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" @Url.Action("Index", "BasicSalary")>Close</button>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+    }
+</div>
+
+
+<script type="application/javascript">
+    $("document").ready(function () {
+
+
+            $('#staffGradeLevel').on('change', function () {
+      
+                $('#staffStep option').remove();
+                var staffgradeLevel = $('#staffGradeLevel option:selected').val();
+         
+                 $.ajax({
+                        type: 'GET',
+
+                     url: '@Url.Action("FindStaffStep", "BasicSalary")/?Level=' + staffgradeLevel,
+                        success: function (result) {
+                            var sc = '<option value="-1">Select Staff Step</option>';
+                            for (var i = 0; i < result.length; i++) {
+                                sc += '<option Value="' + result[i] + '">' + result[i] + '</option>';
+                            }
+                            $('#staffStep').html(sc);
+                     }
+                         });
+
+
+            });
+    });
+</script>
+
+
+
+
+
+

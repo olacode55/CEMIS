@@ -1,0 +1,56 @@
+﻿
+@using CEMIS.Data.Entities
+@using CEMIS.Web.Utilities
+
+@model IEnumerable<RoomSettings>
+    @{
+    ViewBag.Title = "Teaching Staff";
+    var i = 1;
+    }
+
+    @using (Html.BeginForm("Update", "RoomFacility", FormMethod.Post)){
+                      <div class="row">
+
+                          @foreach (var item in Model)
+        {
+          string Label = Webutilities.GenerateLabel(item.Name);
+          string Input = Webutilities.GenerateFacilityPageTextBox(item.Name , item.Type , item.Options , item.Value , item.EnableFunctionCaller , item.Function);
+
+
+
+                          <div class="col-md-6">
+                              @Html.Raw(Label)
+                          </div>
+                          <div class="col-md-6">
+                              @*<input type="checkbox" class="form-control" id="@item.Name" name="@item.Name">*@
+                              @Html.Raw(Input)
+                          </div>
+                          <br />
+
+            }
+                      </div>
+
+    <div id="roomsetting">
+          
+    </div>
+     <input type="submit" value="Save" />
+    }
+
+     <script>
+         function LoadClassRoomDetails() {
+             var url = '@Url.Action("GetRoomSetting", "RoomFacility")';
+             $.ajax({
+                 type: "POST",
+                 url: url,
+                 success: function (data) {
+                     console.log(data);
+                     $("#roomsetting").html(data);
+                 },
+
+                 error: function (resp) {
+
+                 }
+             });
+         }
+
+     </script>

@@ -1,0 +1,101 @@
+﻿@model CEMIS.Business.Model.SessionViewModel
+
+@{
+    ViewBag.Title = "Member in Session";
+
+}
+<div class="modal-body">
+    <!-- Modal content-->
+    @using (Html.BeginForm("AddMemberSession", "SessionMember", FormMethod.Post))
+    {
+
+        <div class="form-horizontal">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Member Session</h4>
+            </div>
+            <div class="modal-body">
+
+                @Html.AntiForgeryToken()
+
+                @Html.HiddenFor(Model => Model.Id)
+
+                <div class="row mt-2">
+                    <div class="col-md-10">
+
+                        @Html.LabelForModel("Session", htmlAttributes: new { @class = "control-label col-md-2" })
+
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.SessionName, new { htmlAttributes = new { @class = "form-control", required = true } })
+                            @Html.ValidationMessageFor(model => model.SessionName, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                    <div>
+
+                    </div>
+                    <div class="col-md-10" >
+
+                        @Html.LabelForModel("Name ", htmlAttributes: new { @class = "control-label col-md-2" })
+
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.MembershipName, new { htmlAttributes = new { @class = "form-control", required = true } })
+                            @Html.ValidationMessageFor(model => model.MembershipName, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+
+                    <div class="col-md-10">
+
+                        @Html.LabelForModel("Position ", htmlAttributes: new { @class = "control-label col-md-2" })
+
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.MembershipPosition, new { htmlAttributes = new { @class = "form-control", required = true } })
+                            @Html.ValidationMessageFor(model => model.MembershipPosition, "", new { @class = "text-danger" })
+                        </div>
+
+                    </div>
+                    <div class="col-md-12 ">
+
+                        @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="input-group date" data-provide="datepicker" data-date-format="dd/mm/yyyy">
+                            @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-th"></span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+
+                    </div>
+                    <div>
+
+                    </div>
+                    <div class="col-md-12">
+
+                        @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="input-group date" data-provide="datepicker" data-date-format="dd/mm/yyyy">
+                            @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
+                            <div class="input-group-addon">
+                                <span class="glyphicon glyphicon-th"></span>
+                            </div>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    }
+</div>
+
+
+
+

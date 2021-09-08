@@ -1,0 +1,118 @@
+﻿
+@using CEMIS.Utility.ViewModel
+
+@model IEnumerable<AcademicSessionViewModel>
+
+
+@{
+    ViewBag.Title = "Academic Session Management";
+    var i = 1;
+}
+
+<div class="page-title">
+    <h3 class="breadcrumb-header">@ViewBag.Title</h3>
+</div>
+
+<div class="clearfix" style="text-align:right; padding: 20px">
+
+    <button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#myModal">Add Session</button>
+</div>
+
+<div id="main-wrapper">
+
+    @*<div class="col-md-24">*@
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Academic Session Information</h3>
+        </div>
+
+        <div class="panel-body table-responsive">
+            <div class="table-responsive" style="width:100%; column-width:auto;">
+                <table id="example" class="display table table-active" style="width:100%; column-width:auto;">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Period</th>
+                            <th>Ist Semeter Start </th>
+                            <th>Ist Semeter End </th>
+                            <th>2nd Semeter Start </th>
+                            <th>2nd Semeter End </th>
+                            <th>Status</th>
+                            <th>Action</th>
+                            @*<th>Add Council Members</th>*@
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr class="odd gradeX">
+                                <td>@i</td>
+                                <td>@item.AcademicPeriod</td>
+                                <td>@item.FirstSemesterStartDate.ToString("dd-MMM-yyyy")</td>
+                                <td>@item.FirstSemesterEndDate.ToString("dd-MMM-yyyy")</td>
+                                <td>@item.SecondSemesterStartDate.ToString("dd-MMM-yyyy")</td>
+                                <td>@item.SecondSemesterEndDate.ToString("dd-MMM-yyyy")</td>
+
+                                <td>
+                                    @if (item.IsActive == "1")
+                                    {
+                                        <a class="btn btn-success btn-sm" style="width:120px" href="@Url.Action("Toggle","AcademicSession", new { Id = item.Id})">Active</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn btn-danger btn-sm" style="width:120px" href="@Url.Action("Toggle","AcademicSession", new { Id = item.Id})">Closed</a>
+                                    }
+                                </td>
+
+                                <td>
+                                    <button class="btn btn-default btn-sm" onclick="Edit(@item.Id)">Edit</button>
+
+                                </td>
+                                @*<td>
+
+                                        <button class="btn btn-default btn-sm" onclick="location.href='@Url.Action("Index", "CouncilMember")'">Add Council Members</button>
+                                    </td>*@
+
+                            </tr>
+                            i = i + 1;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+@Html.Partial("_create", new AcademicSessionViewModel())
+@Html.Partial("_edit", new AcademicSessionViewModel())
+
+
+
+<script>
+    function Edit(id) {
+
+    $.ajax({
+    url: '@Url.Action("Edit", "AcademicSession")',
+    data: { Id: id },
+    type: 'GET',
+        success: function (response) {
+            console.log(response);
+            $("#eId").val(response.id);
+            $("#eAcademicPeriod").val(response.academicPeriod);
+            $("#eIsActive").val(response.isActive);
+            $("#eFirstSemesterStartDate").val(response.firstSemesterStartDate);
+            $("#eFirstSemesterEndDate").val(response.firstSemesterEndDate);
+            $("#eSecondSemesterStartDate").val(response.secondSemesterStartDate);
+            $("#eSecondSemesterEndDate").val(response.secondSemesterEndDate);
+
+            $("#editModal").modal("show");
+            jQuery('#editModal').addClass('show')
+            //$("editModal").attr("show");
+    },
+    error: function (xhr, status, error) {
+    console.log("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText)
+    }
+    });
+    }
+</script>

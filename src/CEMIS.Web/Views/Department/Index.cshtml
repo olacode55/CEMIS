@@ -1,0 +1,105 @@
+﻿
+@model IEnumerable<Department>
+@{
+    ViewBag.Title = "Department";
+    var i = 1;
+}
+
+
+<div class="page-title">
+    <h3 class="breadcrumb-header">@ViewBag.Title</h3>
+</div>
+<div class="clearfix" style="text-align:right; padding: 20px">
+    <button type="button" class="btn btn-success btn-md" data-toggle="modal" data-target="#myModal">Create</button>
+</div>
+<div id="main-wrapper">
+
+    <div class="row">
+        <div class="col-24">
+            <div id="divModal">
+            </div>
+            <div class="row">
+                <div class="col-md-24">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            &nbsp;
+                        </div>
+                        <div class="panel-body">
+                            <div class="dataTable_wrapper">
+                                <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Department</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                            <tr class="odd gradeX">
+                                                <td>@i</td>
+                                                <td>@item.Name</td>
+                                               
+                                                <td>
+                                                    <button class="btn btn-default btn-sm" onclick="manage(@item.Id )">Manage</button>
+                                                    <a class="btn btn-danger btn-sm" href="@Url.Action("Delete","Department", new { Id = item.Id})">Delete</a>
+                                                </td>
+                                            </tr>
+                                            i = i + 1;
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@*<div class="row">
+    <div class="col-md-12">
+        <a class="btn btn-default" style="float:left" href="@Url.Action("Index","College", new { Id = 1})"> Back To Preview </a>
+    </div>
+</div>*@
+
+
+@Html.Partial("Create", new Department())
+@Html.Partial("_Edit", new Department())
+
+@section JavaScript
+    {
+
+
+}
+
+<script>
+    function manage(id) {
+
+    $.ajax({
+    url: '@Url.Action("manage", "Department")',
+    data: { Id: id },
+    type: 'GET',
+        success: function (response) {
+            console.log(response);
+            $("#eID").val(response.id);
+            $("#eName").val(response.name);
+            $("#eNumber").val(response.number);
+
+            $("#editModal").modal("show");
+            jQuery('#editModal').addClass('show')
+            //$("editModal").attr("show");
+    },
+    error: function (xhr, status, error) {
+    console.log("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText)
+    }
+    });
+    }
+</script>
+

@@ -1,0 +1,101 @@
+﻿@model UsersObject
+<!-- Modal -->
+<div class="modal-dialog" role="document">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Update User Details</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close" id="close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+        </div>
+        @using (Html.BeginForm("Userupdate", "User", FormMethod.Post))
+    {
+        @await Html.PartialAsync("_Notifications")
+        <div class="modal-body">
+            @Html.HiddenFor(m => m.AppUserId)
+            @*@Html.HiddenFor(m => m.Roles, new { id = "hdnRoles"})*@
+       
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.StaffID, new { @class = "form-control", required = "true", @placeholder = "Staff No (212423)" })
+                @Html.ValidationMessageFor(m => m.StaffID, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.Email, new { @class = "form-control", required = "true", @placeholder = "example@email.com" })
+                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", required = "true", @placeholder = "First Name.." })
+                @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.MiddleName, new { @class = "form-control", @placeholder = "Middle Name.." })
+                @Html.ValidationMessageFor(m => m.MiddleName, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", required = "true", @placeholder = "Last Name.." })
+                @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "text-danger" })
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.RoleIDs, htmlAttributes: new { @class = "control-label" })
+                <div>
+                    @Html.ListBoxFor(m => m.RoleIDs, Model.Roles, new
+            {
+                id = "rolesLstBx",
+                @class = "form-control select2",
+                multiple = "multiple",
+                required = "true",
+                @style = "width: 100%",
+            })
+                    @Html.ValidationMessageFor(m => m.RoleIDs, "", new { @class = "text-danger" })
+
+                </div>
+
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-shadow" data-dismiss="modal" id="dismiss">Close</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+}
+    </div>
+</div>
+
+<script type="text/javascript">
+    $('document').ready(function () {
+        $("form").submit(function (e) {
+
+            e.preventDefault();
+            $.ajax({
+                url: this.action,
+                type: this.method,
+                data: $(this).serialize(),
+                success: function (result) {
+                    if (result.success) {
+                        $('#addUserModal').modal("hide");
+                        location.href = "@Url.Action("Index","User")";
+                    }
+                    else {
+                        $('#addUserModal').modal("hide");
+                        location.href = "@Url.Action("Index","User")";
+                    }
+                }, error: function (request, status, error) {
+                    alert(JSON.stringify(error));
+                }
+            });
+            return false;
+        })
+
+        $('#dismiss').click(function () {
+            $('#addUserModal').modal("hide");
+            location.href = "@Url.Action("Index","User")";
+        });
+
+        $('#close').click(function () {
+            $('#addUserModal').modal("hide");
+            location.href = "@Url.Action("Index","User")";
+        });
+        //$('#rolesLstBx').change(function () {
+        //    document.getElementById("hdnRoles").value = document.getElementById("rolesLstBx").value;
+        //})
+    })
+</script>

@@ -1,0 +1,67 @@
+﻿@model LoginDTO
+@using System.Collections.Generic
+@using System.Linq
+@using Microsoft.AspNetCore.Http
+@inject SignInManager<User> SignInManager
+@{
+    ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+
+@*@using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post))
+    {*@
+<form asp-route-returnurl="@ViewData["ReturnUrl"]" method="post">
+    @Html.AntiForgeryToken()
+    <div class="login-box">
+        <h4 class="login-title" style="margin-bottom: 0">Log In</h4>
+        <p>Enter your details to log in</p>
+
+        <div class="form-group">
+            @Html.TextBoxFor(m => m.username, new { @class = "form-control", @placeholder = "Username" })
+             <span asp-validation -for= "username" class="text-danger"></span>
+
+        </div>
+        <div class="form-group">
+            @Html.PasswordFor(m => m.password, new { @class = "form-control", @placeholder = "Password" })
+            @Html.ValidationMessageFor(m => m.password, "", new { @class = "text-danger" })
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Log in</button>
+        <div class="login-footer">
+            <p style="text-align:right;margin-top:-16px"><a href="@Url.Action("ForgotPassword", "Account")">Forgot Password?</a></p>
+            @*<span class="sign-up">
+            <span style="padding-right: 5px">New User?</span>
+            <a href="register-start-page.html"
+               class="sign-up-link btn-link">Enroll</a>
+        </span>*@
+        </div>
+
+    </div>
+</form>
+@*}*@
+@*<h2 class="w-300 mb-4" style="color:rgb(82, 82, 82)">Login</h2>
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+    <div class="form-group has-feedback">
+        @Html.TextBoxFor(m => m.username, new { @class = "form-control", @placeholder = "Username" })
+        <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+        @Html.ValidationMessageFor(m => m.username, "", new { @class = "text-danger" })
+    </div>
+    <div class="form-group has-feedback">
+
+        @Html.PasswordFor(m => m.password, new { @class = "form-control", @placeholder = "Password" })
+        <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+        @Html.ValidationMessageFor(m => m.password, "", new { @class = "text-danger" })
+
+    </div>
+
+    <p style="text-align:right;margin-top:-16px"><a href='@Url.Action("ForgotPassword","Account")'>Forgot Password?</a></p>
+    <button type="submit" class="btn-primary btn-block btn-lg">
+        Log In
+    </button>*@
+@*<p style="text-align:center;padding-top:20px">
+      New User? <a href='@Url.Action("Register","Account")'>Create Account</a>
+    </p>*@
+
+
+

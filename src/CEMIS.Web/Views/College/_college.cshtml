@@ -1,0 +1,220 @@
+﻿@using CEMIS.Data.ViewModel
+
+@model CollegeViewModel
+
+
+@using (Html.BeginForm("Create", "College", FormMethod.Post))
+{
+
+    @Html.AntiForgeryToken()
+
+    @Html.HiddenFor(Model => Model.Id)
+    @Html.HiddenFor(Model => Model.ActiveTab)
+
+    <div class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3><b></b></h3> </div>
+            <div class="panel-body">
+
+                <div class="form">
+                    <div class="panel-heading"><h3><b>College Details</b></h3> </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Name<b style="color:red">*</b></label>
+                            @Html.TextBoxFor(x => x.Name, new { @class = "form-control", required = "true" })
+                            @Html.ValidationMessageFor(x => @x.Name, null, new { @style = "color:red" })
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>Address<b style="color:red">*</b></label>
+                            @Html.TextBoxFor(x => x.Address, new { @class = "form-control", required = "true", })
+                            @Html.ValidationMessageFor(x => @x.Address, null, new { @style = "color:red" })
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>Email<b style="color:red">*</b></label>
+                            @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @type = "Email", required = "true" })
+                            @Html.ValidationMessageFor(x => @x.Email, null, new { @style = "color:red" })
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>GIS<b style="color:red">*</b></label>
+                            @Html.TextBoxFor(x => x.GIS, new { @class = "form-control", required = "true" })
+                            @Html.ValidationMessageFor(x => @x.GIS, null, new { @style = "color:red" })
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>Service Offered<b style="color:red">*</b></label>
+                            @Html.TextBoxFor(x => x.ServiceOffered, new { @class = "form-control", required = "true", })
+                            @Html.ValidationMessageFor(x => @x.ServiceOffered, null, new { @style = "color:red" })
+                        </div>
+
+
+                        <div class="col-md-4">
+                            <label>Phone<b style="color:red">*</b></label>
+                            @Html.TextBoxFor(x => x.Phone, new { @class = "form-control", @type = "Phone", required = "true", })
+                            @Html.ValidationMessageFor(x => @x.Phone, null, new { @style = "color:red" })
+                        </div>
+
+                    </div>
+
+                    <div class="panel-heading"><h3><b>None Teaching Staff Count</b></h3> </div>
+
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label> No of Secretary<b style="color:red">*</b></label>
+                            @Html.TextBoxFor(x => x.SecretaryCount, new { @class = "form-control", required = "true" })
+                            @Html.ValidationMessageFor(x => @x.SecretaryCount, null, new { @style = "color:red" })
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>No of Drivers<b style="color:red">*</b></label>
+                            @Html.TextBoxFor(x => x.DriversCount, new { @class = "form-control", required = "true", })
+                            @Html.ValidationMessageFor(x => @x.DriversCount, null, new { @style = "color:red" })
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>No of Handymen<b style="color:red">*</b></label>
+                            @Html.TextBoxFor(x => x.HandymenCount, new { @class = "form-control", required = "true", })
+                            @Html.ValidationMessageFor(x => @x.HandymenCount, null, new { @style = "color:red" })
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label> No of SecurityGuard<b style="color:red">*</b></label>
+                            @Html.TextBoxFor(x => x.SecurityGuardCount, new { @class = "form-control", required = "true" })
+                            @Html.ValidationMessageFor(x => @x.SecurityGuardCount, null, new { @style = "color:red" })
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>No of Cleaner<b style="color:red">*</b></label>
+                            @Html.TextBoxFor(x => x.CleanerCount, new { @class = "form-control", required = "true", })
+                            @Html.ValidationMessageFor(x => @x.CleanerCount, null, new { @style = "color:red" })
+                        </div>
+
+                        <div class="col-md-4">
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="panel-heading"><h3><b>Various Contact / Info</b></h3> </div>
+
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Principal Name<b style="color:red">*</b></label>
+                            @Html.TextBoxFor(x => x.PrincipalName, new { @class = "form-control", required = "true" })
+                            @Html.ValidationMessageFor(x => @x.PrincipalName, null, new { @style = "color:red" })
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>Principal Email<b style="color:red">*</b></label>
+                            @Html.TextBoxFor(x => x.PrincipalEmail, new { @class = "form-control", required = "true", })
+                            @Html.ValidationMessageFor(x => @x.PrincipalEmail, null, new { @style = "color:red" })
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>Principal Phone<b style="color:red">*</b></label>
+                            @Html.TextBoxFor(x => x.PrincipalPhone, new { @class = "form-control", required = "true", })
+                            @Html.ValidationMessageFor(x => @x.PrincipalPhone, null, new { @style = "color:red" })
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Vice Principal Name<b style="color:red">*</b></label>
+                            @Html.TextBoxFor(x => x.VicePrincipalName, new { @class = "form-control", required = "true" })
+                            @Html.ValidationMessageFor(x => @x.VicePrincipalName, null, new { @style = "color:red" })
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>Vice Principal Email<b style="color:red">*</b></label>
+                            @Html.TextBoxFor(x => x.VicePrincipalEmail, new { @class = "form-control", @type = "Email", required = "true", })
+                            @Html.ValidationMessageFor(x => @x.VicePrincipalEmail, null, new { @style = "color:red" })
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>Vice Principal Phone<b style="color:red">*</b></label>
+                            @Html.TextBoxFor(x => x.VicePrincipalPhone, new { @class = "form-control", @type = "Phone", required = "true", })
+                            @Html.ValidationMessageFor(x => @x.VicePrincipalPhone, null, new { @style = "color:red" })
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>ICT System Name<b style="color:red">*</b></label>
+                            @Html.TextBoxFor(x => x.ICTSystemName, new { @class = "form-control", required = "true" })
+                            @Html.ValidationMessageFor(x => @x.ICTSystemName, null, new { @style = "color:red" })
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>ICT System Email<b style="color:red">*</b></label>
+                            @Html.TextBoxFor(x => x.ICTSystemEmail, new { @class = "form-control", @type = "Email", required = "true", })
+                            @Html.ValidationMessageFor(x => @x.ICTSystemEmail, null, new { @style = "color:red" })
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>ICT System Phone<b style="color:red">*</b></label>
+                            @Html.TextBoxFor(x => x.ICTSystemPhone, new { @class = "form-control", @type = "Phone", required = "true", })
+                            @Html.ValidationMessageFor(x => @x.ICTSystemPhone, null, new { @style = "color:red" })
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label>Admin Officer Name<b style="color:red">*</b></label>
+                            @Html.TextBoxFor(x => x.AdminOfficerName, new { @class = "form-control", required = "true" })
+                            @Html.ValidationMessageFor(x => @x.AdminOfficerName, null, new { @style = "color:red" })
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>Admin Office Email<b style="color:red">*</b></label>
+                            @Html.TextBoxFor(x => x.AdminOfficerEmail, new { @class = "form-control", @type = "Email", required = "true", })
+                            @Html.ValidationMessageFor(x => @x.PrincipalEmail, null, new { @style = "color:red" })
+                        </div>
+
+                        <div class="col-md-4">
+                            <label>Admin Office Phone<b style="color:red">*</b></label>
+                            @Html.TextBoxFor(x => x.AdminOfficerPhone, new { @class = "form-control", @type = "Phone", required = "true", })
+                            @Html.ValidationMessageFor(x => @x.AdminOfficerPhone, null, new { @style = "color:red" })
+                        </div>
+
+                    </div>
+
+
+
+
+
+
+                </div>
+
+
+
+
+
+                @*<input type="submit" value="Save And Continue" class="btn btn-primary btn-sm" style="margin-top:30px; margin-right:20px;  float:right" />*@
+
+                <button type="submit" class="btn btn-primary btn-sm" style="margin-top:30px;   float:right">Save And Continue</button>
+
+                @*<a class="btn btn-primary btn-sm" style="margin-top:30px; float:right" onclick="AddContact()">Save And Continue</a>*@
+
+
+            </div>
+        </div>
+    </div>
+
+
+
+}

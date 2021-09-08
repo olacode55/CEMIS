@@ -1,0 +1,280 @@
+@import url("https://use.typekit.net/uff1hva.css");
+
+.btn-primary {
+    color: #fff !important;
+    background-color: #5ABEAE !important;
+    border-color: #48b7a5 !important;
+}
+
+    .btn-primary:focus, .btn-primary.focus {
+        color: #fff !important;
+        background-color: #41a494 !important;
+        border-color: #245b52 !important;
+    }
+
+    .btn-primary:hover {
+        color: #fff !important;
+        background-color: #41a494 !important;
+        border-color: #378b7d !important;
+    }
+
+    .btn-primary:active, .btn-primary.active,
+    .open > .btn-primary.dropdown-toggle {
+        color: #fff !important;
+        background-color: #41a494 !important;
+        background-image: none;
+        border-color: #378b7d !important;
+    }
+
+        .btn-primary:active:hover, .btn-primary:active:focus, .btn-primary:active.focus, .btn-primary.active:hover, .btn-primary.active:focus, .btn-primary.active.focus,
+        .open > .btn-primary.dropdown-toggle:hover,
+        .open > .btn-primary.dropdown-toggle:focus,
+        .open > .btn-primary.dropdown-toggle.focus {
+            color: #fff !important;
+            background-color: #378b7d !important;
+            border-color: #245b52 !important;
+        }
+
+    .btn-primary.disabled:hover, .btn-primary.disabled:focus, .btn-primary.disabled.focus, .btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled].focus,
+    fieldset[disabled] .btn-primary:hover,
+    fieldset[disabled] .btn-primary:focus,
+    fieldset[disabled] .btn-primary.focus {
+        background-color: #5ABEAE !important;
+        border-color: #48b7a5 !important;
+    }
+
+    .btn-primary .badge {
+        color: #5ABEAE !important;
+        background-color: #fff !important;
+    }
+
+.btn-link {
+    font-weight: 400;
+    color: #5ABEAE;
+    border-radius: 0;
+}
+
+    .btn-link, .btn-link:active, .btn-link.active, .btn-link[disabled],
+    fieldset[disabled] .btn-link {
+        background-color: transparent;
+    }
+
+        .btn-link, .btn-link:hover, .btn-link:focus, .btn-link:active {
+            border-color: transparent;
+        }
+
+            .btn-link:hover, .btn-link:focus {
+                color: #3a9284;
+                text-decoration: none;
+                background-color: transparent;
+            }
+
+            .btn-link[disabled]:hover, .btn-link[disabled]:focus,
+            fieldset[disabled] .btn-link:hover,
+            fieldset[disabled] .btn-link:focus {
+                color: #777777;
+                text-decoration: none;
+            }
+
+body, html, a, p, div, span {
+    font-family: proxima-nova, sans-serif;
+    font-weight: 400;
+    color: #707070;
+}
+
+.login-page {
+    background-image: url("images/bg.jpg");
+    height: auto;
+    
+}
+
+.login-box {
+    width: auto;
+    height: auto;
+
+}
+
+.form-control {
+    padding: 25px 12px;
+    border-radius: 0;
+}
+
+.login-page .logo {
+    color: white;
+}
+
+.forgot-link {
+    float: left;
+}
+
+.sign-up {
+    float: right;
+    display: inline;
+}
+
+.sign-up-link {
+    font-weight: 800;
+}
+
+.login-footer {
+    padding: 30px 0;
+}
+
+.d-none {
+    display: none;
+}
+
+.login-form {
+    padding: 10px 0;
+}
+
+.btn {
+    border-radius: 0;
+    padding: 16px 32px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.logo {
+    font-weight: 800;
+    margin-bottom: 60px;
+}
+
+.type-weight-800 {
+    font-weight: 800;
+    letter-spacing: 2px;
+}
+
+.Register-page, .Home-page {
+    background: url(images/honeycomb.jpg) center center fixed;
+}
+
+.Register-page__wrap, .Home-page__wrap {
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    position: relative;
+    top: 0;
+}
+
+.Register-page__row, .Home-page__row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.Register-page__abs, .Home-page__abs {
+    z-index: 1;
+    position: absolute;
+}
+
+.Register-page__topbar, .Home-page__topbar {
+    padding: 8px 20px;
+    height: 100px;
+    width: 100vw;
+}
+
+.Register-page__link, .Home-page__link {
+    width: 300px;
+    height: 200px;
+    background-color: white;
+    margin: auto;
+    text-align: center;
+    font-weight: 800;
+    padding: 75px 0;
+    transition: all 0.3s;
+    font-size: 18px;
+}
+
+.Register-page__link-primary, .Home-page__link-primary {
+    color: white;
+    background-color: #5ABEAE;
+}
+
+.Register-page__link-secondary, .Home-page__link-secondary {
+    color: white;
+    background-color: #33658A;
+}
+
+.Register-page__logo, .Home-page__logo {
+    color: #5ABEAE;
+    float: left;
+    font-weight: 800;
+    margin: 0;
+}
+
+.Register-page__login, .Home-page__login {
+    float: right;
+}
+
+.Register-page__register, .Home-page__register {
+    float: right;
+    border: 1px solid #5abfb0;
+}
+
+.Home-page {
+    background: url(images/homepage-bg.jpg) center center fixed;
+}
+
+.Home-page__h1 {
+    font-size: 60px;
+    color: white;
+    font-weight: 800;
+    text-align: center;
+}
+
+.Home-page__body-text {
+    text-align: center;
+    font-size: 24px;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.Home-page__masthead {
+    max-width: 750px;
+    margin: auto;
+    padding: 20px;
+}
+
+    .Home-page__masthead .btn {
+        display: table;
+        margin: auto;
+    }
+
+.pager li > a, .pager li > span {
+    display: inline-block;
+    padding: 16px 32px;
+    border-radius: 0;
+}
+
+.nav-tabs {
+    border: none;
+    background: #5abfae;
+    color: white;
+}
+
+    .nav-tabs > li > a {
+        border-radius: 0 !important;
+        color: white;
+        border-bottom: none;
+        padding: 20px 10px;
+    }
+
+    .nav-tabs > li.active > a, .nav-tabs > li.active > a:focus, .nav-tabs > li.active > a:hover {
+        color: #338074;
+        cursor: default;
+        background-color: #5abfb0;
+        border-bottom-color: #338074;
+    }
+
+.pager .disabled > a, .pager .disabled > a:focus, .pager .disabled > a:hover, .pager .disabled > span {
+    opacity: .65;
+    border: 1px solid #5abfb0;
+    color: #5abfb0;
+}
+
+.pager li > a, .pager li > span {
+    display: inline-block;
+    border: 1px solid #5abfb0;
+}

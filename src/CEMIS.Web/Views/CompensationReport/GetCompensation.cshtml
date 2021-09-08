@@ -1,0 +1,67 @@
+﻿@model Dictionary<string, List<CompensationReportViewModel>>
+
+
+
+    @using (Html.BeginForm("CommitCompensation", "CompensationReport", FormMethod.Post))
+    {
+        <input type="hidden" id="month" name="month" value="@ViewBag.Month">
+        <input type="hidden" id="year" name="year" value="@ViewBag.Year">
+        <section class="col-md-24">
+            <div class="row" style="margin-top:50px">
+                <div class="col-md-12">
+
+                    <div class="table-responsive" style="width:100%">
+
+                        <table id="table1" class="display table" style="width:150%">
+                            <thead>
+
+                                <tr>
+                                 
+                                    <th>WAGES AND SALARIES</th>
+                                    <th>AMOUNT EXPENDED IN CURRENT MONTH</th>
+                                    <th>CUMMULATIVE  AMOUNT EXPENDED </th>
+                                    <th>TOTAL AMOUNT EXPENDED TO DATE</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td colspan="4"><b>@item.Key</b></td>
+                                    </tr>
+                                    foreach (var allowance in item.Value)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @allowance.Name
+                                            </td>
+                                            <td>
+                                                @allowance.CurrentAmount
+                                            </td>
+                                            <td>
+                                                @allowance.CumulativeAmount
+                                            </td>
+                                            <td>
+                                                @allowance.TotalAmount
+                                            </td>
+                                        </tr>
+                                    }
+                                }
+                                
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
+
+                <div class="col-md-12" style="margin-top:20px;">
+                    <a class="btn btn-sm btn-default" style="float:left" href="@Url.Action("GetCompensation", "CompensationReport")">Back</a>
+                    <button type="submit" class="btn btn-primary" style="float:right">Submit</button>
+                </div>
+            </div>
+
+        </section>
+    }

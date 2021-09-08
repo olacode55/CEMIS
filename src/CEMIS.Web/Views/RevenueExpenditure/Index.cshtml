@@ -1,0 +1,51 @@
+﻿@using CEMIS.Utility.ViewModel
+@model IEnumerable<RevenuExpenditureViewModel>
+
+@{
+    ViewBag.Title = "Revenue Compensation";
+    var i = 1;
+}
+<div class="clearfix" style="text-align:right; padding: 20px">
+    <a class="btn btn-primary btn-sm" href="@Url.Action("AddRevenueExpenditure","RevenueExpenditure")">Add New</a>
+</div>
+<div id="main-wrapper">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Revenue Compensation</h3>
+        </div>
+        <div class="panel-body table-responsive">
+            <div class="table-responsive" style="width:100%; column-width:auto;">
+                <table id="example" class="display table table-active" style="width:100%; column-width:auto;">
+                    <thead>
+                        <tr>
+                            <th>S/N</th>
+                            <th>CostCentre</th>
+                            <th>MDA</th>
+                            <th>Return On</th>
+                            <th>Fund Type</th>
+                            <th>Month</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        <tr class="odd gradeX">
+                        <td>@item.Id</td>
+                        <td>@item.CostCentre</td>
+                        <td>@item.MDA</td>
+                        <td>@item.ReturnOn</td>
+                        <td>@item.FundType</td>
+                        <td>@item.Month</td>
+                        <td>
+                         <a class="btn btn-default btn-sm" href="@Url.Action("AddRevenueExpenditure","RevenueExpenditure", new { Id = item.Id})">View Details</a>
+                        </td>
+                        </tr>
+                            i = i + 1;
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

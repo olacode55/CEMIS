@@ -1,0 +1,240 @@
+﻿@model IEnumerable<CEMIS.Business.Model.SessionViewModel>
+@{
+    ViewBag.Title = "Member in Session";
+
+}
+<div class="container">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="page-title-box">
+                <h4 class="page-title">Members In Session</h4>
+                <ol class="breadcrumb p-0 m-0">
+                    <li>
+                        CEMIC
+                    </li>
+                    <li>
+                       FIXED ASSET
+                    </li>
+                    <li class="active">
+                        Setting
+                    </li>
+                </ol>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="row">
+        <div class="col-md-12">
+
+            <div class="row">
+                <div class="col-md-6">
+
+                    <div class="btn-group">
+                        <a data-target='#addedit_modal' role="button" class="btn btn-raised btn-success btn_add" data-toggle="modal">+Add</a>
+
+                    </div>
+                    <br />
+                </div>
+
+            </div>
+
+            <section class="panel panel-default">
+                <header class="panel-heading">
+                    &nbsp;
+                </header>
+
+                <div class="panel-body table-responsive">
+                    <div class="table-responsive" style="width:120%; ">
+                        <table class="display table table-active" style="width:120%;" id="campustbl">
+                            <thead>
+                                <tr>
+                                    <th>S/N</th>
+                                    <th>Session Name</th>
+                                    <th>Start Date</th>
+                                    <th>End Date</th>
+                                    <th>Member Name</th>
+                                    <th>Member Position</th>
+                                    <th>Action</th>
+
+                                    <th>Status</th>
+                                    <th>#</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @{int rowNo = 0;}
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@(rowNo += 1)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.SessionName)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.StartDate)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.EndDate)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.MembershipName)</td>
+                                        <td>@Html.DisplayFor(modelItem => item.MembershipPosition)</td>
+                                        <td><a data-target='#addedit_modal' role='button' data-edit-id='@Html.DisplayFor(modelItem => item.Id)' class='btn btn-default editBtn' data-toggle='modal'><i class='fa fa-edit'></i>Edit</a></td>
+
+                                        @if (item.IsActive == true)
+                                        {
+                                            <td><a class='btn btn-raised btn-danger' href="@Url.Action("Deactivate","SessionMember",new{item.Id })"><i>Active</i></a></td>
+
+                                        }
+                                        else
+                                        {
+                                            <td><a class='btn btn-raised btn-success' href="@Url.Action("Activate","SessionMember",new{item.Id })" readonly="true"><i>Terminated</i></a></td>
+
+                                        }
+                                        @if (item.IsActive == true)
+                                        {
+                                            <td><a data-target='#addedit_modal' role='button' data-delete-id='@Html.DisplayFor(modelItem => item.Id)' class='btn btn-danger deleteBtn' data-toggle='modal'><i class='fa fa-trash'></i>Terminate</a></td>
+
+                                        }
+                                        else
+                                        {
+                                            <td><a class='btn btn-raised btn-success' href="@Url.Action("Activate","SessionMember",new{item.Id })" readonly="true"><i>Closed</i></a></td>
+                                        }
+
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </section>
+            <!-- Modal -->
+            <div class="modal fade" id="addedit_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content" id="addedit_modal_body">
+                    </div>
+                </div>
+            </div>
+            <!--Delete User-->
+            <div class="modal fade" id="delete_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content" id="delete_content">
+                    </div>
+                </div>
+            </div>
+
+            @section JavaScript
+                {
+                <script type="text/javascript">
+                    $(function () {
+                        var url = "";
+
+                        //Load the edit page
+                        function bindForm(dialog) {
+                            $("form", dialog).submit(function () {
+                                $.ajax({
+                                    url: this.action,
+                                    type: this.method,
+                                    data: $(this).serialize(),
+                                    success: function (result) {
+                                        if (result.success) {
+                                            $('#addedit_modal').modal("hide");
+                                            // Refresh:
+                                            location.reload();
+
+                                        } else {
+
+                                            $('#addedit_modal_body').html(result);
+                                            bindForm();
+                                        }
+                                    }, error: function (request, status, error) {
+                                        alert(JSON.stringify(error));
+                                    }
+                                });
+
+
+                                return false;
+                            });
+                        }
+
+                        //Load the edit page
+
+
+
+                        $(".btn_add").click(function () {
+
+                            url = "@Url.Action("AddMemberSession", "SessionMember")";
+                            console.log(url);
+
+                            $("#addedit_modal_body").load(url, function () {
+                                $("#addedit_modal").modal({
+                                    backdrop: 'static',
+                                    keyboard: true
+                                }, "show");
+                                bindForm(this);
+                            });
+                            return false;
+                        });
+
+
+                        //Load the edit page
+                        $(".editBtn").click(function () {
+
+                            url = '@Url.Action("UpdaSession", "SessionMember", new {id = "_id_" })'.replace('_id_', $(this).data("edit-id"));
+                            console.log(url);
+
+                            $("#addedit_modal_body").load(url, function (responseTxt, statusTxt, xhr) {
+                                $("#addedit_modal").modal({
+                                    backdrop: 'static',
+                                    keyboard: true
+                                }, "show");
+                                bindForm(this);
+                            });
+                            return false;
+                        });
+                        //Handle the delete function
+                        $(".deleteBtn").click(function () {
+
+                            url = '@Url.Action("Deactivate", "SessionMember", new {id = "_id_" })'.replace('_id_', $(this).data("delete-id"));
+                            console.log(url);
+                            $("#addedit_modal_body").load(url, function (responseTxt, statusTxt, xhr) {
+                                $("#addedit_modal").modal({
+                                    backdrop: 'static',
+                                    keyboard: true
+                                }, "show");
+                                bindForm(this);
+                            });
+                            return false;
+                        });
+                        $('#campustbl').DataTable({
+                            "paging": true,
+                            "lengthChange": true,
+                            "searching": true,
+                            "ordering": true,
+                            "info": true,
+                            "autoWidth": true,
+                            "order": [[0, "asc"]],
+                            dom: 'Bfltip',
+                            buttons: [
+                                {
+                                    extend: 'copyHtml5', exportOptions: { columns: [0, 1, 2, 3, 4, 5] }
+                                },
+                                {
+                                    extend: 'csvHtml5', exportOptions: { columns: [0, 1, 2, 3, 4, 5] }, text: 'Excel'
+                                },
+                                {
+                                    extend: 'pdfHtml5', exportOptions: { columns: [0, 1, 2, 3, 4, 5] }
+                                },
+                                {
+                                    extend: 'print', exportOptions: { columns: [0, 1, 2, 3, 4, 5] }
+                                }
+                            ]
+                        });
+
+
+                    });
+
+                </script>
+
+            }
+
+        </div>
+    </div>
+
+</div>
+

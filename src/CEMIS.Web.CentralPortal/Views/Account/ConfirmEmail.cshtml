@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "Confirm Email";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    var confirmStat = ViewData["confirmStat"].ToString();
+}
+<main role="main">
+    <div class="container">
+        <div class="row p-2">
+            <div class="col-lg-16">
+                <div class="front--text">
+                    <span class="hr" style="width: 50px;background:#0393dd;height:6px;border-radius:3px;display:block"></span>
+                    <h2 class="hero-text">
+                        Cemis
+                    </h2>
+                   
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="bg-light login--form p-5">
+                    <div class="form-group">
+
+                        @if (confirmStat == "OK")
+                        {
+                            <p class="t-23 w-400">
+                                Thank You For Confirming Your Email!.
+                            </p>
+                            <p style="color:white">
+                                @Html.ActionLink("Click here to Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-primary btn-block btn-flat" })
+                            </p>
+                        }
+                        else
+                        {
+                            <h2 style="color:white">
+                                The confirmation link has expired!
+                            </h2>
+                        }
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</main>
+
+
+
+
+
+

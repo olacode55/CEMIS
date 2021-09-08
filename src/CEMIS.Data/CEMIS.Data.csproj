@@ -1,0 +1,134 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20200129095040_init.cs" />
+    <Compile Remove="Migrations\20200129095040_init.Designer.cs" />
+    <Compile Remove="Migrations\20200129150451_CollegeLeadershipchange.cs" />
+    <Compile Remove="Migrations\20200129150451_CollegeLeadershipchange.Designer.cs" />
+    <Compile Remove="Migrations\20200130123706_Collegechanges.cs" />
+    <Compile Remove="Migrations\20200130123706_Collegechanges.Designer.cs" />
+    <Compile Remove="Migrations\20200201044311_IsSynched.cs" />
+    <Compile Remove="Migrations\20200201044311_IsSynched.Designer.cs" />
+    <Compile Remove="Migrations\20200201045928_StaffGradeleveltable.cs" />
+    <Compile Remove="Migrations\20200201045928_StaffGradeleveltable.Designer.cs" />
+    <Compile Remove="Migrations\20200201055624_StaffGradeleveltable1.cs" />
+    <Compile Remove="Migrations\20200201055624_StaffGradeleveltable1.Designer.cs" />
+    <Compile Remove="Migrations\20200201154534_CollegeTableUpdate2.cs" />
+    <Compile Remove="Migrations\20200201154534_CollegeTableUpdate2.Designer.cs" />
+    <Compile Remove="Migrations\20200202083412_TeachingStaff.code.cs" />
+    <Compile Remove="Migrations\20200202083412_TeachingStaff.code.Designer.cs" />
+    <Compile Remove="Migrations\20200202102250_gradelevel.cs" />
+    <Compile Remove="Migrations\20200202102250_gradelevel.Designer.cs" />
+    <Compile Remove="Migrations\20200207151544_leadership.cs" />
+    <Compile Remove="Migrations\20200207151544_leadership.Designer.cs" />
+    <Compile Remove="Migrations\20200227145834_firstlogin.cs" />
+    <Compile Remove="Migrations\20200227145834_firstlogin.Designer.cs" />
+    <Compile Remove="Migrations\20200227161240_staffid.cs" />
+    <Compile Remove="Migrations\20200227161240_staffid.Designer.cs" />
+    <Compile Remove="Migrations\20200227164512_tblcouncilUpdate.cs" />
+    <Compile Remove="Migrations\20200227164512_tblcouncilUpdate.Designer.cs" />
+    <Compile Remove="Migrations\20200227165945_councilmember.cs" />
+    <Compile Remove="Migrations\20200227165945_councilmember.Designer.cs" />
+    <Compile Remove="Migrations\20200227175735_setup.cs" />
+    <Compile Remove="Migrations\20200227175735_setup.Designer.cs" />
+    <Compile Remove="Migrations\20200228144900_Certificate.cs" />
+    <Compile Remove="Migrations\20200228144900_Certificate.Designer.cs" />
+    <Compile Remove="Migrations\20200301161506_student---------.cs" />
+    <Compile Remove="Migrations\20200301161506_student---------.Designer.cs" />
+    <Compile Remove="Migrations\20200301162141_student---------7678678678687.cs" />
+    <Compile Remove="Migrations\20200301162141_student---------7678678678687.Designer.cs" />
+    <Compile Remove="Migrations\20200301162648_student0000000987654321.cs" />
+    <Compile Remove="Migrations\20200301162648_student0000000987654321.Designer.cs" />
+    <Compile Remove="Migrations\20200302080923_membercounciltable.cs" />
+    <Compile Remove="Migrations\20200302080923_membercounciltable.Designer.cs" />
+    <Compile Remove="Migrations\20200302112006_updatememberaudit.cs" />
+    <Compile Remove="Migrations\20200302112006_updatememberaudit.Designer.cs" />
+    <Compile Remove="Migrations\20200302113110_ModifyCollegeFacilityTable.cs" />
+    <Compile Remove="Migrations\20200302113110_ModifyCollegeFacilityTable.Designer.cs" />
+    <Compile Remove="Migrations\20200302115059_cert.cs" />
+    <Compile Remove="Migrations\20200302115059_cert.Designer.cs" />
+    <Compile Remove="Migrations\20200302124301_department.cs" />
+    <Compile Remove="Migrations\20200302124301_department.Designer.cs" />
+    <Compile Remove="Migrations\20200302125421_unit.cs" />
+    <Compile Remove="Migrations\20200302125421_unit.Designer.cs" />
+    <Compile Remove="Migrations\20200302131441_RemoveWallMaterialColumnFromCollegeFacility.cs" />
+    <Compile Remove="Migrations\20200302131441_RemoveWallMaterialColumnFromCollegeFacility.Designer.cs" />
+    <Compile Remove="Migrations\20200303080954_StaffCategory.cs" />
+    <Compile Remove="Migrations\20200303080954_StaffCategory.Designer.cs" />
+    <Compile Remove="Migrations\20200303081312_StaffRankPosition.cs" />
+    <Compile Remove="Migrations\20200303081312_StaffRankPosition.Designer.cs" />
+    <Compile Remove="Migrations\20200304134426_finacetablelog.cs" />
+    <Compile Remove="Migrations\20200304134426_finacetablelog.Designer.cs" />
+    <Compile Remove="Migrations\20200305095719_updatexxxxxxxxxx.cs" />
+    <Compile Remove="Migrations\20200305095719_updatexxxxxxxxxx.Designer.cs" />
+    <Compile Remove="Migrations\20200305103558_updatexxxxxxxxxxxxxxxxxxxxx.cs" />
+    <Compile Remove="Migrations\20200305103558_updatexxxxxxxxxxxxxxxxxxxxx.Designer.cs" />
+    <Compile Remove="Migrations\20200305135506_ModifyRevenue.cs" />
+    <Compile Remove="Migrations\20200305135506_ModifyRevenue.Designer.cs" />
+    <Compile Remove="Migrations\20200305175551_updatexxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.cs" />
+    <Compile Remove="Migrations\20200305175551_updatexxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx.Designer.cs" />
+    <Compile Remove="Migrations\20200305182713_AddVarianceToModifyRevenueEstimateItem.cs" />
+    <Compile Remove="Migrations\20200305182713_AddVarianceToModifyRevenueEstimateItem.Designer.cs" />
+    <Compile Remove="Migrations\20200305184333_expenditure.cs" />
+    <Compile Remove="Migrations\20200305184333_expenditure.Designer.cs" />
+    <Compile Remove="Migrations\20200306073633_Expendituretype.cs" />
+    <Compile Remove="Migrations\20200306073633_Expendituretype.Designer.cs" />
+    <Compile Remove="Migrations\20200306074001_Expendituretypes.cs" />
+    <Compile Remove="Migrations\20200306074001_Expendituretypes.Designer.cs" />
+    <Compile Remove="Migrations\20200306103035_Expendituretypess.cs" />
+    <Compile Remove="Migrations\20200306103035_Expendituretypess.Designer.cs" />
+    <Compile Remove="Migrations\20200306115429_Expendituretypees.cs" />
+    <Compile Remove="Migrations\20200306115429_Expendituretypees.Designer.cs" />
+    <Compile Remove="Migrations\20200307175053_jj.cs" />
+    <Compile Remove="Migrations\20200307175053_jj.Designer.cs" />
+    <Compile Remove="Migrations\20200307182230_okk.cs" />
+    <Compile Remove="Migrations\20200307182230_okk.Designer.cs" />
+    <Compile Remove="Migrations\20200309080111_updateoncemis.cs" />
+    <Compile Remove="Migrations\20200309080111_updateoncemis.Designer.cs" />
+    <Compile Remove="Migrations\20200309080358_updatetable.cs" />
+    <Compile Remove="Migrations\20200309080358_updatetable.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="appsettings.Development.json" />
+    <None Remove="appsettings.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="appsettings.Development.json">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+    <Content Include="appsettings.json">
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EPPlus" Version="4.5.2.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="2.2.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.6" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="2.2.0" />
+    <PackageReference Include="NLog" Version="4.6.8" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CEMIS.Utility\CEMIS.Utility.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNetCore.Mvc.ViewFeatures">
+      <HintPath>..\..\..\..\Desktop\Microsoft.AspNetCore.Mvc.ViewFeatures.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.Annotations">
+      <HintPath>..\..\..\..\..\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.netcore.app\2.2.0\ref\netcoreapp2.2\System.ComponentModel.Annotations.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

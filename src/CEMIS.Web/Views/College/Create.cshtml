@@ -1,0 +1,1140 @@
+﻿@using CEMIS.Utility.ViewModel
+@using CEMIS.Utility
+@model CollegeFormDataViewModel
+@{
+    ViewBag.Title = "College Management";
+
+}
+
+<div class="vatebra-pageheader">
+    <ol class="breadcrumb vatebra-breadcrumb">
+        <li class="breadcrumb-item"><a href="#">@ViewBag.Title</a></li>
+        <li class="breadcrumb-item text-white active" aria-current="page">College Management</li>
+    </ol>
+    <h6 class="vatebra-pagetitle text-uppercase">College Management</h6>
+</div>
+
+@using (Html.BeginForm("CreateAndUpdate", "College", FormMethod.Post, new { autocomplete = "off", id = "frmCreateAndUpdate" }))
+{
+
+    <div class="panel">
+        <div class="panel-title"></div>
+        <div class="panel-heading"></div>
+        <div class="panel-body">
+
+
+
+            <div class="form" id="college">
+
+                <ul class="nav nav-tabs" id="collegeAppTab">
+                    <li class="nav-item"> <a class="nav-link active" href="#CollegeTab" data-toggle="tab"> College</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="#FacilityTab" data-toggle="tab"> Facility</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="#ClassRoomDataTab" data-toggle="tab"> Class Room Data</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="#ClassRoomInfoTab" data-toggle="tab"> Class Room Infomation</a> </li>
+                    <li class="nav-item"> <a class="nav-link" href="#Summary" data-toggle="tab"> Summary</a> </li>
+                </ul>
+
+                <div class="tab-content">
+                    <div class="tab-pane active" id="CollegeTab">
+
+                        <div class="col-md-12">
+                            <div class="panel-heading"><h3><b>College Details</b></h3> </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>Name<b style="color:red">*</b></label>
+                                    @*<input id="Name" name="Name" type="text" class="form-control" />*@
+                                    @Html.TextBoxFor(x => x.Name, new { @class = "form-control", required = "true" })
+                                    @Html.ValidationMessageFor(x => @x.Name, null, new { @style = "color:red" })
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label>Address<b style="color:red">*</b></label>
+                                    @*<input id="Address" name="Address" type="text" class="form-control" />*@
+                                    @Html.TextBoxFor(x => x.Address, new { @class = "form-control", required = "true", })
+                                    @Html.ValidationMessageFor(x => @x.Address, null, new { @style = "color:red" })
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label>Email<b style="color:red">*</b></label>
+                                    @*<input id="Email" name="Email" type="Email" class="form-control" />*@
+                                    @Html.TextBoxFor(x => x.Email, new { @class = "form-control", @type = "Email", required = "true" })
+                                    @Html.ValidationMessageFor(x => @x.Email, null, new { @style = "color:red" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>GIS<b style="color:red">*</b></label>
+                                    @*<input id="GIS" name="GIS" type="text" class="form-control" />*@
+                                    @Html.TextBoxFor(x => x.GIS, new { @class = "form-control", required = "true" })
+                                    @Html.ValidationMessageFor(x => @x.GIS, null, new { @style = "color:red" })
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label>Service Offered<b style="color:red">*</b></label>
+                                    @*<input id="ServiceOffered" name="ServiceOffered" type="text" class="form-control" />*@
+                                    @Html.TextBoxFor(x => x.ServiceOfferedId, new { @class = "form-control", required = "true", })
+                                    @Html.ValidationMessageFor(x => @x.ServiceOfferedId, null, new { @style = "color:red" })
+                                </div>
+
+
+                                <div class="col-md-4">
+                                    <label>Phone<b style="color:red">*</b></label>
+                                    @*<input id="Phone" name="Phone" type="tel" class="form-control" />*@
+                                    @Html.TextBoxFor(x => x.Phone, new { @class = "form-control", @type = "Phone", required = "true", })
+                                    @Html.ValidationMessageFor(x => @x.Phone, null, new { @style = "color:red" })
+                                </div>
+
+                            </div>
+
+                            <div class="panel-heading"><h3><b>None Teaching Staff Count</b></h3> </div>
+
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label> No of Secretary<b style="color:red">*</b></label>
+                                    @*<input id="SecretaryCount" name="SecretaryCount" type="number" class="form-control" />*@
+                                    @Html.TextBoxFor(x => x.SecretaryCount, new { @class = "form-control", required = "true" })
+                                    @Html.ValidationMessageFor(x => @x.SecretaryCount, null, new { @style = "color:red" })
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label>No of Drivers<b style="color:red">*</b></label>
+                                    @*<input id="DriversCount" name="DriversCount" type="number" class="form-control" />*@
+                                    @Html.TextBoxFor(x => x.DriversCount, new { @class = "form-control", required = "true", })
+                                    @Html.ValidationMessageFor(x => @x.DriversCount, null, new { @style = "color:red" })
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label>No of Handymen<b style="color:red">*</b></label>
+                                    @*<input id="HandymenCount" name="HandymenCount" type="number" class="form-control" />*@
+                                    @Html.TextBoxFor(x => x.HandymenCount, new { @class = "form-control", required = "true", })
+                                    @Html.ValidationMessageFor(x => @x.HandymenCount, null, new { @style = "color:red" })
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label> No of SecurityGuard<b style="color:red">*</b></label>
+                                    @*<input id="SecurityGuardCount" name="SecurityGuardCount" type="number" class="form-control" />*@
+                                    @Html.TextBoxFor(x => x.SecurityGuardCount, new { @class = "form-control", required = "true" })
+                                    @Html.ValidationMessageFor(x => @x.SecurityGuardCount, null, new { @style = "color:red" })
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label>No of Cleaner<b style="color:red">*</b></label>
+                                    @*<input id="CleanerCount" name="CleanerCount" type="number" class="form-control" />*@
+                                    @Html.TextBoxFor(x => x.CleanerCount, new { @class = "form-control", required = "true", })
+                                    @Html.ValidationMessageFor(x => @x.CleanerCount, null, new { @style = "color:red" })
+                                </div>
+
+                                <div class="col-md-4">
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="panel-heading"><h3><b>Various Contact / Info</b></h3> </div>
+
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>Principal Name<b style="color:red">*</b></label>
+                                    @*<input id="PrincipalName" name="PrincipalName" type="text" class="form-control" />*@
+                                    @Html.TextBoxFor(x => x.PrincipalName, new { @class = "form-control", required = "true" })
+                                    @Html.ValidationMessageFor(x => @x.PrincipalName, null, new { @style = "color:red" })
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label>Principal Email<b style="color:red">*</b></label>
+                                    @*<input id="PrincipalEmail" name="PrincipalEmail" type="email" class="form-control" />*@
+                                    @Html.TextBoxFor(x => x.PrincipalEmail, new { @class = "form-control", required = "true", })
+                                    @Html.ValidationMessageFor(x => @x.PrincipalEmail, null, new { @style = "color:red" })
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label>Principal Phone<b style="color:red">*</b></label>
+                                    @*<input id="PrincipalPhone" name="PrincipalPhone" type="tel" class="form-control" />*@
+                                    @Html.TextBoxFor(x => x.PrincipalPhone, new { @class = "form-control", required = "true", })
+                                    @Html.ValidationMessageFor(x => @x.PrincipalPhone, null, new { @style = "color:red" })
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>Vice Principal Name<b style="color:red">*</b></label>
+                                    @*<input id="VicePrincipalName" name="VicePrincipalName" type="text" class="form-control" />*@
+                                    @Html.TextBoxFor(x => x.VicePrincipalName, new { @class = "form-control", required = "true" })
+                                    @Html.ValidationMessageFor(x => @x.VicePrincipalName, null, new { @style = "color:red" })
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label>Vice Principal Email<b style="color:red">*</b></label>
+                                    @*<input id="VicePrincipalEmail" name="VicePrincipalEmail" type="email" class="form-control" />*@
+                                    @Html.TextBoxFor(x => x.VicePrincipalEmail, new { @class = "form-control", @type = "Email", required = "true", })
+                                    @Html.ValidationMessageFor(x => @x.VicePrincipalEmail, null, new { @style = "color:red" })
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label>Vice Principal Phone<b style="color:red">*</b></label>
+                                    @*<input id="VicePrincipalPhone" name="VicePrincipalPhone" type="tel" class="form-control" />*@
+                                    @Html.TextBoxFor(x => x.VicePrincipalPhone, new { @class = "form-control", @type = "Phone", required = "true", })
+                                    @Html.ValidationMessageFor(x => @x.VicePrincipalPhone, null, new { @style = "color:red" })
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>ICT System Name<b style="color:red">*</b></label>
+                                    @*<input id="ICTSystemName" name="ICTSystemName" type="text" class="form-control" />*@
+                                    @Html.TextBoxFor(x => x.ICTSystemName, new { @class = "form-control", required = "true" })
+                                    @Html.ValidationMessageFor(x => @x.ICTSystemName, null, new { @style = "color:red" })
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label>ICT System Email<b style="color:red">*</b></label>
+                                    @*<input id="ICTSystemEmail" name="ICTSystemEmail" type="email" class="form-control" />*@
+                                    @Html.TextBoxFor(x => x.ICTSystemEmail, new { @class = "form-control", @type = "Email", required = "true", })
+                                    @Html.ValidationMessageFor(x => @x.ICTSystemEmail, null, new { @style = "color:red" })
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label>ICT System Phone<b style="color:red">*</b></label>
+                                    @*<input id="ICTSystemPhone" name="ICTSystemPhone" type="tel" class="form-control" />*@
+                                    @Html.TextBoxFor(x => x.ICTSystemPhone, new { @class = "form-control", @type = "Phone", required = "true", })
+                                    @Html.ValidationMessageFor(x => @x.ICTSystemPhone, null, new { @style = "color:red" })
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <label>Admin Officer Name<b style="color:red">*</b></label>
+                                    @*<input id="AdminOfficerName" name="AdminOfficerName" type="text" class="form-control" />*@
+                                    @Html.TextBoxFor(x => x.AdminOfficerName, new { @class = "form-control", required = "true" })
+                                    @Html.ValidationMessageFor(x => @x.AdminOfficerName, null, new { @style = "color:red" })
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label>Admin Office Email<b style="color:red">*</b></label>
+                                    @*<input id="AdminOfficerEmail" name="AdminOfficerEmail" type="email" class="form-control" />*@
+                                    @Html.TextBoxFor(x => x.AdminOfficerEmail, new { @class = "form-control", @type = "Email", required = "true", })
+                                    @Html.ValidationMessageFor(x => @x.PrincipalEmail, null, new { @style = "color:red" })
+                                </div>
+
+                                <div class="col-md-4">
+                                    <label>Admin Office Phone<b style="color:red">*</b></label>
+                                    @*<input id="AdminOfficerPhone" name="AdminOfficerPhone" type="tel" class="form-control" />*@
+                                    @Html.TextBoxFor(x => x.AdminOfficerPhone, new { @class = "form-control", @type = "Phone", required = "true", })
+                                    @Html.ValidationMessageFor(x => @x.AdminOfficerPhone, null, new { @style = "color:red" })
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="row" style="margin-top:20px">
+                            <div class="col-md-6 text-left"></div>
+                            <div class="col-md-6 text-right"><a class="nav-link btn btn-default" href="#FacilityTab" data-toggle="tab"> Next </a></div>
+                        </div>
+
+                    </div>
+                    <div class="tab-pane active" id="FacilityTab">
+                        <div class="col-md-12">
+                            <div class="panel-heading"><h3><b>College Facility</b></h3> </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Facility Name<b style="color:red">*</b></label>
+                                    <input id="FacilityName" name="FacilityName" type="text" class="form-control" />
+                                    @*@Html.TextBoxFor(x => x.Name, new { @class = "form-control", required = "true" })
+                                        @Html.ValidationMessageFor(x => @x.Name, null, new { @style = "color:red" })*@
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>No Available<b style="color:red">*</b></label>
+                                    <input id="FacilityNo" name="FacilityNo" type="number" class="form-control" />
+                                    @*@Html.TextBoxFor(x => x.Number, new { @class = "form-control", required = "true", })
+                                        @Html.ValidationMessageFor(x => @x.Number, null, new { @style = "color:red" })*@
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button type="button" onclick="addFacility();" class="btn btn-primary" style="margin-top:10px; float:right">Add</button>
+                                </div>
+                            </div>
+
+                            <div class="row" style="margin-top:50px">
+                                <div class="col-md-12">
+
+                                    <div class="table-responsive">
+
+                                        <table id="CollegeFacility" name="CollegeFacility" class="display table">
+                                            <thead>
+
+                                                <tr>
+                                                    <th>Facility Type</th>
+                                                    <th>No. Available</th>
+                                                    <th> </th>
+                                                </tr>
+                                            </thead>
+                                            @if (Model.Id > 0)
+                                            {
+                                                <tbody>
+                                                    @foreach (var item in Model.CollegeFacility)
+                                                    {
+                                                        <tr>
+                                                            <td>@item.FacilityType</td>
+                                                            <td>@item.Number</td>
+                                                            <td><a href="#">edit</a>|<a href="#">delete</a></td>
+
+                                                        </tr>
+                                                    }
+                                                </tbody>
+                                            }
+                                            else
+                                            {
+                                                <tbody></tbody>
+                                            }
+
+                                        </table>
+
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+
+
+
+                        <div class="row" style="margin-top:20px">
+                            <div class="col-md-6 text-left"> <a class="nav-link btn btn-default" href="#CollegeTab" data-toggle="tab"> Previous</a> </div>
+                            <div class="col-md-6 text-right"><a class="nav-link btn btn-default" href="#ClassRoomDataTab" data-toggle="tab"> Next </a></div>
+                        </div>
+                    </div>
+                    <div class="tab-pane active" id="ClassRoomDataTab">
+                        <div class="col-md-12">
+
+                            <div class="panel-heading"><h3><b>College Class Room Data</b></h3> </div>
+
+
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    <label>No. of ClassRoom (s)<b style="color:red">*</b></label>
+                                    @*<input id="ClassRoomCount" name="ClassRoomCount" type="number" class="form-control" />*@
+                                    @Html.TextBoxFor(x => x.ClassRoomCount, new { @class = "form-control", required = "true" })
+                                    @Html.ValidationMessageFor(x => @x.ClassRoomCount, null, new { @style = "color:red" })
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>No. of StaffRoom (s)<b style="color:red">*</b></label>
+                                    @*<input id="StaffRoomCount" name="StaffRoomCount" type="number" class="form-control" />*@
+                                    @Html.TextBoxFor(x => x.StaffRoomCount, new { @class = "form-control", required = "true", })
+                                    @Html.ValidationMessageFor(x => @x.StaffRoomCount, null, new { @style = "color:red" })
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    <label>No. of Office (s)<b style="color:red">*</b></label>
+                                    @*<input id="OfficeCount" name="OfficeCount" type="number" class="form-control" />*@
+                                    @Html.TextBoxFor(x => x.OfficeCount, new { @class = "form-control", required = "true" })
+                                    @Html.ValidationMessageFor(x => @x.OfficeCount, null, new { @style = "color:red" })
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>No. of Library (s)<b style="color:red">*</b></label>
+                                    @*<input id="LibraryCount" name="LibraryCount" type="number" class="form-control" />*@
+                                    @Html.TextBoxFor(x => x.LibraryCount, new { @class = "form-control", required = "true", })
+                                    @Html.ValidationMessageFor(x => @x.LibraryCount, null, new { @style = "color:red" })
+                                </div>
+
+                            </div>
+
+
+                            <div class="form-group">
+                                <div class="col-md-6">
+                                    <label>No. of Laboratory<b style="color:red">*</b></label>
+                                    @*<input id="LaboratoryCount" name="LaboratoryCount" type="number" class="form-control" />*@
+                                    @Html.TextBoxFor(x => x.LaboratoryCount, new { @class = "form-control", required = "true" })
+                                    @Html.ValidationMessageFor(x => @x.LaboratoryCount, null, new { @style = "color:red" })
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>No. of Store Room(s)<b style="color:red">*</b></label>
+                                    @*<input id="StoreRoomCount" name="StoreRoomCount" type="number" class="form-control" />*@
+                                    @Html.TextBoxFor(x => x.StoreRoomCount, new { @class = "form-control", required = "true", })
+                                    @Html.ValidationMessageFor(x => @x.StoreRoomCount, null, new { @style = "color:red" })
+                                </div>
+
+                            </div>
+
+                            <div class="form-group">
+                                <div class="col-md-6">
+
+                                    <label>Is Class Held Outside<b style="color:red">*</b></label>
+                                    @*<input id="IsClassHeldOutside" name="IsClassHeldOutside" type="checkbox" class="form-control" />*@
+                                    <select class="custom-select" asp-for="IsClassHeldOutside" asp-items="Html.GetEnumSelectList(typeof(IsClassHeldOutside))"></select>
+
+                                    @*@Html.CheckBoxFor(x => x.IsClassHeldOutside, new { @class = "form-control", style = "margin:50", })*@
+                                    @Html.ValidationMessageFor(x => @x.IsClassHeldOutside, null, new { @style = "color:red" })
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>No. of Others<b style="color:red">*</b></label>
+                                    @*<input id="OthersCount" name="OthersCount" type="number" class="form-control" />*@
+                                    @Html.TextBoxFor(x => x.OthersCount, new { @class = "form-control", required = "true" })
+                                    @Html.ValidationMessageFor(x => @x.OthersCount, null, new { @style = "color:red" })
+                                </div>
+
+
+
+                            </div>
+
+
+
+
+
+
+
+                        </div>
+
+                        <div class="row" style="margin-top:20px">
+                            <div class="col-md-6 text-left"> <a class="nav-link btn btn-default" href="#FacilityTab" data-toggle="tab"> Previous</a> </div>
+                            <div class="col-md-6 text-right"><a class="nav-link btn btn-default" href="#ClassRoomInfoTab" data-toggle="tab"> Next </a></div>
+                        </div>
+                    </div>
+                    <div class="tab-pane active" id="ClassRoomInfoTab">
+                        <div class="col-md-12">
+
+                            <div class="panel-heading"><h3><b>College Class Room Info</b></h3> </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Year Of Construction<b style="color:red">*</b></label>
+                                    @*<input id="YearOfConstruction" name="YearOfConstruction" type="number" class="form-control" />*@
+                                    @Html.TextBoxFor(x => x.YearOfConstruction, new { @class = "form-control", required = "true" })
+                                    @Html.ValidationMessageFor(x => @x.YearOfConstruction, null, new { @style = "color:red" })
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>Present Condition<b style="color:red">*</b></label>
+                                    <select class="custom-select" asp-for="PresentCondition" asp-items="Html.GetEnumSelectList(typeof(ClassRoomCondition))"></select>
+                                    @Html.ValidationMessageFor(x => @x.PresentCondition, null, new { @style = "color:red" })
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Length (m)<b style="color:red">*</b></label>
+                                    @*<input id="LengthInMeters" name="LengthInMeters" type="number" class="form-control" />*@
+                                    @Html.TextBoxFor(x => x.LengthInMeters, new { @class = "form-control", required = "true" })
+                                    @Html.ValidationMessageFor(x => @x.LengthInMeters, null, new { @style = "color:red" })
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>Width (m)<b style="color:red">*</b></label>
+                                    @*<input id="WidthInMeters" name="WidthInMeters" type="number" class="form-control" />*@
+                                    @Html.TextBoxFor(x => x.WidthInMeters, new { @class = "form-control", required = "true", })
+                                    @Html.ValidationMessageFor(x => @x.WidthInMeters, null, new { @style = "color:red" })
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Floor Material<b style="color:red">*</b></label>
+                                    <select class="custom-select" asp-for="FloorMaterial" asp-items="Html.GetEnumSelectList(typeof(FloorMaterial))"></select>
+                                    @*<input id="FloorMaterial" name="FloorMaterial" type="text" class="form-control" />*@
+                                    @*@Html.TextBoxFor(x => x.FloorMaterial, new { @class = "form-control", required = "true" })*@
+                                    @Html.ValidationMessageFor(x => @x.FloorMaterial, null, new { @style = "color:red" })
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>Wall Material<b style="color:red">*</b></label>
+                                    <select class="custom-select" asp-for="WallMaterial" asp-items="Html.GetEnumSelectList(typeof(WallMaterial))"></select>
+                                    @*<input id="WallMaterial" name="WallMaterial" type="text" class="form-control" />*@
+                                    @*@Html.TextBoxFor(x => x.WallMaterial, new { @class = "form-control", required = "true", })*@
+                                    @Html.ValidationMessageFor(x => @x.WallMaterial, null, new { @style = "color:red" })
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Roof Material<b style="color:red">*</b></label>
+                                    <select class="custom-select" asp-for="RoofMaterial" asp-items="Html.GetEnumSelectList(typeof(RoofMaterial))"></select>
+                                    @*<input id="RoofMaterial" name="RoofMaterial" type="text" class="form-control" />*@
+                                    @*@Html.TextBoxFor(x => x.RoofMaterial, new { @class = "form-control", required = "true" })*@
+                                    @Html.ValidationMessageFor(x => @x.RoofMaterial, null, new { @style = "color:red" })
+                                </div>
+
+                                <div class="col-md-6">
+                                    <label>Seatings<b style="color:red">*</b></label>
+                                    <select class="custom-select" asp-for="Seatings" asp-items="Html.GetEnumSelectList(typeof(SeatAvailability))"></select>
+                                    @*<input id="Seatings" name="Seatings" type="text" class="form-control" />*@
+                                    @*@Html.TextBoxFor(x => x.Seatings, new { @class = "form-control", required = "true", })*@
+                                    @Html.ValidationMessageFor(x => @x.Seatings, null, new { @style = "color:red" })
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <label>Has Disability Access<b style="color:red">*</b></label>
+                                    <select class="custom-select" asp-for="DisabilityAccess" asp-items="Html.GetEnumSelectList(typeof(DisabilityAccessAvailability))"></select>
+                                    @*<input id="DisabilityAccess" name="DisabilityAccess" type="checkbox" />*@
+                                    @*@Html.CheckBoxFor(x => x.DisabilityAccess, new { @class = "form-control" })*@
+
+                                </div>
+
+                                <div class="col-md-6">
+
+                                </div>
+
+                            </div>
+
+
+
+                        </div>
+                        @*<div class="row">
+                                <div class="col-md-12">
+                                    <button type="button" onclick="addclassRoom();" class="btn btn-primary" style="margin-top:10px; float:right">Add</button>
+                                </div>
+                            </div>*@
+                        @*<div class="row" style="margin-top:50px">
+                                <div class="col-md-12">
+
+                                    <div class="table-responsive">
+
+                                        <table id="ClassroomTable" class="display table">
+                                            <thead>
+
+                                                <tr>
+                                                    <th>Year of Construction</th>
+                                                    <th>Present Condition</th>
+                                                    <th>Length</th>
+                                                    <th>Width</th>
+                                                    <th>Floor Material</th>
+                                                    <th>Wall Material</th>
+                                                    <th>Roof Material</th>
+                                                    <th>Seating</th>
+                                                    <th>Has Disability</th>
+                                                    <th> </th>
+                                                </tr>
+                                            </thead>
+                                            <tbody></tbody>
+
+                                        </table>
+
+                                    </div>
+
+                                </div>
+                            </div>*@
+                        <div class="row" style="margin-top:20px">
+                            <div class="col-md-6 text-left"> <a class="nav-link btn btn-default" href="#ClassRoomDataTab" data-toggle="tab"> Previous</a> </div>
+                            <div class="col-md-6 text-left"> <a class="nav-link btn btn-default" href="#Summary" data-toggle="tab"> Preview</a> </div>
+                        </div>
+
+
+                    </div>
+                    <div class="tab-pane active" id="Summary">
+
+                        <div class="panel-heading"><h3><b>Summary</b></h3> </div>
+
+                        <div class="col-md-12">
+
+
+
+                            <section class="card">
+
+                                <h3><span class="number">1.</span> <b>College Details</b></h3>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label class="control-label label-blue">Name:</label>
+                                        <label class="control-label">@Model.Name</label>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label>Address:</label>
+                                        <label class="control-label">@Model.Address</label>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label>Email:</label>
+                                        <label class="control-label">@Model.Email</label>
+                                    </div>
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>GIS:</label>
+                                        <label class="control-label">@Model.GIS</label>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label>Service Offered:</label>
+                                        <label class="control-label">@Model.ServiceOfferedId</label>
+                                    </div>
+
+
+                                    <div class="col-md-4">
+                                        <label>Phone:</label>
+                                        <label class="control-label">@Model.Phone</label>
+                                    </div>
+
+                                </div>
+
+                                <div class="panel-heading"><h3><b>None Teaching Staff Count</b></h3> </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label> No of Secretary:</label>
+                                        <label class="control-label">@Model.SecretaryCount</label>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label>No of Drivers:</label>
+                                        <label class="control-label">@Model.DriversCount</label>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label>No of Handymen:</label>
+                                        <label class="control-label">@Model.HandymenCount</label>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label> No of SecurityGuard:</label>
+                                        <label class="control-label">@Model.SecretaryCount</label>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label>No of Cleaner:</label>
+                                        <label class="control-label">@Model.CleanerCount</label>
+                                    </div>
+
+                                    <div class="col-md-4">
+
+                                    </div>
+
+                                </div>
+
+
+                                <div class="panel-heading"><h3><b>Various Contact / Info</b></h3> </div>
+
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Principal Name:</label>
+                                        <label class="control-label">@Model.PrincipalName</label>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label>Principal Email:</label>
+                                        <label class="control-label">@Model.PrincipalEmail</label>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label>Principal Phone:</label>
+                                        <label class="control-label">@Model.PrincipalPhone</label>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Vice Principal Name:</label>
+                                        <label class="control-label">@Model.VicePrincipalName</label>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label>Vice Principal Email:</label>
+                                        <label class="control-label">@Model.VicePrincipalEmail</label>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label>Vice Principal Phone:</label>
+                                        <label class="control-label">@Model.VicePrincipalPhone</label>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>ICT System Name:</label>
+                                        <label class="control-label">@Model.ICTSystemName</label>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label>ICT System Email:</label>
+                                        <label class="control-label">@Model.ICTSystemEmail</label>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label>ICT System Phone:</label>
+                                        <label class="control-label">@Model.ICTSystemPhone</label>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <label>Admin Officer Name:</label>
+                                        <label class="control-label">@Model.AdminOfficerName</label>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label>Admin Office Email:</label>
+                                        <label class="control-label">@Model.AdminOfficerEmail</label>
+                                    </div>
+
+                                    <div class="col-md-4">
+                                        <label>Admin Office Phone:</label>
+                                        <label class="control-label">@Model.AdminOfficerPhone</label>
+                                    </div>
+
+                                </div>
+
+
+
+                            </section>
+
+
+
+                            <section class="card">
+                                <h3><span class="number">2.</span> <b>College Facility</b></h3>
+
+                                <div class="row" style="margin-top:50px">
+                                    <div class="col-md-12">
+
+                                        <div class="table-responsive">
+
+                                            <table id="FacilityTable" class="display table">
+                                                <thead>
+
+                                                    <tr>
+                                                        <th>Facility Name</th>
+                                                        <th>No. Available</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @*@foreach (var item in Model.CollegeFacility)
+                                                        {
+                                                            <tr>
+                                                                <td>@item.Name</td>
+                                                                <td>@item.Number</td>
+                                                            </tr>
+
+                                                        }*@
+                                                </tbody>
+
+                                            </table>
+
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </section>
+
+
+                            <section class="card">
+
+                                <h3><span class="number">3.</span> <b>College Class Room Data</b></h3>
+
+
+
+                                <div class="form-group">
+                                    <div class="col-md-6">
+                                        <label>No. of ClassRoom (s):</label>
+                                        <label class="control-label">@Model.ClassRoomCount</label>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label>No. of StaffRoom (s):</label>
+                                        <label class="control-label">@Model.StaffRoomCount</label>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-6">
+                                        <label>No. of Office (s):</label>
+                                        <label class="control-label">@Model.OfficeCount</label>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label>No. of Library (s):</label>
+                                        <label class="control-label">@Model.LibraryCount</label>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="form-group">
+                                    <div class="col-md-6">
+                                        <label>No. of Laboratory:</label>
+                                        <label class="control-label">@Model.LaboratoryCount</label>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label>No. of Store Room(s) :</label>
+                                        <label class="control-label">@Model.StoreRoomCount</label>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-group">
+                                    <div class="col-md-6">
+                                        <label>No. of Others:</label>
+                                        <label class="control-label">@Model.OthersCount</label>
+                                    </div>
+
+                                    <div class="col-md-6">
+
+                                        <label>Is Class Held Outside:</label>
+
+                                        <label class="control-label">@Model.IsClassHeldOutside </label>
+                                    </div>
+
+                                </div>
+
+                            </section>
+
+
+
+
+                            <section class="card">
+
+
+                                <h3><span class="number">4.</span> <b>College Class Room Info</b></h3>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Year Of Construction:</label>
+                                        <label class="control-label">@Model.YearOfConstruction </label>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label>Present Condition:</label>
+                                        <label class="control-label">@Model.PresentCondition </label>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Length (m):</label>
+                                        <label class="control-label">@Model.LengthInMeters </label>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label>Width (m):</label>
+                                        <label class="control-label">@Model.WidthInMeters </label>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Floor Material:</label>
+                                        <label class="control-label">@Model.FloorMaterial </label>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label>Wall Material:</label>
+                                        <label class="control-label">@Model.WallMaterial </label>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Roof Material:</label>
+                                        <label class="control-label">@Model.RoofMaterial </label>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label>Seatings:</label>
+                                        <label class="control-label">@Model.Seatings </label>
+                                    </div>
+
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <label>Has Disability Access:</label>
+                                        <label class="control-label">@Model.DisabilityAccess </label>
+
+                                    </div>
+
+                                    <div class="col-md-6">
+
+                                    </div>
+
+                                </div>
+
+
+
+                            </section>
+
+                        </div>
+
+
+
+                        <div class="row" style="margin-top:20px">
+                            <div class="col-md-6 text-right"><a class="nav-link btn btn-default" href="#ClassRoomInfoTab" data-toggle="tab"> Previous </a></div>
+                            @*<div class="col-md-6 text-right"><button type="submit" class="btn btn-primary">Submit</button></div>*@
+                            <div class="col-md-6 text-right"><button id="btnSubmitForm" type="button" onclick="collegeFormSubmit()" class="btn btn-primary">Submit</button></div>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+
+
+
+
+
+        </div>
+
+
+    </div>
+
+}
+
+@section Scripts{
+    <script>
+        var facilityObject = [];
+        //$("form").attr('autocomplete', 'off');
+        //$(function () {
+        //    var collegeItems = {};
+        //    var facilityItems = {};
+        //    var classDataItems = {};
+        //    var classInfoItems = {};
+
+        //})
+        var selectedRow = null;
+
+        function addFacility() {
+            var facilityData = readFacilityData();
+            if (selectedRow == null)
+                insertIntoFacility(facilityData);
+            else
+                updateFacility(facilityData);
+            resetFacilityData();
+
+        }
+
+
+
+        function readFacilityData() {
+            var facilityData = {};
+
+            facilityData["FacilityName"] = document.getElementById("FacilityName").value;
+            facilityData["FacilityNo"] = document.getElementById("FacilityNo").value;
+
+            facilityObject.push({
+                facilityName: document.getElementById("FacilityName").value,
+                facilityNumber: document.getElementById("FacilityNo").value
+            });
+
+            return facilityData;
+        }
+
+        function collegeFormSubmit() {
+            var formData = new FormData;
+
+            jQuery.each(facilityObject, function (index, value) {
+                formData.append("FacilityName["+index +"]", value.FacilityName);
+                formData.append("FacilityNo[" + index + "]", value.FacilityNo);
+
+                console.log("FacilityName["+index +"]");
+            })
+
+           // $("#SubmitApplication").attr("disabled", true);
+
+
+
+                $.ajax({
+                    type: "POST",
+                    url: "@Url.Action("CreateAndUpdate", "College")",
+                    dataType: "Json",
+                    data: formData,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success: function (data) {
+
+
+                    },
+                    error: function (request, status, error) {
+
+                        $("#LoadingSpinner").removeClass("fa fa-circle-o-notch fa-spin");
+
+                    }
+                });
+
+             @*@Model.formData = formData;*@
+
+           // $("#frmCreateAndUpdate").submit();
+
+
+
+        }
+
+        function insertIntoFacility(data) {
+            var facilitytable = document.getElementById("FacilityTable").getElementsByTagName('tbody')[0];
+            var addRow = facilitytable.insertRow(facilitytable.lenght);
+            cell1 = addRow.insertCell(0);
+            cell1.innerHTML = data.FacilityName;
+            cell2 = addRow.insertCell(1);
+            cell2.innerHTML = data.FacilityNo;
+            cell3 = addRow.insertCell(2);
+            cell3.innerHTML = `<a onClick="onFacilityEdit(this);">Edit</a>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   <a onClick="onFacilityDelete(this);">Delete</a>`;
+
+        }
+
+        function updateFacility(facilityData) {
+            selectedRow.cells[0].innerHTML = facilityData.FacilityName;
+            selectedRow.cells[1].innerHTML = facilityData.FacilityNo;
+
+        }
+
+        function resetFacilityData() {
+            document.getElementById("FacilityName").value = "";
+            document.getElementById("FacilityNo").value = "";
+            selectedRow = null;
+        }
+
+        function onFacilityEdit(td) {
+            selectedRow = td.parentElement.parentElement;
+            document.getElementById("FacilityName").value = selectedRow.cell1[0].innerHTML;
+            document.getElementById("FacilityNo").value = selectedRow.cell1[1].innerHTML;
+        }
+
+        function onFacilityDelete(td) {
+            if (confirm('Are you sure to delete record ?')) {
+                row = td.parentElement.parentElement;
+                document.getElementById("FacilityTable").deleteRow(row.rowIndex);
+                resetFacilityData();
+            }
+
+        }
+
+        function insertIntoClassroom(data) {
+            var classroomtable = document.getElementById("ClassroomTable").getElementsByTagName('tbody')[0];
+            var addRow = classroomtable.insertRow(classroomtable.lenght);
+            cell1 = addRow.insertCell(0);
+            cell1.innerHTML = data.YearOfConstruction;
+            cell2 = addRow.insertCell(1);
+            cell2.innerHTML = data.PresentCondition;
+            cell3 = addRow.insertCell(2);
+            cell3.innerHTML = data.LengthInMeters;
+            cell4 = addRow.insertCell(3);
+            cell4.innerHTML = data.WidthInMeters;
+            cell5 = addRow.insertCell(4);
+            cell5.innerHTML = data.FloorMaterial;
+            cell6 = addRow.insertCell(5);
+            cell6.innerHTML = data.WallMaterial;
+            cell7 = addRow.insertCell(6);
+            cell7.innerHTML = data.RoofMaterial;
+            cell8 = addRow.insertCell(7);
+            cell8.innerHTML = data.Seatings;
+            cell9 = addRow.insertCell(8);
+            cell9.innerHTML = data.DisabilityAccess;
+            cell10 = addRow.insertCell(9);
+            cell10.innerHTML = `<a onClick="onclassRoomEdit(this);">Edit</a>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                       <a onClick="onFacilityDelete(this);">Delete</a>`;
+
+        }
+
+        function updateClassRoom(classRoomData) {
+            selectedRow.cells[0].innerHTML = classRoomData.YearOfConstruction;
+            selectedRow.cells[1].innerHTML = classRoomData.PresentCondition;
+            selectedRow.cells[2].innerHTML = classRoomData.LengthInMeters;
+            selectedRow.cells[3].innerHTML = classRoomData.WidthInMeters;
+            selectedRow.cells[4].innerHTML = classRoomData.FloorMaterial;
+            selectedRow.cells[5].innerHTML = classRoomData.WallMaterial;
+            selectedRow.cells[6].innerHTML = classRoomData.RoofMaterial;
+            selectedRow.cells[7].innerHTML = classRoomData.Seatings;
+            selectedRow.cells[8].innerHTML = classRoomData.DisabilityAccess;
+
+        }
+
+        function resetclassRoomData() {
+            document.getElementById("YearOfConstruction").value = "";
+            document.getElementById("PresentCondition").value = "";
+            document.getElementById("LengthInMeters").value = "";
+            document.getElementById("WidthInMeters").value = "";
+            document.getElementById("FloorMaterial").value = "";
+            document.getElementById("WallMaterial").value = "";
+            document.getElementById("RoofMaterial").value = "";
+            document.getElementById("Seatings").value = "";
+            document.getElementById("DisabilityAccess").value = "";
+            selectedRow = null;
+        }
+        var selectedRow = null;
+        function addclassRoom() {
+            var classRoomData = readclassRoomData();
+            if (selectedRow == null)
+                insertIntoClassroom(classRoomData);
+            else
+                updateClassRoom(classRoomData);
+            resetclassRoomData();
+
+        }
+        function readclassRoomData() {
+            var classRoomData = {};
+            classRoomData["YearOfConstruction"] = document.getElementById("YearOfConstruction").value;
+            classRoomData["PresentCondition"] = document.getElementById("PresentCondition").value;
+            classRoomData["LengthInMeters"] = document.getElementById("LengthInMeters").value;
+            classRoomData["WidthInMeters"] = document.getElementById("WidthInMeters").value;
+            classRoomData["FloorMaterial"] = document.getElementById("FloorMaterial").value;
+            classRoomData["WallMaterial"] = document.getElementById("WallMaterial").value;
+            classRoomData["RoofMaterial"] = document.getElementById("RoofMaterial").value;
+            classRoomData["Seatings"] = document.getElementById("Seatings").value;
+            classRoomData["DisabilityAccess"] = document.getElementById("DisabilityAccess").value;
+            return classRoomData;
+        }
+
+        function onclassRoomDelete(td) {
+            if (confirm('Are you sure to delete record ?')) {
+                row = td.parentElement.parentElement;
+                document.getElementById("ClassroomTable").deleteRow(row.rowIndex);
+                resetclassRoomData();
+            }
+
+            function onclassRoomEdit(td) {
+                selectedRow = td.parentElement.parentElement;
+                document.getElementById("YearOfConstruction").value = selectedRow.cell1[0].innerHTML;
+                document.getElementById("PresentCondition").value = selectedRow.cell1[1].innerHTML;
+                ocument.getElementById("LengthInMeters").value = selectedRow.cell1[2].innerHTML;
+                document.getElementById("WidthInMeters").value = selectedRow.cell1[3].innerHTML;
+                ocument.getElementById("FloorMaterial").value = selectedRow.cell1[4].innerHTML;
+                document.getElementById("WallMaterial").value = selectedRow.cell1[5].innerHTML;
+                ocument.getElementById("RoofMaterial").value = selectedRow.cell1[6].innerHTML;
+                document.getElementById("Seatings").value = selectedRow.cell1[7].innerHTML;
+                document.getElementById("DisabilityAccess").value = selectedRow.cell1[8].innerHTML;
+            }
+
+        }
+
+    </script>
+}

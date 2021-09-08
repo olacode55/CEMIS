@@ -1,0 +1,154 @@
+﻿@using CEMIS.Utility.ViewModel
+
+@model CourseFormViewModel
+
+
+@{
+    ViewBag.Title = "Course Management";
+    var i = 1;
+}
+
+<div class="page-title">
+    <h3 class="breadcrumb-header">@ViewBag.Title</h3>
+</div>
+
+<div class="clearfix" style="text-align:right; padding: 20px">
+
+    <button type="button" class="btn btn-default btn-md" data-toggle="modal" data-target="#myModal">New Course</button>
+</div>
+
+<div id="main-wrapper">
+
+    @*<div class="col-md-24">*@
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Course Information</h3>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="row" style="margin-top:50px; margin-bottom:50px">
+
+                    @using (Html.BeginForm("Index", "Course", FormMethod.Post))
+                    {
+                        <div class="form-group">
+                            <div class="row col-md-12">
+                                <div class="col-md-3">
+                                    <label>Program:</label>
+                                    @*@Html.DropDownListFor(x => @x.ProgramId, new SelectList(ViewBag.Program, "Value", "Text"), "Select Program", new { @class = "custom-select form-control-sm" })*@
+                                    <select asp-for="ProgramId" class="custom-select form-control-sm" asp-items="ViewBag.Program">
+                                        <option value="" selected>--- Select program ---</option>
+                                    </select>
+                                    @Html.ValidationMessageFor(x => @x.ProgramId, null, new { @style = "color:red" })
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Level:</label>
+                                    <select asp-for="LevelId" class="custom-select form-control-sm" asp-items="ViewBag.Level">
+                                        <option value="" selected>--- Select Level ---</option>
+                                    </select>
+                                    @*@Html.DropDownListFor(x => @x.LevelId, new SelectList(ViewBag.Level, "Value", "Text"), "Select Level", new { @class = "custom-select form-control-sm" })*@
+                                    @Html.ValidationMessageFor(x => @x.LevelId, null, new { @style = "color:red" })
+                                </div>
+                                <div class="col-md-3">
+                                    <label>Semester:</label>
+                                    <select class="custom-select" asp-for="Semester" asp-items="Html.GetEnumSelectList(typeof(Semester))">
+                                        <option value="0" selected>--- Select Semester ---</option>
+                                    </select>
+                                    @Html.ValidationMessageFor(x => @x.Semester, null, new { @style = "color:red" })
+                                </div>
+                                <div class="col-md-3">
+                                    <button type="submit" class="btn btn-primary" style="float:right; margin-top:24px">View</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-body table-responsive">
+            <div class="table-responsive" style="width:100%; column-width:auto;">
+                <table id="example" class="display table table-active" style="width:100%; column-width:auto;">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Course Code</th>
+                            <th>Course Title</th>
+                            <th>Credit Unit</th>
+                            <th>Status</th>
+                            <th>Option</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model.Courses)
+                        {
+                            <tr class="odd gradeX">
+                                <td>@i</td>
+                                <td>@item.CourseCode</td>
+                                <td>@item.CourseTitle</td>
+                                <td>@item.Credit</td>
+                                <td>@item.Option</td>
+                                <td>
+                                    @if (item.IsActive == true)
+                                    {
+                                        <a class="btn btn-success btn-sm" style="width:130px" href="@Url.Action("Toggle","Course", new { Id = item.Id})">Active</a>
+                                    }
+                                    else
+                                    {
+                                        <a class="btn btn-danger btn-sm" style="width:130px" href="@Url.Action("Toggle","Course", new { Id = item.Id})">In-Active</a>
+                                    }
+                                </td>
+                                <td>
+                                    @*@Html.ActionLink("Edit", "manage", "Staff", new { Id = item.Id }, new { @class = "btn btn-primary btn-sm" })*@
+                                    <button class="btn btn-default btn-sm" onclick="Edit(@item.Id)">Edit</button>
+                                </td>
+
+                            </tr>
+                            i = i + 1;
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@Html.Partial("_create", new CourseViewModel())
+@Html.Partial("_edit", new CourseViewModel())
+
+
+
+<script>
+    function Edit(id) {
+
+    $.ajax({
+    url: '@Url.Action("Edit", "Course")',
+    data: { Id: id },
+    type: 'GET',
+        success: function (response) {
+            console.log(response);
+            $("#eId").val(response.id);
+            $("#eCourseCode").val(response.courseCode);
+            $("#eCourseTitle").val(response.courseTitle);
+            $("#eCredit").val(response.credit);
+            $("#eOption").val(response.option);
+            $("#eProgramId").val(response.programId);
+            $("#eLevelId").val(response.levelId);
+            $("#eSemester").val(response.semester);
+
+            $("#editModal").modal("show");
+            jQuery('#editModal').addClass('show')
+            //$("editModal").attr("show");
+    },
+    error: function (xhr, status, error) {
+    console.log("Result: " + status + " " + error + " " + xhr.status + " " + xhr.statusText)
+    }
+    });
+    }
+</script>
+

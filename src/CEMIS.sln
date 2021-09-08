@@ -1,0 +1,61 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.757
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CEMIS.Data", "CEMIS.Data\CEMIS.Data.csproj", "{36B3DC72-25A0-4C09-BFB2-273B46CF87BA}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CEMIS.Business", "CEMIS.Business\CEMIS.Business.csproj", "{5EB9F98A-BBC7-41C1-8A5F-563354795D3C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CEMIS.Web", "CEMIS.Web\CEMIS.Web.csproj", "{B16FB113-DC56-4AC8-A0F9-C66657AE570A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cemis.Data.Central", "Cemis.Data(Central)\Cemis.Data.Central.csproj", "{64C79FC1-CC46-44E7-B3B9-3945BEB2D66C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Cemis.Business.Central", "Cemis.Business.Central\Cemis.Business.Central.csproj", "{18DE89EF-8442-4578-8EA9-AF2A2BEFEB92}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CEMIS.Utility", "CEMIS.Utility\CEMIS.Utility.csproj", "{5EA055E9-98B8-491B-9069-5DC1B38C3150}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CEMIS.Web.CentralPortal", "CEMIS.Web.CentralPortal\CEMIS.Web.CentralPortal.csproj", "{23549392-FB45-4841-B73F-65D3711680FE}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{36B3DC72-25A0-4C09-BFB2-273B46CF87BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36B3DC72-25A0-4C09-BFB2-273B46CF87BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36B3DC72-25A0-4C09-BFB2-273B46CF87BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36B3DC72-25A0-4C09-BFB2-273B46CF87BA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EB9F98A-BBC7-41C1-8A5F-563354795D3C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EB9F98A-BBC7-41C1-8A5F-563354795D3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EB9F98A-BBC7-41C1-8A5F-563354795D3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EB9F98A-BBC7-41C1-8A5F-563354795D3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B16FB113-DC56-4AC8-A0F9-C66657AE570A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B16FB113-DC56-4AC8-A0F9-C66657AE570A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B16FB113-DC56-4AC8-A0F9-C66657AE570A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B16FB113-DC56-4AC8-A0F9-C66657AE570A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{64C79FC1-CC46-44E7-B3B9-3945BEB2D66C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{64C79FC1-CC46-44E7-B3B9-3945BEB2D66C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{64C79FC1-CC46-44E7-B3B9-3945BEB2D66C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{64C79FC1-CC46-44E7-B3B9-3945BEB2D66C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{18DE89EF-8442-4578-8EA9-AF2A2BEFEB92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{18DE89EF-8442-4578-8EA9-AF2A2BEFEB92}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{18DE89EF-8442-4578-8EA9-AF2A2BEFEB92}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{18DE89EF-8442-4578-8EA9-AF2A2BEFEB92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5EA055E9-98B8-491B-9069-5DC1B38C3150}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5EA055E9-98B8-491B-9069-5DC1B38C3150}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5EA055E9-98B8-491B-9069-5DC1B38C3150}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5EA055E9-98B8-491B-9069-5DC1B38C3150}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23549392-FB45-4841-B73F-65D3711680FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23549392-FB45-4841-B73F-65D3711680FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23549392-FB45-4841-B73F-65D3711680FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23549392-FB45-4841-B73F-65D3711680FE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F4EEBD88-5A3A-48F4-A672-EB93511CC095}
+	EndGlobalSection
+EndGlobal

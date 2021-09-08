@@ -1,0 +1,78 @@
+﻿
+@using CEMIS.Data.Entities
+
+@model IEnumerable<CollegeLeadershipViewModel>
+@{
+    ViewBag.Title = "College Leadership";
+    var i = 1;
+}
+
+<div class="page-title">
+    <h3 class="breadcrumb-header">@ViewBag.Title</h3>
+</div>
+<div class="clearfix" style="text-align:right; padding: 20px">
+    <a class="btn btn-default btn-md" href="@Url.Action("create", "CollegeLeadership")"> New College Leadership </a>
+    @await Html.PartialAsync("_Notifications")
+</div>
+<div style="float:right">
+</div>
+<div id="main-wrapper">
+    <div class="row">
+        <div class="col-24">
+            <div id="divModal">
+            </div>
+            <div class="row">
+                <div class="col-md-24">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            &nbsp;
+                        </div>
+                        <div class="panel-body">
+                            <div class="table-responsive">
+                                <table id="example" class="display table" style="width: 100%; cellspacing: 0;">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Name</th>
+                                            <th>Role</th>
+                                            <th>Session</th>
+                                            <th>Gender</th>
+                                            <th>DOB</th>
+
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                        <tr class="odd gradeX">
+                                            <td>@i</td>
+                                            <td>@item.Name</td>
+                                            <td>@item.Role</td>
+                                            <td>@item.SessionName</td>
+                                        <td>@item.Gender</td>
+
+                                        <td>@item.DateOfBirth.ToString("dd MMM yyyy")</td>
+                                        <td>
+                                            @Html.ActionLink("Manage", "manage", "CollegeLeadership", new { Id = item.Id }, new { @class = "btn btn-primary btn-sm" })
+                                        </td>
+                                        @*<td>
+        @Html.ActionLink("Delete", "Delete", "CollegeLeadership", new { Id = item.Id }, new { @class = "btn btn-danger btn-sm" })
+    </td>*@
+                                        </tr>
+                                            i = i + 1;
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section JavaScript
+    {
+}

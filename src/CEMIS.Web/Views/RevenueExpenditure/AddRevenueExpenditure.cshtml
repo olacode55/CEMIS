@@ -1,0 +1,129 @@
+﻿@using CEMIS.Utility.ViewModel
+@model RevenueExpenditureItemViewModel
+@{
+    ViewBag.Title = "Revenue Compensation";
+    //var i = 1;
+
+}
+
+<div class="vatebra-pageheader">
+    <ol class="breadcrumb vatebra-breadcrumb">
+        <li class="breadcrumb-item"><a href="#">@ViewBag.Title</a></li>
+        @*<li class="breadcrumb-item text-white active" aria-current="page">College Management</li>*@
+    </ol>
+    <h6 class="vatebra-pagetitle text-uppercase">Revenue Compensation Items</h6>
+</div>
+@using (Html.BeginForm("AddRevenueExpenditure", "RevenueExpenditure", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(x => x.Id)
+
+    <div class="panel">
+        <div class="panel-title"></div>
+        @*<div class="panel-heading">
+                <h3 style="text-align:center; text-decoration:underline"><b>ACCRA COLLEGE OF EDUCATION</b></h3>
+                <h3 style="text-align:center; text-decoration:underline"><b>NON-TAX REVENUE/INTERNALLY GENERATED FUNDS (NTR/IGFs)</b></h3>
+                <h3 style="text-align:center; text-decoration:underline"><b>MONTHLY REPORTING FORMAT</b></h3>
+            </div>*@
+
+        <div class="panel-body">
+            <div class="col-md-12" id="college">
+
+
+                <section class="card" style="margin-top:50px">
+
+                    <div class="row">
+                        <div class="col-md-7">
+                            <label>MDA:  @Html.TextBoxFor(x => x.MDA)</label>
+                        </div>
+
+                        <div class="col-md-5">
+                            <label>ORGANIZATION:  @Html.TextBoxFor(x => x.CostCentre)</label>
+                            @*<div class="col-sm-3"></div>*@
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-7">
+                            <label>Month:  @Html.TextBoxFor(x => x.ReportingMonth)</label>
+
+                        </div>
+
+                        <div class="col-md-5">
+                            <label>RETURNS ON:  @Html.TextBoxFor(x => x.ReturnOn)</label>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-7">
+                            <label>Fund Type:  @Html.TextBoxFor(x => x.FundType)</label>
+                        </div>
+
+                        <div class="col-md-5">
+                            @*<label>RETENTION ACCOUNT No: @Model.RetentionAccNo</label>*@
+                        </div>
+                    </div>
+
+                </section>
+
+                <section class="card">
+
+                    <div class="row" style="margin-top:50px">
+                        <div class="col-md-12">
+
+                            <div class="table-responsive" style="width:100%">
+
+                                <table id="table1" class="display table" style="width:150%">
+                                    <thead>
+
+                                        <tr>
+                                            <th style="visibility:hidden;"></th>
+                                            <th>Compensation Type</th>
+                                            <th>WAGES AND SALARIES</th>
+                                            <th>APPROVE BUDGET</th>
+                                            <th> AMT EXPENDED IN CURRENT MONTH</th>
+                                           
+                                           
+
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @for (int i = 0; i < Model.RevenueExpenditureItems.Count(); i++)
+                                        {
+                                            <tr>
+
+                                                <td style="visibility:hidden;">@Model.RevenueExpenditureItems[i].Id </td>
+                                                <td>@Model.RevenueExpenditureItems[i].RevenueExpenditureType </td>
+
+                                                <td>@Html.TextBoxFor(x => Model.RevenueExpenditureItems[i].WageandSalary)</td>
+                                                <td>@Html.TextBoxFor(x => Model.RevenueExpenditureItems[i].Approvebudget)</td>
+                                                <td>@Html.TextBoxFor(x => Model.RevenueExpenditureItems[i].Amountexpendedcurrentmonth)</td>
+                                                <td>@Html.TextBoxFor(x => Model.RevenueExpenditureItems[i].Cumulativeamt)</td>
+                                                <td>@Html.TextBoxFor(x => Model.RevenueExpenditureItems[i].Totalexpendituretodate)</td>
+                                                <td>@Html.TextBoxFor(x => Model.RevenueExpenditureItems[i].Balance)</td>
+                                            </tr>
+
+                                        }
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+
+                        </div>
+                        <div class="col-md-12">  <button type="submit" class="btn btn-primary" style="float:right">Submit</button></div>
+                    </div>
+
+                </section>
+
+
+            </div>
+
+
+        </div>
+
+
+    </div>
+}

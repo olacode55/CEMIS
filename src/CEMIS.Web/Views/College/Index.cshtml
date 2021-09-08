@@ -1,0 +1,405 @@
+﻿@using CEMIS.Utility.ViewModel
+@model CollegeFormDataViewModel
+@{
+    ViewBag.Title = "College Management";
+    var i = 1;
+
+}
+
+<div class="vatebra-pageheader">
+    <ol class="breadcrumb vatebra-breadcrumb">
+        <li class="breadcrumb-item"><a href="#">@ViewBag.Title</a></li>
+        <li class="breadcrumb-item text-white active" aria-current="page">College Management</li>
+    </ol>
+    <h6 class="vatebra-pagetitle text-uppercase">College Summary</h6>
+</div>
+
+@Html.HiddenFor(x => x.Id)
+
+<div class="panel">
+    <div class="panel-title"></div>
+    <div class="panel-heading">
+        @*<a href="@Url.Action("Create", "College", Model)" style="float:right">Edit</a>*@
+    </div>
+
+    <div class="panel-body">
+
+
+
+        <div class="col-md-12" id="college">
+
+
+
+            <section class="card">
+
+                <h3><span class="number">1.</span> <b>College Details <a href="@Url.Action("CollegeSetup", "College", new {Id = Model.Id })"><i class='fa fa-edit'></i></a> </b></h3>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <label class="control-label label-blue">Name:</label>
+                        <label class="control-label">@Model.Name</label>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Address:</label>
+                        <label class="control-label">@Model.Address</label>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Email:</label>
+                        <label class="control-label">@Model.Email</label>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>GIS:</label>
+                        <label class="control-label">@Model.GIS</label>
+                    </div>
+
+
+
+
+                    <div class="col-md-4">
+                        <label>Phone:</label>
+                        <label class="control-label">@Model.Phone</label>
+                    </div>
+
+                    <div class="col-md-4">
+                        @*<label>Service Offered:</label>
+                            <label class="control-label">@Model.ServiceOfferedId</label>*@
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>First Accreditation Date:</label>
+                        <label class="control-label">@Model.FirstAccreditationDate.ToString("dd-MMM-yyyy")</label>
+                    </div>
+
+
+
+
+                    <div class="col-md-4">
+                        <label>Cureent Accreditation Date:</label>
+                        <label class="control-label">@Model.CureentAccreditationDate.ToString("dd-MMM-yyyy")</label>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Next Accreditation Date:</label>
+                        <label class="control-label">@Model.NextAccreditationDate.ToString("dd-MMM-yyyy")</label>
+                    </div>
+
+                </div>
+
+                <div class="panel-heading"><h2>Program(s) Offered</h2> </div>
+
+                <div class="row">
+                    @foreach (var item in Model.ServicesOffered)
+                    {
+                        <div class="col-md-4">
+                            @*<label> No of Secretary:</label>*@
+                            <label class="control-label">@item.Name</label>
+                        </div>
+                    }
+                </div>
+
+                <div class="panel-heading"><h2>None Teaching Staff Count</h2> </div>
+
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <label> No of Secretary:</label>
+                        <label class="control-label">@Model.SecretaryCount</label>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>No of Drivers:</label>
+                        <label class="control-label">@Model.DriversCount</label>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>No of Handymen:</label>
+                        <label class="control-label">@Model.HandymenCount</label>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <label> No of SecurityGuard:</label>
+                        <label class="control-label">@Model.SecretaryCount</label>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>No of Cleaner:</label>
+                        <label class="control-label">@Model.CleanerCount</label>
+                    </div>
+
+                    <div class="col-md-4">
+
+                    </div>
+
+                </div>
+
+
+                <div class="panel-heading"><h2>Various Contact / Info</h2> </div>
+
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Principal Name:</label>
+                        <label class="control-label">@Model.PrincipalName</label>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Principal Email:</label>
+                        <label class="control-label">@Model.PrincipalEmail</label>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Principal Phone:</label>
+                        <label class="control-label">@Model.PrincipalPhone</label>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Vice Principal Name:</label>
+                        <label class="control-label">@Model.VicePrincipalName</label>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Vice Principal Email:</label>
+                        <label class="control-label">@Model.VicePrincipalEmail</label>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Vice Principal Phone:</label>
+                        <label class="control-label">@Model.VicePrincipalPhone</label>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>ICT System Name:</label>
+                        <label class="control-label">@Model.ICTSystemName</label>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>ICT System Email:</label>
+                        <label class="control-label">@Model.ICTSystemEmail</label>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>ICT System Phone:</label>
+                        <label class="control-label">@Model.ICTSystemPhone</label>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-4">
+                        <label>Admin Officer Name:</label>
+                        <label class="control-label">@Model.AdminOfficerName</label>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Admin Office Email:</label>
+                        <label class="control-label">@Model.AdminOfficerEmail</label>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Admin Office Phone:</label>
+                        <label class="control-label">@Model.AdminOfficerPhone</label>
+                    </div>
+
+                </div>
+
+
+
+            </section>
+
+
+
+            <section class="card">
+                <h3><span class="number">2.</span> <b>College Facility <a href="@Url.Action("Index", "Facility")"><i class='fa fa-edit'></i></a></b></h3>
+
+                <div class="row" style="margin-top:50px">
+                    <div class="col-md-8">
+
+                        <div class="table-responsive">
+
+                            <table id="FacilityTable" class="display table">
+                                <thead>
+
+                                    <tr>
+                                        <th>Facility Name</th>
+                                        <th>No. Available</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.CollegeFacility)
+                                    {
+                                        <tr>
+                                            <td>@item.FacilityTypeName</td>
+                                            <td>@item.Number</td>
+                                        </tr>
+
+                                    }
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+
+            </section>
+
+
+            @*<section class="card">
+
+                    <h3><span class="number">3.</span> <b>College Class Room Data  <a href="@Url.Action("ClassRoomData", "College", new {Id = Model.Id })"><i class='fa fa-edit'></i></a></b></h3>
+
+
+
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <label>No. of ClassRoom (s):</label>
+                            <label class="control-label">@Model.ClassRoomCount</label>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>No. of StaffRoom (s):</label>
+                            <label class="control-label">@Model.StaffRoomCount</label>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <label>No. of Office (s):</label>
+                            <label class="control-label">@Model.OfficeCount</label>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>No. of Library (s):</label>
+                            <label class="control-label">@Model.LibraryCount</label>
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <label>No. of Laboratory:</label>
+                            <label class="control-label">@Model.LaboratoryCount</label>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label>No. of Store Room(s) :</label>
+                            <label class="control-label">@Model.StoreRoomCount</label>
+                        </div>
+
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-md-6">
+                            <label>No. of Others:</label>
+                            <label class="control-label">@Model.OthersCount</label>
+                        </div>
+
+                        <div class="col-md-6">
+
+                            <label>Is Class Held Outside:</label>
+
+                            <label class="control-label">@Model.IsClassHeldOutside </label>
+                        </div>
+
+                    </div>
+
+                </section>*@
+
+
+
+
+            <section class="card">
+
+
+                <h3><span class="number">3.</span> <b>College Class Room Info  <a href="@Url.Action("ClassRoomInfo", "College", new {CollegeId = Model.Id })"><i class='fa fa-edit'></i></a> </b></h3>
+
+                <div class="row" style="margin-top:50px">
+                    <div class="col-md-12">
+
+                        <div class="table-responsive">
+
+                            <table id="FacilityTable" class="display table">
+                                <thead>
+
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Year Of Construction</th>
+                                        <th>Present Condition</th>
+                                        <th>Length In Meters </th>
+                                        <th>Width In Meters</th>
+                                        <th>Floor Material</th>
+                                        <th>Wall Material </th>
+                                        <th>Roof Material </th>
+                                        <th>Seatings </th>
+                                        <th>Has Disability Access </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.CollegeClassRoomInfo)
+                                    {
+                                        <tr>
+                                            <td>@i</td>
+                                            <td>@item.YearOfConstruction</td>
+                                            <td>@item.PresentCondition</td>
+                                            <td>@item.LengthInMeters</td>
+                                            <td>@item.WidthInMeters</td>
+                                            <td>@item.FloorMaterial</td>
+                                            <td>@item.WallMaterial</td>
+                                            <td>@item.RoofMaterial</td>
+                                            <td>@item.Seatings</td>
+                                            <td>@item.DisabilityAccess</td>
+                                        </tr>
+
+                                        i = i + 1;
+
+                                    }
+                                </tbody>
+
+                            </table>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+
+
+            </section>
+
+
+        </div>
+
+
+
+
+    </div>
+
+
+</div>
+
+
+

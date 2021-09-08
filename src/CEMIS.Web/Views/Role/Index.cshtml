@@ -1,0 +1,96 @@
+﻿@model IEnumerable<RoleViewModel>
+
+@{
+    ViewBag.Title = "Role Management";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h4 class="panel-title">Role Management</h4>
+    </div>
+    <div class="clearfix" style="text-align:right; padding: 20px">
+        <button type="button" id="addRole" class="btn btn-success m-b-sm" data-toggle="modal" data-target="#addRoleModal">Add New Role</button>
+        @*<span class="label label-default pull-">
+            @{
+            if (Model.Any())
+            {
+                @Model.Count()
+        }
+            } &nbsp; Role(s)
+        </span>*@
+        <div class="clearfix" style="text-align:right; padding: 20px" >
+            <span class="label label-default pull-">
+                @{
+            if (Model.Any())
+            {
+                @Model.Count()
+    }
+                } &nbsp; Role(s)
+            </span>
+        </div>
+    </div>
+        <!-- Modal -->
+
+        <div class="table-responsive">
+            <table id="example3" class="display table" style="width: 100%; cellspacing: 0;">
+                <thead>
+
+                    <tr>
+                        <th>S/N</th>
+                        <th>Role Name</th>
+                        <th width="5%"></th>
+                        <th width="5%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{int rowNo = 0;}
+                    @foreach (var item in Model)
+                    {
+
+                        <tr>
+                            <td>@(rowNo += 1)</td>
+                            <td>@Html.DisplayFor(modelItem => item.rolename)</td>
+                            <td><a data-target='#addRoleModal' role="button" data-edit-id='@Html.DisplayFor(modelItem => item.roleid)' class="btn btn-default editBtn" data-toggle="modal"><i class='fa fa-edit'></i>Edit</a></td>
+                            <td><a data-target='#addRoleModal' role="button" data-delete-id='@Html.DisplayFor(modelItem => item.roleid)' class='btn btn-default deleteBtn' data-toggle='modal'><i class='fa fa-trash'></i>Delete</a></td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        <div class="modal fade" id="addRoleModal" role="dialog" aria-hidden="true">
+        </div>
+    
+
+
+    @section Scripts{
+
+        <script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#addRole').click(function () {
+            $('#addRoleModal').load("@Url.Action("Create", "Role")", function () {
+               // $('#addRoleModal').modal('show');
+            });
+        });
+
+        $('.editBtn').click(function (e) {
+            e.preventDefault();
+            var roleId = $(this).attr("data-edit-id");
+            $('#addRoleModal').load("@Url.Action("UpdateRole", "Role")/?roleId=" + roleId, function () {
+                $('#addRoleModal').modal('show');
+            });
+        });
+
+        $('.deleteBtn').click(function (e) {
+            e.preventDefault();
+            var roleId = $(this).attr("data-delete-id");
+            $('#addRoleModal').load("@Url.Action("RemoveRole", "Role")/?roleId=" + roleId, function () {
+                $('#addRoleModal').modal('show');
+            });
+        });
+    });
+        </script>
+    }
+

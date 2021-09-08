@@ -1,0 +1,64 @@
+﻿@using CEMIS.Utility.ViewModel
+@model IEnumerable<RevenuestimateViewModel>
+
+@{
+    ViewBag.Title = "Revenue Estimate";
+    var i = 1;
+}
+
+<div class="clearfix" style="text-align:right; padding: 20px">
+    <a class="btn btn-primary btn-sm" href="@Url.Action("AddRevItem","RevenueEstimate")">Add New</a>
+</div>
+
+<div id="main-wrapper">
+
+    @*<div class="col-md-24">*@
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Revenue Estimate</h3>
+        </div>
+
+        <div class="panel-body table-responsive">
+            <div class="table-responsive" style="width:100%; column-width:auto;">
+                <table id="example" class="display table table-active" style="width:100%; column-width:auto;">
+                    <thead>
+                        <tr>
+                            <th>S/N</th>
+                            <th>Year</th>
+                            <th>Month</th>
+                            <th>MDA</th>
+                            <th>Lodgement Acc. No</th>
+                            <th>Retention Acc. No</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr class="odd gradeX">
+                                <td>@item.Id</td>
+                                <td>@item.Year</td>
+                                <td>@item.Month</td>
+                                <td>@item.MDA</td>
+                                <td>@item.LodgementAccNo</td>
+                                <td>@item.RetentionAccNo</td>
+
+                                <td>
+
+                                    <a class="btn btn-default btn-sm" href="@Url.Action("AddRevItem","RevenueEstimate", new { Id = item.Id})">View Details</a>
+
+                                </td>
+
+                            </tr>
+                            i = i + 1;
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+</div>

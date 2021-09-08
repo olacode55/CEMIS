@@ -1,0 +1,292 @@
+﻿
+@model StudentProfileViewModel
+
+
+<div class="page-inner">
+    <div class="page-title clearfix">
+        <h3 class="breadcrumb-header">Student Profile</h3>
+        @*<button type="button" class="btn" style="float: right" data-toggle="modal" data-target=".bs-example-grid">Edit Profile</button>*@
+    </div>
+    <div id="main-wrapper">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-white">
+                    <img src='@Model.Passport' style="align-content:center" alt="passport.jpg" width="100" height="100" />
+ 
+                    <table class="table table-responsive table-condensed">
+                        <tr>
+                            <td class="w-sm text-right">College Name</td>
+                            <td> @Model.CollegeName</td>
+                        </tr>
+                        <tr>
+                            <td class="w-sm text-right">Student Name</td>
+                            <td>@Model.OtherName</td>
+                        </tr>
+                        <tr>
+                            <td class="w-sm text-right">Gender</td>
+                            <td>@Model.Gender</td>
+                        </tr>
+                        <tr>
+                            <td class="w-sm text-right">Date of birth</td>
+                            <td>@Model.DOB</td>
+                        </tr>
+                        <tr>
+                            <td class="w-sm text-right">Place of Birth</td>
+                            <td>@Model.POB</td>
+                        </tr>
+                        <tr>
+                            <td class="w-sm text-right">Student ID</td>
+                            <td>@Model.StudentId</td>
+                        </tr>
+                        <tr>
+                            <td class="w-sm text-right">Program</td>
+                            <td>@Model.Program</td>
+                        </tr>
+                        <tr>
+                            <td class="w-sm text-right">Level</td>
+                            <td>@Model.Level</td>
+                        </tr>
+                        <tr>
+                            <td class="w-sm text-right">Session</td>
+                            <td>@Model.Session</td>
+                        </tr>
+                        <tr>
+                            <td class="w-sm text-right">Marital Status</td>
+                            <td>@Model.MaritalStatus</td>
+                        </tr>
+                        <tr>
+                            <td class="w-sm text-right">Home Town</td>
+                            <td>@Model.HomeTown</td>
+                        </tr>
+                        <tr>
+                            <td class="w-sm text-right">District</td>
+                            <td>@Model.District</td>
+                        </tr>
+                        <tr>
+                            <td class="w-sm text-right">Region</td>
+                            <td>@Model.Region</td>
+                        </tr>
+                        <tr>
+                            <td class="w-sm text-right">Languages Spoken</td>
+                            <td>@Model.LanguagesSpoken</td>
+                        </tr>
+                        <tr>
+                            <td class="w-sm text-right">Contact Address</td>
+                            <td>@Model.ContactAddress</td>
+                        </tr>
+                        <tr>
+                            <td class="w-sm text-right">Telephone number</td>
+                            <td>@Model.TelephoneNumber</td>
+                        </tr>
+                        <tr>
+                            <td class="w-sm text-right">Religion</td>
+                            <td>@Model.Religion</td>
+                        </tr>
+                        <tr>
+                            <td class="w-sm text-right">Passport</td>
+                            <td>Passport</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div><!-- Row -->
+    </div><!-- Main Wrapper -->
+    <div class="page-footer">
+        <style>
+
+            .control-label {
+                line-height: 36px;
+                white-space: nowrap;
+            }
+        </style>
+        @*<div class="modal fade bs-example-grid" tabindex="-1" role="dialog" aria-labelledby="gridSystemModalLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="gridSystemModalLabel">Profile Update</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form class="form-horizontal">
+                            <div class="form-group">
+                                <label for="inputEmail3" class="col-sm-3 control-label">Email</label>
+                                <div class="col-sm-9">
+                                    <input type="email" class="form-control" id="inputEmail3" placeholder="Email">
+                                    <p class="help-block" style="margin-bottom:0;">Example block-level help text here.</p>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-3 control-label">
+                                    College
+                                    Name
+                                </label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control"
+                                           placeholder="College Name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-3 control-label">
+                                    Student
+                                    Name
+                                </label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control"
+                                           placeholder="Student Name">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-3 control-label">Gender</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control"
+                                           placeholder="Gender">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-3 control-label">
+                                    Date of
+                                    birth
+                                </label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control"
+                                           placeholder="Date of birth">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-3 control-label">
+                                    Place of
+                                    Birth
+                                </label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control"
+                                           placeholder="Place of Birth">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-3 control-label">
+                                    Student
+                                    ID
+                                </label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control"
+                                           placeholder="Student ID">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for=""
+                                       class="col-sm-3 control-label">Program</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control"
+                                           placeholder="Program">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-3 control-label">Level</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control"
+                                           placeholder="Level">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for=""
+                                       class="col-sm-3 control-label">Session</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control"
+                                           placeholder="Session">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-3 control-label">
+                                    Marital
+                                    Status
+                                </label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control"
+                                           placeholder="Marital Status">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-3 control-label">
+                                    Home
+                                    Town
+                                </label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control"
+                                           placeholder="Home Town">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for=""
+                                       class="col-sm-3 control-label">District</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control"
+                                           placeholder="District">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-3 control-label">Region</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control"
+                                           placeholder="Region">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-3 control-label">
+                                    Languages
+                                    Spoken
+                                </label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control"
+                                           placeholder="Languages Spoken">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-3 control-label">
+                                    Contact
+                                    Address
+                                </label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control"
+                                           placeholder="Contact Address">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="col-sm-3 control-label">
+                                    Telephone
+                                    number
+                                </label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control"
+                                           placeholder="Telephone number">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for=""
+                                       class="col-sm-3 control-label">Religion</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control"
+                                           placeholder="Religion">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for=""
+                                       class="col-sm-3 control-label">Passport</label>
+                                <div class="col-sm-9">
+                                    <input type="text" class="form-control"
+                                           placeholder="Passport">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-9">
+                                    <button type="submit" class="btn btn-success" style="margin-top:10px;margin-bottom:-14px;">Update</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </div>*@<!-- /.modal -->
+    </div>
+</div><!-- /Page Inner -->

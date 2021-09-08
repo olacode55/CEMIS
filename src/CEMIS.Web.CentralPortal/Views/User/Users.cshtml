@@ -1,0 +1,101 @@
+﻿@model IEnumerable<UsersObject>
+@{
+    ViewBag.Title = "User Management";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+
+<div class="panel panel-white">
+    <div class="panel-heading">
+        <h4 class="panel-title">User Management</h4>
+    </div>
+    <div class="panel-body">
+        <button type="button" id="addUser" class="btn btn-info" data-toggle="modal" data-target="#addUserModal">Add New User</button>
+        <!-- Modal -->
+
+        <div class="table-responsive">
+            <table id="example3" class="display table" style="width: 100%; cellspacing: 0;">
+                <thead>
+
+                    <tr>
+                        <th>S/N</th>
+                        <th>Username</th>
+                        <th>Full Name</th>
+                        <th>Role</th>
+                        <th width="5%"></th>
+                        <th width="5%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{int rowNo = 0;}
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@(rowNo += 1)</td>
+                            <td>@Html.DisplayFor(modelItem => item.UserName)</td>
+                            @{string parameterValue = item.FirstName + " " + item.MiddleName + " " + item.LastName;
+                            }
+                            <td>@Html.DisplayFor(modelItem => parameterValue)</td>
+                            <td>@Html.DisplayFor(modelItem => item.Rolename)</td>
+                            <td><a data-target='#addUserModal' role="button" data-edit-id='@Html.DisplayFor(modelItem => item.AppUserId)' class="btn btn-warning editBtn" data-toggle="modal"><i class='fa fa-edit'></i>Edit</a></td>
+                            @if (item.IsActive)
+                            {
+                                <td>
+                                    <a data-target='#addUserModal' role='button' data-delete-id='@Html.DisplayFor(modelItem => item.AppUserId)' class='btn btn-danger deleteBtn' data-toggle='modal'><i class='fa fa-minus-circle'></i>Deactivate</a>
+                                </td>
+                            }
+                            else
+                            {
+                                <td>
+                                    <a data-target='#addUserModal' role='button' data-activate-id='@Html.DisplayFor(modelItem => item.AppUserId)' class='btn btn-success activateBtn' data-toggle='modal'><i class='fa fa-check-circle'></i>Activate</a>
+                                </td>
+                            }
+
+
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+        </div>
+        <div class="modal fade" id="addUserModal" role="dialog" aria-hidden="true">
+        </div>
+    </div>
+    </div>
+    @section Scripts{
+
+        <script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#addUser').click(function () {
+            $('#addUserModal').load("@Url.Action("AddUser", "User")", function () {
+                //$('#addUserModal').modal('show');
+            });
+        });
+
+        $('.editBtn').click(function (e) {
+            e.preventDefault();
+            var appUserId = $(this).attr("data-edit-id");
+            $('#addUserModal').load("@Url.Action("Userupdate", "User")/?appUserId=" + appUserId, function () {
+                $('#addUserModal').modal('show');
+            });
+        });
+
+        $('.deleteBtn').click(function (e) {
+            e.preventDefault();
+            var appUserId = $(this).attr("data-delete-id");
+            $('#addUserModal').load("@Url.Action("Deactivate_user", "User")/?appUserId=" + appUserId, function () {
+                $('#addUserModal').modal('show');
+            });
+        });
+
+        $('.activateBtn').click(function (e) {
+            e.preventDefault();
+            var appUserId = $(this).attr("data-activate-id");
+            $('#addUserModal').load("@Url.Action("Activate_user", "User")/?appUserId=" + appUserId, function () {
+                $('#addUserModal').modal('show');
+            });
+        });
+    });
+        </script>
+    }

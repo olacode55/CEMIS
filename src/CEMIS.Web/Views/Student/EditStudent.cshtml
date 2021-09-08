@@ -1,0 +1,212 @@
+﻿@using CEMIS.Utility.ViewModel
+@model StudentViewModel
+
+@{
+    ViewBag.Title = "Student Bio-Data";
+
+}
+
+
+<div class="col-md-12">
+
+    <div class="card">
+
+        <div class="card-header">
+
+            <h3 class="vatebra-pagetitle text-uppercase">Student Bio-Data</h3>
+        </div>
+
+        <div class="card-body">
+
+            <form method="post" enctype="multipart/form-data" asp-action="EditStudent">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Id" />
+
+
+                <div class="form-row">
+                    <div class="col-md-4">
+                        <label>Applicant Ref. Number</label>
+                        <input asp-for="AppRefNumber" class="form-control" readonly />
+                        <span asp-validation-for="AppRefNumber" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Surename</label>
+                        <input asp-for="Surname" class="form-control" />
+                        <span asp-validation-for="Surname" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Other Names</label>
+                        <input asp-for="OtherNames" class="form-control" />
+                        <span asp-validation-for="OtherNames" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-row">
+
+                    <div class="col-md-4">
+                        <label>Gender</label>
+                        <input asp-for="Gender" class="form-control" />
+                        <span asp-validation-for="Gender" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Marital Status</label>
+                        <input asp-for="MaritalStatus" class="form-control" />
+                        <span asp-validation-for="MaritalStatus" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Date Of Birth</label>
+                        <input asp-for="DOB" class="form-control" />
+                        <span asp-validation-for="DOB" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-row">
+
+                    <div class="col-md-4">
+                        <label>Place Of Birth</label>
+                        <input asp-for="POB" class="form-control" />
+                        <span asp-validation-for="POB" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Languages Spoken</label>
+                        <input asp-for="LanguagesSpoken" class="form-control" />
+                        <span asp-validation-for="LanguagesSpoken" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Disability</label>
+                        <input asp-for="Disability" class="form-control" />
+                        <span asp-validation-for="Disability" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-row">
+
+                    <div class="col-md-4">
+                        <label>Region</label>
+                        <input asp-for="Region" class="form-control" />
+                        <span asp-validation-for="Region" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>District</label>
+                        <input asp-for="District" class="form-control" />
+                        <span asp-validation-for="District" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Religion</label>
+                        <input asp-for="Religion" class="form-control" />
+                        <span asp-validation-for="Religion" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-row">
+
+                    <div class="col-md-4">
+                        <label>Phone</label>
+                        <input asp-for="TelephoneNumber" class="form-control" />
+                        <span asp-validation-for="TelephoneNumber" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Parent Particulars</label>
+                        <input asp-for="ParentParticulars" class="form-control" />
+                        <span asp-validation-for="ParentParticulars" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>HomeTown</label>
+                        <input asp-for="HomeTown" class="form-control" />
+                        <span asp-validation-for="HomeTown" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-row">
+
+                    <div class="col-md-4">
+                        <label>First Choice College</label>
+                        <input asp-for="FirstChoiceCollege" class="form-control" />
+                        <span asp-validation-for="FirstChoiceCollege" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>First Choice College</label>
+                        <input asp-for="SecondChoiceCollege" class="form-control" />
+                        <span asp-validation-for="FirstChoiceCollege" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Third Choice College</label>
+                        <input asp-for="ThirdChoiceCollege" class="form-control" />
+                        <span asp-validation-for="ThirdChoiceCollege" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-row">
+
+                    <div class="col-md-4">
+                        <label>First Choice Program</label>
+                        <input asp-for="FirstChoiceProgram" class="form-control" />
+                        <span asp-validation-for="FirstChoiceProgram" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>First Choice Program</label>
+                        <input asp-for="SecondChoiceProgram" class="form-control" />
+                        <span asp-validation-for="SecondChoiceProgram" class="text-danger"></span>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Third Choice Program</label>
+                        <input asp-for="ThreeChoiceProgram" class="form-control" />
+                        <span asp-validation-for="ThreeChoiceProgram" class="text-danger"></span>
+                    </div>
+
+                </div>
+
+                <div class="form-row">
+                    <div class="col-md-8">
+                        <label>Address</label>
+                        <input asp-for="ContactAddress" class="form-control" />
+                        <span asp-validation-for="ContactAddress" class="text-danger"></span>
+
+                    </div>
+
+                    <div class="col-md-4">
+                        <label>Upload Image</label>
+                        <input type="file" asp-for="File" class="form-control" />
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <a class="btn btn-default" style="margin-top:50px; float:left" asp-action="StudentDetail" asp-route-AppRefNumber="@Model.AppRefNumber">Back</a>
+                    <button type="submit" class="btn btn-primary" style="margin-top:50px; float:right">Update</button>
+                </div>
+
+
+
+            </form>
+
+        </div>
+    </div>
+
+    <div class="card-footer" style="margin-top:50px">
+
+        @*<a class="btn btn-default" style="float:left" asp-action="StudentDetail" asp-route-AppRefNumber="@Model.AppRefNumber">Back</a>*@
+
+    </div>
+</div>
+
+

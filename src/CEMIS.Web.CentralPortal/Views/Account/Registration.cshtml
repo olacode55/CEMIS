@@ -1,0 +1,175 @@
+﻿<style>
+    .registration {
+        display : none;
+    }
+</style>
+
+@model StudentRegistrationDTO
+@{
+    ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+}
+
+<div class="login-box">
+    <h4 class="login-title">Create an account</h4>
+    @using (Html.BeginForm("Registration", "Account", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-group validation">
+            <label>Student ID</label>
+            @Html.TextBoxFor(x => x.StudentId, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.StudentId, null, new { @style = "color:red" })
+        </div>
+        <div class="form-group validation">
+            <label>Registration Pin</label>
+            @Html.TextBoxFor(x => x.RegistrationPin, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.RegistrationPin, null, new { @style = "color:red" })
+        </div>
+
+        <div class="form-group registration">
+            <label>First Name</label>
+            @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.FirstName, null, new { @style = "color:red" })
+        </div>
+
+        <div class="form-group registration">
+            <label>Last Name</label>
+            @Html.TextBoxFor(x => x.LastName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.LastName, null, new { @style = "color:red" })
+        </div>
+
+        <div class="form-group registration">
+            <label>College Name</label>
+            @Html.TextBoxFor(x => x.CollegeName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.CollegeName, null, new { @style = "color:red" })
+        </div>
+        <div class="form-group registration">
+            <label for="exampleInputPassword">Email Address</label>
+            @Html.TextBoxFor(x => x.EmailAddress, new { @class = "form-control", @onchange = "ValidateEmail()" })
+            @Html.ValidationMessageFor(x => x.EmailAddress, null, new { @style = "color:red" })
+        </div>
+
+        <div class="form-group registration">
+            <label for="exampleInputPassword">Phone Number</label>
+            @Html.TextBoxFor(x => x.PhoneNumber, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.PhoneNumber, null, new { @style = "color:red" })
+        </div>
+
+        <div class="form-group registration">
+            <label for="exampleInputPassword">Password</label>
+            @Html.PasswordFor(x => x.Password, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Password, null, new { @style = "color:red" })
+        </div>
+
+        <div class="form-group registration">
+            <label for="exampleInputPassword">Confirm Password</label>
+            @Html.PasswordFor(x => x.ConfirmPassword, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.ConfirmPassword, null, new { @style = "color:red" })
+        </div>
+
+        <input type="button" class="btn btn-primary btn-block validation" onclick="ValidateStudent()" value="Validate Student" />
+        <button href="index.html" class="btn btn-primary btn-block registration">Register</button>
+        <div class="login-footer">
+            <a href="index.html" class="forgot-link">Forgot password?</a>
+        </div>
+    }
+</div>
+               
+<script>
+
+
+     function ValidateEmail() {
+        let email = $('#EmailAddress').val();
+        let url = '@Url.Action("CheckEmail", "User")';
+         $.ajax({
+             type: "GET",
+             url: url,
+             data: { email: email}, // serializes the form's elements.
+             success: function (data) {
+                 console.log(typeof (data));
+                 if (data === true) {
+                     $('#EmailAddress').val('');
+                     $.toast({ heading: 'Registration', text: 'Email taken. Kindly register with another email address', showHideTransition: 'slide', icon: 'error', position: 'top-right', });
+                 }
+                 
+
+
+            },
+            error: function (resp) {
+                console.log(resp);
+
+            }
+        })
+
+        }
+
+    window.onload = function () {
+        if ($("#CollegeName").val() !== '') {
+            $(".registration").show();
+            $(".validation").hide();
+        }
+      
+    }
+
+    function ValidateStudent() {
+     
+        var studentId = $("#StudentId").val();
+        var registrationPin = $("#RegistrationPin").val();
+
+
+
+        if (studentId === '') {
+
+            $.toast({ heading: 'Registration', text: 'Student Id is required', showHideTransition: 'slide', icon: 'error', position: 'top-right', });
+
+            return;
+        }
+
+        if (registrationPin === '') {
+
+            $.toast({ heading: 'Registration', text: 'Registration Pin is required', showHideTransition: 'slide', icon: 'error', position: 'top-right', });
+
+            return;
+        }
+
+         let url = '@Url.Action("ValidateStudent", "Account")'
+        $.ajax({
+            type: "GET",
+            url: url,
+            data: { studentId: studentId, registrationPin: registrationPin }, // serializes the form's elements.
+            success: function (data) {
+
+                if (data.errorMessage !== '') {
+                    $.toast({ heading: 'Registration', text: data.errorMessage, showHideTransition: 'slide', icon: 'error', position: 'top-right', });
+                    return;
+                }
+                //if (data.studentId == null && data.registrationPin == null) {
+                //    $.toast({ heading: 'Registration', text: `Student with ID - ${studentId} and Registration Pin - ${registrationPin} does not exist`, showHideTransition: 'slide', icon: 'error', position: 'top-right', });
+                //    return;
+                //}
+                
+                $("#StudentId").val(data.studentId);
+                $("#RegistrationPin").val(data.registrationPin);
+                $("#CollegeName").val(data.collegeName);
+                //$("#StudentName").val(data.studentName);
+                $("#EmailAddress").val(data.emailAddress); 
+                $("#PhoneNumber").val(data.phoneNumber);
+                $(".validation").hide();
+                $(".registration").show();
+                
+             
+
+
+            },
+            error: function (resp) {
+                console.log(resp);
+                $.toast({ heading: 'Registration', text: 'Operation Failed', showHideTransition: 'slide', icon: 'error', position: 'top-right', });
+
+            }
+        });
+
+
+
+    }
+</script>
+  

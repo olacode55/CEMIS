@@ -1,0 +1,98 @@
+﻿
+
+@model CollegeLeadershipViewModel
+
+@{
+    ViewBag.Title = "College Leadership";
+    var i = 1;
+}
+<div class="page-title">
+    <h3 class="breadcrumb-header alert-info">@ViewBag.Title</h3>
+</div>
+<div id="main-wrapper">
+    @using (Html.BeginForm("Create", "CollegeLeadership", FormMethod.Post))
+    {
+        @await Html.PartialAsync("_Notifications")
+        @Html.AntiForgeryToken();
+        @Html.HiddenFor(Model => Model.Id)
+        <div class="row">
+            <div class="col-md-4">
+                <label>Name<b style="color:red">*</b></label>
+                @Html.TextBoxFor(x => x.Name, new { @class = "form-control", required = "true" })
+                @Html.ValidationMessageFor(x => @x.Name, null, new { @style = "color:red" })
+            </div>
+            <div class="col-md-4">
+                <label>Gender<b style="color:red">*</b></label>
+                @*@Html.TextBoxFor(x => x.Gender, new { @class = "form-control", required = "true" })*@
+                <select class="custom-select" asp-for="Gender" asp-items="Html.GetEnumSelectList(typeof(Gender))"></select>
+                @Html.ValidationMessageFor(x => @x.Gender, null, new { @style = "color:red" })
+            </div>
+            <div class="col-md-4">
+                <label>Date Of Birth<b style="color:red">*</b></label>
+                @Html.TextBoxFor(x => x.DateOfBirth, "{0:MM/dd/yyyy}", new { @class = "form-control date-picker", required = "true", @datatoggle = "datepicker", max = DateTime.Today.ToString("yyyy-MM-dd"), onkeydown = "return false" })
+                @Html.ValidationMessageFor(x => @x.DateOfBirth, null, new { @style = "color:red" })
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-4">
+                <label>Phone <b style="color:red">*</b></label>
+                @Html.TextBoxFor(x => x.CouncilMemberPhone1, new { @class = "form-control", required = "true", @type = "number" })
+                @Html.ValidationMessageFor(x => @x.CouncilMemberPhone1, null, new { @style = "color:red" })
+            </div>
+            <div class="col-md-4">
+                <label>Mobile Number<b style="color:red">*</b></label>
+                @Html.TextBoxFor(x => x.CouncilMemberPhone2, new { @class = "form-control", required = "true", @type = "number" })
+                @Html.ValidationMessageFor(x => @x.CouncilMemberPhone2, null, new { @style = "color:red" })
+            </div>
+            <div class="col-md-4">
+                <label>Email<b style="color:red">*</b></label>
+                @Html.TextBoxFor(x => x.CouncilMemberEmail, new { @class = "form-control", @type = "Email", required = "true" })
+                @Html.ValidationMessageFor(x => @x.CouncilMemberEmail, null, new { @style = "color:red" })
+            </div>
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-4">
+                <label>Postal Address<b style="color:red">*</b></label>
+                @Html.TextBoxFor(x => x.CouncilMemberPostalAddress, new { @class = "form-control", required = "true" })
+                @Html.ValidationMessageFor(x => @x.CouncilMemberPostalAddress, null, new { @style = "color:red" })
+            </div>
+            <div class="col-md-4">
+                <label>CouncilMemberSponsor<b style="color:red"></b></label>
+                @*@Html.TextBoxFor(x => x.Gender, new { @class = "form-control", required = "true" })*@
+                <select class="custom-select" asp-for="CouncilMemberSponsor" asp-items="Html.GetEnumSelectList(typeof(Sponspor))"></select>
+                @Html.ValidationMessageFor(x => @x.CouncilMemberSponsor, null, new { @style = "color:red" })
+            </div>
+            <div class="col-md-4">
+                <label>Session<b style="color:red">*</b></label>
+                @Html.DropDownList("Session", new SelectList(ViewBag.Session, "Id", "Name"), "Select Session", new { @class = "custom-select form-control-sm" })
+                @Html.ValidationMessageFor(x => @x.Session, null, new { @style = "color:red" })
+            </div>
+            
+        </div>
+        <br />
+        <div class="row">
+            <div class="col-md-4">
+                <label>Appiontment Date<b style="color:red">*</b></label>
+                @Html.TextBoxFor(x => x.DateAppointed, "{0:MM/dd/yyyy}", new { @class = "form-control date-picker", required = "true", @datatoggle = "datepicker", max = DateTime.Today.ToString("yyyy-MM-dd"), onkeydown = "return false" })
+                @Html.ValidationMessageFor(x => @x.DateAppointed, null, new { @style = "color:red" })
+            </div>
+            <div class="col-md-4">
+                <label>Date Left<b style="color:red"></b></label>
+                @Html.TextBoxFor(x => x.DateLeft, "{0:MM/dd/yyyy}", new { @class = "form-control date-picker", @datatoggle = "datepicker", max = DateTime.Today.ToString("yyyy-MM-dd"), onkeydown = "return false" })
+                @Html.ValidationMessageFor(x => @x.DateLeft, null, new { @style = "color:red" })
+            </div>
+            <div class="col-md-4">
+                <label>Role<b style="color:red"></b></label>
+                @*@Html.TextBoxFor(x => x.Gender, new { @class = "form-control", required = "true" })*@
+                <select class="custom-select" asp-for="Role" asp-items="Html.GetEnumSelectList(typeof(Postion))"></select>
+                @Html.ValidationMessageFor(x => @x.Role, null, new { @style = "color:red" })
+            </div>
+        </div>
+        <br />
+
+        <button type="submit" class="btn btn-success">Create</button>
+
+    }
+</div>

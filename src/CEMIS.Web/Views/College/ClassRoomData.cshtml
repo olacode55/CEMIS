@@ -1,0 +1,109 @@
+﻿
+@model CollegeClassRoomDataViewModel
+
+
+
+@using (Html.BeginForm("ClassRoomData", "College", FormMethod.Post))
+{
+    <div class="modal-content">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal">&times;</button>
+            <h4>College Class Room Data </h4>
+        </div>
+        <div class="modal-body">
+
+            @Html.AntiForgeryToken()
+
+            @Html.HiddenFor(Model => Model.CollegeId)
+
+            <div class="col-md-12">
+
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>No. of ClassRoom (s)<b style="color:red">*</b></label>
+                        @Html.TextBoxFor(x => x.ClassRoomCount, new { @class = "form-control", required = "true", @readonly = "readonly" })
+                        @Html.ValidationMessageFor(x => @x.ClassRoomCount, null, new { @style = "color:red" })
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>No. of StaffRoom (s)<b style="color:red">*</b></label>
+                        @Html.TextBoxFor(x => x.StaffRoomCount, new { @class = "form-control", required = "true", })
+                        @Html.ValidationMessageFor(x => @x.StaffRoomCount, null, new { @style = "color:red" })
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>No. of Office (s)<b style="color:red">*</b></label>
+                        @Html.TextBoxFor(x => x.OfficeCount, new { @class = "form-control", required = "true" })
+                        @Html.ValidationMessageFor(x => @x.OfficeCount, null, new { @style = "color:red" })
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>No. of Library (s)<b style="color:red">*</b></label>
+                        @Html.TextBoxFor(x => x.LibraryCount, new { @class = "form-control", required = "true", })
+                        @Html.ValidationMessageFor(x => @x.LibraryCount, null, new { @style = "color:red" })
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <label>No. of Laboratory<b style="color:red">*</b></label>
+                        @Html.TextBoxFor(x => x.LaboratoryCount, new { @class = "form-control", required = "true" })
+                        @Html.ValidationMessageFor(x => @x.LaboratoryCount, null, new { @style = "color:red" })
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>No. of Store Room(s)<b style="color:red">*</b></label>
+                        @Html.TextBoxFor(x => x.StoreRoomCount, new { @class = "form-control", required = "true", })
+                        @Html.ValidationMessageFor(x => @x.StoreRoomCount, null, new { @style = "color:red" })
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+
+                        <label>Is Class Held Outside<b style="color:red">*</b></label>
+                        <select class="custom-select" asp-for="IsClassHeldOutside" asp-items="Html.GetEnumSelectList(typeof(IsClassHeldOutside))"></select>
+                        @Html.ValidationMessageFor(x => @x.IsClassHeldOutside, null, new { @style = "color:red" })
+                    </div>
+
+                    <div class="col-md-6">
+                        <label>No. of Others<b style="color:red">*</b></label>
+                        @Html.TextBoxFor(x => x.OthersCount, new { @class = "form-control", required = "true" })
+                        @Html.ValidationMessageFor(x => @x.OthersCount, null, new { @style = "color:red" })
+                    </div>
+
+
+
+                </div>
+
+
+
+                <div class="row" style="margin-top:20px">
+
+
+                    <a class="btn btn-default" style="float:left" href="@Url.Action("Index","College", new { Id = Model.CollegeId})"> Back To Preview </a>
+
+                    <button type="submit" style="float:right" class="btn btn-primary">Submit</button>
+
+
+
+
+                </div>
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+
+}

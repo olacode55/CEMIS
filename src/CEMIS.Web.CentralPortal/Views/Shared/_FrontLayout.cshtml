@@ -1,0 +1,58 @@
+﻿<!DOCTYPE html>
+<html>
+<head lang="en">
+    @*<title>Login &mdash; VatDoc &mdash; To Get You Started</title>*@
+    <meta charset="utf-8" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="robots" content="noindex, follow" />
+    @*<link rel="stylesheet" href="https://use.typekit.net/uff1hva.css" />
+    <link href="~/css/app.css" rel="stylesheet" />
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />*@
+    @*<link rel="alternate"
+          type="application/atom+xml"
+          href="/atom.xml"
+          title="VatDoc activity feed" />*@
+</head>
+<body class="special">
+    <header>
+        <nav class="navbar navbar-expand-md bg-transparent">
+            <div class="container">
+                <a class="navbar-brand" href="@Url.Action("Index","Home")">VatDoc</a>
+            </div>
+        </nav>
+    </header>
+    <main role="main">
+        <div class="container">
+            <div class="row p-2">
+                <div class="col-lg-16">
+                    <div class="front--text">
+                        <h2 class="hero-text">
+                            Efficient document management for teams
+                        </h2>
+                        <p class="t-24 w-300">
+                            Store scanned documents and track retention policies defined
+                            around each document
+                        </p>
+                    </div>
+                </div>
+                <div class="col-lg-8">
+                    @RenderBody()
+                </div>
+            </div>
+        </div>
+    </main>
+    @*<script src="~/js/jquery-1.10.2.js"></script>
+    <script src="~/js/jquery-3.4.1.js"></script>
+    <script src="~/js/jquery.validate.js"></script>
+    <script src="~/js/vendor.js"></script>
+    <script src="~/js/app.js"></script>
+    <script src="~/js/bootstrap.js"></script>*@
+    @RenderSection("scripts", required: false)
+    @RenderSection("JavaScript", required: false)
+</body>
+</html>

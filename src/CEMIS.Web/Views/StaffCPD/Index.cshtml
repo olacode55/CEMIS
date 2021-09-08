@@ -1,0 +1,92 @@
+﻿
+@model IEnumerable<StaffCPDAssesmentViewModel>
+
+
+@{
+    ViewBag.Title = "StaffCPD Management";
+    var i = 1;
+}
+
+<div class="page-title">
+    <h3 class="breadcrumb-header">@ViewBag.Title</h3>
+</div>
+
+<div class="clearfix" style="text-align:right; padding: 20px">
+
+    <button type="button" class="btn btn-default btn-md" id="btnCreate" data-toggle="modal" data-target="#myModal">Add New</button>
+</div>
+
+<div id="main-wrapper">
+
+    @*<div class="col-md-24">*@
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>StaffCPD Information</h3>
+        </div>
+
+        <div class="panel-body table-responsive">
+            <div class="table-responsive" style="width:100%; column-width:auto;">
+                <table id="example" class="display table table-active" style="width:100%; column-width:auto;">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>File</th>
+                            <th>Academic Year</th>
+                            <th>Semester</th>
+                            <th>Form Type </th>
+                            <th>Date </th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr class="odd gradeX">
+                                <td>@i</td>
+                                <td>@item.Fullname</td>
+                                <td><a href="@item.Filename" target="_blank">@item.Filename</a></td>
+                                <td>@item.Session</td>
+                                <td>@item.Semester</td>
+                                <td>@item.FormType</td>
+                                <td>@item.Date.ToString("dd-MMM-yyyy")</td>
+                                <td>
+                                    @Html.ActionLink("Remove", "Delete", "StaffCPD", new { Id = item.Id }, new { @class = "text text-danger" })
+                                </td>
+
+                            </tr>
+                            i = i + 1;
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div id="myModal" class="modal fade" role="dialog">
+</div>
+
+@*@Html.Partial("_Create", new CouncilMemberViewModel())
+    @Html.Partial("_Edit", new CouncilMemberViewModel())*@
+@section JavaScript
+    {
+    <script type="application/javascript">
+    $("document").ready(function () {
+
+        $("#btnCreate").click(function (e) {
+
+            e.preventDefault();
+            $("#myModal").load("@Url.Action("Create", "StaffCPD")");
+        });
+
+
+
+    });
+    </script>
+
+}
+
+
+

@@ -1,0 +1,142 @@
+﻿@using CEMIS.Utility.ViewModel
+
+@*@model IEnumerable<StudentViewModel>*@
+
+@model StudentFormViewModel
+
+
+@{
+    ViewBag.Title = "Student Admission List Information";
+    var i = 1;
+}
+
+<div class="page-title">
+    <h3 class="breadcrumb-header">@ViewBag.Title</h3>
+</div>
+
+<div class="clearfix" style="text-align:right; padding: 20px">
+
+    <button type="button" class="btn btn-default btn-md" data-toggle="modal" data-target="#myModal">Upload Admited Students</button>
+</div>
+
+<div id="main-wrapper">
+
+    @*<div class="col-md-24">*@
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3>Student Information</h3>
+        </div>
+
+        <div class="card">
+            <div class="card-body">
+                <div class="row" style="margin-top:50px; margin-bottom:50px">
+
+                    @using (Html.BeginForm("Index", "Student", FormMethod.Post))
+                    {
+                        <div class="form-group">
+                            <div class="row col-md-12">
+                                <div class="col-md-4">
+                                    <label>Academic Session:</label>
+                                    @Html.DropDownListFor(x => @x.AcademicSessionId, new SelectList(ViewBag.AcademicSession, "Value", "Text"), "Select Academic Session", new { @class = "custom-select form-control-sm" })
+                                    @Html.ValidationMessageFor(x => @x.AcademicSessionId, null, new { @style = "color:red" })
+                                </div>
+                                <div class="col-md-4">
+                                    <label>Program:</label>
+                                    @Html.DropDownListFor(x => @x.ProgramId, new SelectList(ViewBag.Program, "Value", "Text"), "Select Program", new { @class = "custom-select form-control-sm" })
+                                    @Html.ValidationMessageFor(x => @x.ProgramId, null, new { @style = "color:red" })
+                                </div>
+
+                                <div class="col-md-4">
+
+                                    <button type="submit" class="btn btn-primary" style="float:right; margin-top:24px">View</button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+
+        <div class="panel-body table-responsive">
+            <div class="table-responsive" style="width:100%; column-width:auto;">
+                <table id="example" class="display table table-active" style="width:100%; column-width:auto;">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Ref. Number</th>
+                            <th>Surname</th>
+                            <th>Other Names</th>
+                            <th>Gender</th>
+                            @*<th>Marital Status</th>
+                                <th>DOB</th>
+                                <th>POB</th>
+                                <th>HomeTown</th>
+                                <th>District</th>
+                                <th>Region</th>
+                                <th>Religion</th>
+                                <th>Languages Spoken</th>
+                                <th>Contact Address</th>
+                                <th>District</th>
+                                <th>1st Choice Program</th>
+                                <th>2nd Choice Program</th>
+                                <th>3rd Choice Program</th>
+                                <th>1st Choice College</th>
+                                <th>2nd Choice College</th>
+                                <th>3rd Choice College</th>
+                                <th>Parent Particulars</th>
+                                <th>Result</th>
+                                <th>Telephone Number</th>*@
+                            <th>Action(s)</th>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        @foreach (var item in Model.Students)
+                        {
+                            <tr class="odd gradeX">
+                                <td>@i</td>
+                                <td>@item.AppRefNumber</td>
+                                <td>@item.Surname</td>
+                                <td>@item.OtherNames</td>
+                                <td>@item.Gender</td>
+                                @*<td>@item.MaritalStatus</td>
+                                    <td>@item.DOB.ToString("dd-MMM-yyyy")</td>
+                                    <td>@item.POB</td>
+                                    <td>@item.HomeTown</td>
+                                    <td>@item.District</td>
+                                    <td>@item.Region</td>
+                                    <td>@item.Religion</td>
+                                    <td>@item.LanguagesSpoken</td>
+                                    <td>@item.ContactAddress</td>
+                                    <td>@item.District</td>
+                                    <td>@item.FirstChoiceProgram</td>
+                                    <td>@item.SecondChoiceProgram</td>
+                                    <td>@item.ThreeChoiceProgram</td>
+                                    <td>@item.FirstChoiceCollege</td>
+                                    <td>@item.SecondChoiceCollege</td>
+                                    <td>@item.ThirdChoiceCollege</td>
+                                    <td>@item.ParentParticulars</td>
+                                    <td>@item.Result</td>
+                                    <td>@item.TelephoneNumber</td>*@
+                                <td>
+                                    <a class="text-primary" href="@Url.Action("StudentDetail","Student", new {appRefNumber = item.AppRefNumber })">Bio-Data</a> |
+
+                                    |<a class="text-primary" href="@Url.Action("StudentDropout","Student", new {appRefNumber = item.AppRefNumber })"> Dropout</a>
+
+                                </td>
+
+                            </tr>
+                            i = i + 1;
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+
+@Html.Partial("_upload", new StudentFileUpload())
+
